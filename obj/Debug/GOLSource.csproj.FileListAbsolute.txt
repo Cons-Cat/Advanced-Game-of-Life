@@ -1,0 +1,9 @@
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\bin\Debug\GOLSource.exe.config
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\bin\Debug\GOLSource.exe
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\bin\Debug\GOLSource.pdb
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.csprojAssemblyReference.cache
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.Form1.resources
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.Properties.Resources.resources
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.csproj.GenerateResource.cache
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.exe
+D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.pdb
