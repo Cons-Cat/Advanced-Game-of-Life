@@ -62,14 +62,16 @@
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
-            this.graphicsPanel1 = new GOLSource.GraphicsPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.graphicsPanel1 = new GOLSource.GraphicsPanel();
+            this.sliderButton1 = new GOLSource.SliderButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.graphicsPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -251,6 +253,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(573, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             // 
             // newToolStripButton
             // 
@@ -341,34 +344,57 @@
             this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
             this.toolStripStatusLabelGenerations.Text = "Generations = 0";
             // 
-            // graphicsPanel1
-            // 
-            this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
-            this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphicsPanel1.Location = new System.Drawing.Point(0, 0);
-            this.graphicsPanel1.Name = "graphicsPanel1";
-            this.graphicsPanel1.Size = new System.Drawing.Size(378, 274);
-            this.graphicsPanel1.TabIndex = 3;
-            this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
-            this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitContainer1.Panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.graphicsPanel1);
+            this.splitContainer1.Panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             this.splitContainer1.Size = new System.Drawing.Size(573, 274);
             this.splitContainer1.SplitterDistance = 191;
+            this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 4;
+            this.splitContainer1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            // 
+            // graphicsPanel1
+            // 
+            this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
+            this.graphicsPanel1.Controls.Add(this.sliderButton1);
+            this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphicsPanel1.Location = new System.Drawing.Point(0, 0);
+            this.graphicsPanel1.Name = "graphicsPanel1";
+            this.graphicsPanel1.Size = new System.Drawing.Size(381, 274);
+            this.graphicsPanel1.TabIndex = 3;
+            this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
+            this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
+            this.graphicsPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            // 
+            // sliderButton1
+            // 
+            this.sliderButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.sliderButton1.Location = new System.Drawing.Point(0, 107);
+            this.sliderButton1.Name = "sliderButton1";
+            this.sliderButton1.Size = new System.Drawing.Size(22, 67);
+            this.sliderButton1.sliding = false;
+            this.sliderButton1.splitObj = null;
+            this.sliderButton1.TabIndex = 1;
+            this.sliderButton1.Text = ">";
+            this.sliderButton1.UseVisualStyleBackColor = true;
+            this.sliderButton1.xOff = 0;
+            this.sliderButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.sliderButton1_MouseDown);
+            this.sliderButton1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            this.sliderButton1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.sliderButton1_MouseUp);
             // 
             // Form1
             // 
@@ -391,6 +417,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.graphicsPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,7 +428,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private GraphicsPanel graphicsPanel1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -432,7 +458,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGenerations;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        public System.Windows.Forms.SplitContainer splitContainer1;
+        private GraphicsPanel graphicsPanel1;
+        private SliderButton sliderButton1;
     }
 }
 

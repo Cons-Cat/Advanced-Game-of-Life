@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -107,11 +108,43 @@ namespace GOLSource
                 // CELL Y = MOUSE Y / CELL HEIGHT
                 int y = e.Y / cellSize;
 
-                // Toggle the cell's state
-                universe[x, y] = !universe[x, y];
+                if (x < universe.GetLength(0) && y < universe.GetLength(1))
+                {
+                    // Toggle the cell's state
+                    universe[x, y] = !universe[x, y];
 
-                // Tell Windows you need to repaint
-                graphicsPanel1.Invalidate();
+                    // Tell Windows you need to repaint
+                    graphicsPanel1.Invalidate();
+                }
+            }
+        }
+
+        private void sliderButton_MouseClick(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void sliderButton1_MouseDown(object sender, MouseEventArgs e)
+        {
+            sliderButton1.xOff = PointToClient(Cursor.Position).X - splitContainer1.SplitterDistance;
+            sliderButton1.sliding = true;
+        }
+
+        private void sliderButton1_MouseUp(object sender, MouseEventArgs e)
+        {
+            sliderButton1.xOff = 0;
+            sliderButton1.sliding = false;
+        }
+
+        private void MouseMove(object sender, MouseEventArgs e)
+        {
+            int mouseX = PointToClient(Cursor.Position).X;
+
+            if (sliderButton1.sliding)
+            {
+                if (mouseX - sliderButton1.xOff >= 1)
+                {
+                    splitContainer1.SplitterDistance += mouseX - sliderButton1.xOff - splitContainer1.SplitterDistance;
+                }
             }
         }
     }

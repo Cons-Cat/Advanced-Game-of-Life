@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// Change the namespace to your project's namespace.
 namespace GOLSource
 {
     class GraphicsPanel : Panel
@@ -14,10 +13,10 @@ namespace GOLSource
         public GraphicsPanel()
         {
             // Turn on double buffering.
-            this.DoubleBuffered = true;
+            DoubleBuffered = true;
 
             // Allow repainting when the window is resized.
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
         }
     }
 }
