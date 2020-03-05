@@ -56,10 +56,7 @@ namespace GOLSource
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             // Calculate the width and height of each cell in pixels
-            // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
-            int cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
-            // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
-            int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+            int cellSize = Math.Min(splitContainer1.Panel2.Width / Program.universe.GetLength(0), splitContainer1.Panel2.Height / Program.universe.GetLength(1));
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
@@ -75,10 +72,10 @@ namespace GOLSource
                 {
                     // A rectangle to represent each cell in pixels
                     Rectangle cellRect = Rectangle.Empty;
-                    cellRect.X = x * cellWidth;
-                    cellRect.Y = y * cellHeight;
-                    cellRect.Width = cellWidth;
-                    cellRect.Height = cellHeight;
+                    cellRect.X = x * cellSize;
+                    cellRect.Y = y * cellSize;
+                    cellRect.Width = cellSize;
+                    cellRect.Height = cellSize;
 
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
@@ -102,14 +99,13 @@ namespace GOLSource
             if (e.Button == MouseButtons.Left)
             {
                 // Calculate the width and height of each cell in pixels
-                int cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
-                int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+                int cellSize = Math.Min(splitContainer1.Panel2.Width / Program.universe.GetLength(0), splitContainer1.Panel2.Height / Program.universe.GetLength(1));
 
                 // Calculate the cell that was clicked in
                 // CELL X = MOUSE X / CELL WIDTH
-                int x = e.X / cellWidth;
+                int x = e.X / cellSize;
                 // CELL Y = MOUSE Y / CELL HEIGHT
-                int y = e.Y / cellHeight;
+                int y = e.Y / cellSize;
 
                 // Toggle the cell's state
                 universe[x, y] = !universe[x, y];

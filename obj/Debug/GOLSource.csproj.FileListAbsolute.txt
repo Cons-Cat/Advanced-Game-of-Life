@@ -7,3 +7,15 @@ D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.
 D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.csproj.GenerateResource.cache
 D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.exe
 D:\Full Sail Work\Month 7 Project and Portfolio I\GOLSource\obj\Debug\GOLSource.pdb
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\bin\Debug\GOLSource.exe.config
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\bin\Debug\GOLSource.exe
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\bin\Debug\GOLSource.pdb
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.csprojAssemblyReference.cache
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.Form1.resources
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.Properties.Resources.resources
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.csproj.GenerateResource.cache
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.exe
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.pdb
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\bin\Debug\System.ValueTuple.dll
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\bin\Debug\System.ValueTuple.xml
+D:\Full Sail Work\Month 7 Project and Portfolio I\Advanced-Game-of-Life\obj\Debug\GOLSource.csproj.CopyComplete
