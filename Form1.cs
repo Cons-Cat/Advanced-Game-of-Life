@@ -13,9 +13,6 @@ namespace GOLSource
 {
     public partial class Form1 : Form
     {
-        // The universe array
-        bool[,] universe = new bool[5, 5];
-
         // Drawing colors
         Color gridColor = Color.Black;
         Color cellColor = Color.Gray;
@@ -39,8 +36,6 @@ namespace GOLSource
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-
-
             // Increment generation count
             generations++;
 
@@ -66,10 +61,10 @@ namespace GOLSource
             Brush cellBrush = new SolidBrush(cellColor);
 
             // Iterate through the universe in the y, top to bottom
-            for (int y = 0; y < universe.GetLength(1); y++)
+            for (int y = 0; y < Program.universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
-                for (int x = 0; x < universe.GetLength(0); x++)
+                for (int x = 0; x < Program.universe.GetLength(0); x++)
                 {
                     // A rectangle to represent each cell in pixels
                     Rectangle cellRect = Rectangle.Empty;
@@ -79,13 +74,15 @@ namespace GOLSource
                     cellRect.Height = cellSize;
 
                     // Fill the cell with a brush if alive
-                    if (universe[x, y] == true)
+                    if (Program.universe[x, y].Active)
                     {
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                    //TextRenderer.DrawText(e.Graphics, "0", this.Font, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height, SystemColors.ControlText);
+                    TextRenderer.DrawText(e.Graphics, $"{Program.universe[x, y].AdjacentCount}", this.Font, new Point(cellRect.X, cellRect.Y), SystemColors.ControlText);
                 }
             }
 
@@ -108,19 +105,44 @@ namespace GOLSource
                 // CELL Y = MOUSE Y / CELL HEIGHT
                 int y = e.Y / cellSize;
 
-                if (x < universe.GetLength(0) && y < universe.GetLength(1))
+                if (x < Program.universe.GetLength(0) && y < Program.universe.GetLength(1))
                 {
                     // Toggle the cell's state
-                    universe[x, y] = !universe[x, y];
+                    Program.universe[x, y].Active = !Program.universe[x, y].Active;
+
+                    int adjX;
+                    int adjY;
+
+                    for (int i = 0; i < 9; i++)
+                    {
+                        adjX = x + (i / 3) - 1;
+                        adjY = y + (i % 3) - 1;
+
+                        if (
+                            i == 4
+                            || adjX >= 5
+                            || adjY >= 5
+                            || adjX < 0
+                            || adjY < 0
+                            )
+                        {
+                            continue;
+                        }
+
+                        if (Program.universe[x, y].Active)
+                        {
+                            Program.universe[adjX, adjY].AdjacentCount++;
+                        }
+                        else
+                        {
+                            Program.universe[adjX, adjY].AdjacentCount--;
+                        }
+                    }
 
                     // Tell Windows you need to repaint
                     graphicsPanel1.Invalidate();
                 }
             }
-        }
-
-        private void sliderButton_MouseClick(object sender, MouseEventArgs e)
-        {
         }
 
         private void sliderButton1_MouseDown(object sender, MouseEventArgs e)
@@ -144,6 +166,7 @@ namespace GOLSource
                 if (mouseX - sliderButton1.xOff >= 1)
                 {
                     splitContainer1.SplitterDistance += mouseX - sliderButton1.xOff - splitContainer1.SplitterDistance;
+                    //graphicsPanel1.Invalidate();
                 }
             }
         }
