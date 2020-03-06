@@ -20,18 +20,30 @@ namespace GOLSource
         public void UpdateAdjacentCount(ref Cell[,] argArr, int argX, int argY)
         {
             AdjacentCount = 0;
+            int adjX;
+            int adjY;
 
             for (int i = 0; i < 9; i++)
             {
-                if (i == 4) { continue; }
-                Debug.WriteLine($"{argX + (i / 3) - 1}, {argY + i % 3 - 1}");
+                adjX = argX + (i / 3) - 1;
+                adjY = argY + (i % 3) - 1;
 
-                if (argArr[argX + (i / 3) - 1, argY + i % 3 - 1].Active)
+                if (
+                    i == 4
+                    || adjX >= 5
+                    || adjY >= 5
+                    || adjX < 0
+                    || adjY < 0
+                    )
+                {
+                    continue;
+                }
+
+                if (argArr[argX + (i / 3) - 1, argY + (i % 3) - 1].Active)
                 {
                     AdjacentCount++;
                 }
             }
         }
-
     }
 }

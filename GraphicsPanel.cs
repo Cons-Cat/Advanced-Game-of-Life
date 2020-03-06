@@ -18,8 +18,8 @@ namespace GOLSource
         public GraphicsPanel()
         {
             YOff = 0;
-            GridHeight = 5;
-            GridWidth = 5;
+            GridHeight = Program.universe.GetLength(1);
+            GridWidth = Program.universe.GetLength(0);
 
             // Turn on double buffering.
             DoubleBuffered = true;
@@ -35,7 +35,7 @@ namespace GOLSource
 
         public void RecalcCellSize(ref SplitContainer argContainer)
         {
-            CellSize = Math.Min((float)argContainer.Panel2.Width / Program.universe.GetLength(0), (float)argContainer.Panel2.Height / Program.universe.GetLength(1));
+            CellSize = Math.Min((float)argContainer.Panel2.Width / GridWidth, (float)argContainer.Panel2.Height / GridHeight);
         }
     }
 }

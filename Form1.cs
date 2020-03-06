@@ -180,5 +180,11 @@ namespace GOLSource
             graphicsPanel1.RecalcY(ref splitContainer1);
             graphicsPanel1.RecalcCellSize(ref splitContainer1);
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Program.Tick();
+            graphicsPanel1.Invalidate();
+        }
     }
 }
