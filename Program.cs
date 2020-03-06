@@ -14,7 +14,7 @@ namespace GOLSource
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        //[STAThread]
         static void Main()
         {
             for (int i = 0; i < universe.GetLength(0); i++)

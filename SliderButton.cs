@@ -9,15 +9,15 @@ namespace GOLSource
 {
     class SliderButton : Button
     {
-        public int xOff { get; set; }
-        public bool sliding { get; set; }
-        public SplitContainer splitObj { get; set; }
+        public int XOff { get; set; }
+        public bool Sliding { get; set; }
+        public SplitContainer SplitObj { get; set; }
 
         // Default constructor
         public SliderButton() : base()
         {
-            xOff = 0;
-            sliding = false;
+            XOff = 0;
+            Sliding = false;
 
         }
 
