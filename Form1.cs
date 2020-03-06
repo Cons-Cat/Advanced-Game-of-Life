@@ -82,8 +82,11 @@ namespace GOLSource
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
-                    //TextRenderer.DrawText(e.Graphics, "0", this.Font, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height, SystemColors.ControlText);
-                    TextRenderer.DrawText(e.Graphics, $"{Program.universe[x, y].AdjacentCount}", this.Font, new Point((int)cellRect.X, (int)cellRect.Y), SystemColors.ControlText);
+
+                    if (graphicsPanel1.CellSize > 12)
+                    {
+                        TextRenderer.DrawText(e.Graphics, $"{Program.universe[x, y].AdjacentCount}", this.Font, new Point((int)cellRect.X, (int)cellRect.Y), SystemColors.ControlText);
+                    }
                 }
             }
 
@@ -106,7 +109,7 @@ namespace GOLSource
                 // CELL Y = MOUSE Y / CELL HEIGHT
                 int y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
 
-                if (x >= 0 && y >= 0 && x < Program.universe.GetLength(0) && y < Program.universe.GetLength(1))
+                if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
                 {
                     // Toggle the cell's state
                     Program.universe[x, y].Active = !Program.universe[x, y].Active;
@@ -121,8 +124,8 @@ namespace GOLSource
 
                         if (
                             i == 4
-                            || adjX >= 5
-                            || adjY >= 5
+                            || adjX >= graphicsPanel1.GridWidth
+                            || adjY >= graphicsPanel1.GridHeight
                             || adjX < 0
                             || adjY < 0
                             )
@@ -184,6 +187,20 @@ namespace GOLSource
         private void Button1_Click(object sender, EventArgs e)
         {
             Program.Tick();
+            graphicsPanel1.Invalidate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < graphicsPanel1.GridWidth; i++)
+            {
+                for (int j = 0; j < graphicsPanel1.GridHeight; j++)
+                {
+                    Program.universe[i, j].Active = false;
+                    Program.universe[i, j].AdjacentCount = 0;
+                }
+            }
+
             graphicsPanel1.Invalidate();
         }
     }

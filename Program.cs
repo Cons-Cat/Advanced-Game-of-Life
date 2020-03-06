@@ -22,6 +22,8 @@ namespace GOLSource
                 for (int j = 0; j < universe.GetLength(1); j++)
                 {
                     universe[i, j] = new Cell();
+                    universe[i, j].X = i;
+                    universe[i, j].Y = j;
                 }
             }
 
@@ -32,10 +34,13 @@ namespace GOLSource
 
         public static void Tick()
         {
+            int w = universe.GetLength(0);
+            int h = universe.GetLength(1);
+
             // Update cell states.
-            for (int i = 0; i < universe.GetLength(0); i++)
+            for (int i = 0; i < w; i++)
             {
-                for (int j = 0; j < universe.GetLength(1); j++)
+                for (int j = 0; j < h; j++)
                 {
                     if (universe[i, j].AdjacentCount < 2)
                     {
@@ -56,11 +61,11 @@ namespace GOLSource
             }
 
             // Evaluate new adjacent counts.
-            for (int i = 0; i < universe.GetLength(0); i++)
+            for (int i = 0; i < w; i++)
             {
-                for (int j = 0; j < universe.GetLength(1); j++)
+                for (int j = 0; j < h; j++)
                 {
-                    universe[i, j].UpdateAdjacentCount(ref universe, i, j);
+                    universe[i, j].UpdateAdjacentCount();
                 }
             }
         }

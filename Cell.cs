@@ -11,13 +11,15 @@ namespace GOLSource
     {
         public bool Active { get; set; }
         public uint AdjacentCount { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public Cell()
         {
             Active = false;
         }
 
-        public void UpdateAdjacentCount(ref Cell[,] argArr, int argX, int argY)
+        public void UpdateAdjacentCount()
         {
             AdjacentCount = 0;
             int adjX;
@@ -25,13 +27,13 @@ namespace GOLSource
 
             for (int i = 0; i < 9; i++)
             {
-                adjX = argX + (i / 3) - 1;
-                adjY = argY + (i % 3) - 1;
+                adjX = X + (i / 3) - 1;
+                adjY = Y + (i % 3) - 1;
 
                 if (
                     i == 4
-                    || adjX >= 5
-                    || adjY >= 5
+                    || adjX >= Program.universe.GetLength(0)
+                    || adjY >= Program.universe.GetLength(1)
                     || adjX < 0
                     || adjY < 0
                     )
@@ -39,7 +41,7 @@ namespace GOLSource
                     continue;
                 }
 
-                if (argArr[argX + (i / 3) - 1, argY + (i % 3) - 1].Active)
+                if (Program.universe[X + (i / 3) - 1, Y + (i % 3) - 1].Active)
                 {
                     AdjacentCount++;
                 }
