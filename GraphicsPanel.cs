@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace GOLSource
 {
-    class GraphicsPanel : Panel
+    public class GraphicsPanel : Panel
     {
         public float YOff { get; set; }
         public float CellSize { get; set; }

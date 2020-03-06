@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,36 +18,16 @@ namespace GOLSource
         Color gridColor = Color.Black;
         Color cellColor = Color.Gray;
 
-        // The Timer class
-        Timer timer = new Timer();
-
-        // Generation count
-        int generations = 0;
-
         public Form1()
         {
             InitializeComponent();
-
-            // Setup the timer
-            timer.Interval = 100; // milliseconds
-            timer.Tick += Timer_Tick;
-            timer.Enabled = true; // start timer running
         }
 
         // Calculate the next generation of cells
-        private void NextGeneration()
+        public void UpdateTicks(int argTicks)
         {
-            // Increment generation count
-            generations++;
-
             // Update status strip generations
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
-        }
-
-        // The event called by the timer every Interval milliseconds.
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            NextGeneration();
+            toolStripStatusLabelGenerations.Text = "Generations = " + argTicks.ToString();
         }
 
         private void GraphicsPanel1_Paint(object sender, PaintEventArgs e)
@@ -184,23 +165,41 @@ namespace GOLSource
             graphicsPanel1.RecalcCellSize(ref splitContainer1);
         }
 
+        // Discrete tick.
         private void Button1_Click(object sender, EventArgs e)
         {
-            Program.Tick();
-            graphicsPanel1.Invalidate();
+            if (!Program.playing)
+            {
+                Program.Tick();
+                graphicsPanel1.Invalidate();
+            }
         }
 
+        // Clear grid.
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < graphicsPanel1.GridWidth; i++)
+            if (!Program.playing)
             {
-                for (int j = 0; j < graphicsPanel1.GridHeight; j++)
+                for (int i = 0; i < graphicsPanel1.GridWidth; i++)
                 {
-                    Program.universe[i, j].Active = false;
-                    Program.universe[i, j].AdjacentCount = 0;
+                    for (int j = 0; j < graphicsPanel1.GridHeight; j++)
+                    {
+                        Program.universe[i, j].Active = false;
+                        Program.universe[i, j].AdjacentCount = 0;
+                    }
                 }
-            }
 
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        // Loop ticks.
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Program.playing = !Program.playing;
+        }
+        public void UpdateLoop()
+        {
             graphicsPanel1.Invalidate();
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -10,6 +12,9 @@ namespace GOLSource
     {
         // The universe array
         public static Cell[,] universe = new Cell[25, 25];
+        public static bool playing;
+        public static int ticks;
+        public static Form1 form;
 
         /// <summary>
         /// The main entry point for the application.
@@ -17,23 +22,34 @@ namespace GOLSource
         //[STAThread]
         static void Main()
         {
+            ticks = 0;
+            playing = false;
+            Thread t = new Thread(PlayThread);
+            t.Start();
+
             for (int i = 0; i < universe.GetLength(0); i++)
             {
                 for (int j = 0; j < universe.GetLength(1); j++)
                 {
-                    universe[i, j] = new Cell();
-                    universe[i, j].X = i;
-                    universe[i, j].Y = j;
+                    universe[i, j] = new Cell
+                    {
+                        X = i,
+                        Y = j
+                    };
                 }
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            form = new Form1();
+            Application.Run(form);
         }
 
         public static void Tick()
         {
+            ticks++;
+            form.UpdateTicks(ticks);
+
             int w = universe.GetLength(0);
             int h = universe.GetLength(1);
 
@@ -66,6 +82,19 @@ namespace GOLSource
                 for (int j = 0; j < h; j++)
                 {
                     universe[i, j].UpdateAdjacentCount();
+                }
+            }
+        }
+        public static void PlayThread()
+        {
+            while (true)
+            {
+                if (playing)
+                {
+                    Tick();
+                    form.UpdateLoop();
+
+                    Thread.Sleep(1000);
                 }
             }
         }
