@@ -75,25 +75,32 @@ namespace GOLSource
             gridPen.Dispose();
             cellBrush.Dispose();
         }
-
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            // If the left mouse button was clicked
-            if (e.Button == MouseButtons.Left)
+            // Calculate the cell that was clicked in
+            // CELL X = MOUSE X / CELL WIDTH
+            int x = (int)(e.X / graphicsPanel1.CellSize);
+            // CELL Y = MOUSE Y / CELL HEIGHT
+            int y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
+
+            if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
             {
-                // Calculate the width and height of each cell in pixels
-                //float cellSize = Math.Min((float)splitContainer1.Panel2.Width / Program.universe.GetLength(0), (float)splitContainer1.Panel2.Height / Program.universe.GetLength(1));
-
-                // Calculate the cell that was clicked in
-                // CELL X = MOUSE X / CELL WIDTH
-                int x = (int)(e.X / graphicsPanel1.CellSize);
-                // CELL Y = MOUSE Y / CELL HEIGHT
-                int y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
-
-                if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
+                if (
+                    (e.Button == MouseButtons.Left && !Program.universe[x, y].Active)
+                    || (e.Button == MouseButtons.Right && Program.universe[x, y].Active)
+                    )
                 {
-                    // Toggle the cell's state
-                    Program.universe[x, y].Active = !Program.universe[x, y].Active;
+                    // If the left mouse button was clicked
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        // Enable cell.
+                        Program.universe[x, y].Active = true;
+                    }
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        // Disable cell.
+                        Program.universe[x, y].Active = false;
+                    }
 
                     int adjX;
                     int adjY;
@@ -189,6 +196,9 @@ namespace GOLSource
                     }
                 }
 
+                Program.ticks = 0;
+                UpdateTicks(0);
+
                 graphicsPanel1.Invalidate();
             }
         }
@@ -201,6 +211,11 @@ namespace GOLSource
         public void UpdateLoop()
         {
             graphicsPanel1.Invalidate();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
