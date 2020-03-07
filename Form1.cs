@@ -25,20 +25,34 @@ namespace GOLSource
 
         private void GraphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
+            // Prevent initialized CellSize of 0.
+            if (graphicsPanel1.CellSize == 0)
+            {
+                graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+
+                graphicsPanel1.Location = new Point(
+                     flowLayoutPanel1.Width,
+                     0
+                );
+
+                graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
+            }
+
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
 
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
 
+            // A rectangle to represent each cell in pixels
+            RectangleF cellRect = RectangleF.Empty;
+
             // Iterate through the universe in the x, left to right
-            for (int x = 0; x < Program.universe.GetLength(0); x++)
+            for (int x = 0; x < graphicsPanel1.GridWidth; x++)
             {
                 // Iterate through the universe in the y, top to bottom
-                for (int y = 0; y < Program.universe.GetLength(1); y++)
+                for (int y = 0; y < graphicsPanel1.GridHeight; y++)
                 {
-                    // A rectangle to represent each cell in pixels
-                    RectangleF cellRect = RectangleF.Empty;
                     cellRect.X = (x * graphicsPanel1.CellSize);
                     cellRect.Y = (y * graphicsPanel1.CellSize) + graphicsPanel1.YOff;
 
@@ -152,13 +166,12 @@ namespace GOLSource
                 if (mouseX - sliderButton1.XOff >= 1)
                 {
                     flowLayoutPanel1.Width = mouseX - sliderButton1.XOff;
+                    graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
 
                     graphicsPanel1.Location = new Point(
                          flowLayoutPanel1.Width,
                          0
                     );
-
-                    graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
 
                     graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
                     //flowLayoutPanel1.Invalidate(new Rectangle(mouseX - sliderButton1.XOff, 0, sliderButton1.XOff, flowLayoutPanel1.Height));
@@ -170,7 +183,13 @@ namespace GOLSource
 
         private void Form1_ClientSizeChanged(object sender, EventArgs e)
         {
-            //graphicsPanel1.UpdateGrid(Width, Height, ref flowLayoutPanel1);
+            graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+
+            graphicsPanel1.Location = new Point(
+                 flowLayoutPanel1.Width,
+                 0
+            );
+
             graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
         }
 

@@ -26,7 +26,7 @@ namespace GOLSource
 
         public void UpdateGrid(int argWidth, int argHeight, ref FlowLayoutPanel argPanelLeft)
         {
-            Width = argWidth - argPanelLeft.Width;
+            //Width = argWidth - argPanelLeft.Width;
             Height = argHeight;
 
             CellSize = Math.Min((float)Width / GridWidth, (float)Height / GridHeight);
