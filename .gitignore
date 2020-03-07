@@ -4,3 +4,17 @@
 *.ide-shm
 *.ide
 *.cache
+.vs/GOLSource/v16/Server/sqlite3/storage.ide-wal
+*.ide-wal
+*.ide-shm
+.vs/GOLSource/v16/Server/sqlite3/storage.ide-shm
+.vs/GOLSource/v16/.suo
+*.ide-shm
+*.exe
+bin/Debug/GOLSource.exe
+bin/Debug/GOLSource.pdb
+*.pdb
+obj/Debug/GOLSource.csprojAssemblyReference.cache
+*.cache
+obj/Debug/GOLSource.exe
+obj/Debug/GOLSource.pdb
