@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GOLSource
@@ -85,6 +81,7 @@ namespace GOLSource
                 }
             }
         }
+
         public static void PlayThread()
         {
             while (true)

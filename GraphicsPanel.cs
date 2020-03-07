@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GOLSource
@@ -28,14 +24,18 @@ namespace GOLSource
             SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
-        public void RecalcY(ref SplitContainer argContainer)
+        public void Update(int argWidth, int argHeight, ref FlowLayoutPanel argPanelLeft)
         {
-            YOff = (argContainer.Panel2.Height - (CellSize * GridHeight)) / 2;
-        }
+            Width = argWidth - argPanelLeft.Width;
+            Height = argHeight;
 
-        public void RecalcCellSize(ref SplitContainer argContainer)
-        {
-            CellSize = Math.Min((float)argContainer.Panel2.Width / GridWidth, (float)argContainer.Panel2.Height / GridHeight);
+            CellSize = Math.Min((float)Width / GridWidth, (float)Height / GridHeight);
+            YOff = (Height - (CellSize * GridHeight)) / 2;
+
+            if (CellSize < 10)
+            {
+                int a = 0;
+            }
         }
     }
 }

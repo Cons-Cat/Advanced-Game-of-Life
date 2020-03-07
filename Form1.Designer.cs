@@ -30,7 +30,6 @@ namespace GOLSource
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,10 +38,6 @@ namespace GOLSource
             this.graphicsPanel1 = new GOLSource.GraphicsPanel();
             this.sliderButton1 = new GOLSource.SliderButton();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,39 +58,13 @@ namespace GOLSource
             this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
             this.toolStripStatusLabelGenerations.Text = "Generations = 0";
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
-            this.splitContainer1.Panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.graphicsPanel1);
-            this.splitContainer1.Panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
-            this.splitContainer1.Size = new System.Drawing.Size(573, 323);
-            this.splitContainer1.SplitterDistance = 191;
-            this.splitContainer1.SplitterWidth = 1;
-            this.splitContainer1.TabIndex = 4;
-            this.splitContainer1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Controls.Add(this.button4);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(191, 323);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -142,13 +111,13 @@ namespace GOLSource
             // 
             // graphicsPanel1
             // 
+            this.graphicsPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
             this.graphicsPanel1.CellSize = 0F;
             this.graphicsPanel1.Controls.Add(this.sliderButton1);
-            this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphicsPanel1.GridHeight = 25;
             this.graphicsPanel1.GridWidth = 25;
-            this.graphicsPanel1.Location = new System.Drawing.Point(0, 0);
+            this.graphicsPanel1.Location = new System.Drawing.Point(192, 3);
             this.graphicsPanel1.Name = "graphicsPanel1";
             this.graphicsPanel1.Size = new System.Drawing.Size(381, 323);
             this.graphicsPanel1.TabIndex = 3;
@@ -177,7 +146,8 @@ namespace GOLSource
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 345);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.graphicsPanel1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -185,10 +155,6 @@ namespace GOLSource
             this.SizeChanged += new System.EventHandler(this.Form1_ClientSizeChanged);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.graphicsPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -199,7 +165,6 @@ namespace GOLSource
         #endregion
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGenerations;
-        public System.Windows.Forms.SplitContainer splitContainer1;
         private GraphicsPanel graphicsPanel1;
         private SliderButton sliderButton1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

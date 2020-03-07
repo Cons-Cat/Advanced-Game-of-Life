@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GOLSource
@@ -32,9 +25,6 @@ namespace GOLSource
 
         private void GraphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
-            // Calculate the width and height of each cell in pixels
-            graphicsPanel1.RecalcCellSize(ref splitContainer1);
-
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
 
@@ -75,71 +65,75 @@ namespace GOLSource
             gridPen.Dispose();
             cellBrush.Dispose();
         }
+
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            // Calculate the cell that was clicked in
-            // CELL X = MOUSE X / CELL WIDTH
-            int x = (int)(e.X / graphicsPanel1.CellSize);
-            // CELL Y = MOUSE Y / CELL HEIGHT
-            int y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
-
-            if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
+            if (!Program.playing)
             {
-                if (
-                    (e.Button == MouseButtons.Left && !Program.universe[x, y].Active)
-                    || (e.Button == MouseButtons.Right && Program.universe[x, y].Active)
-                    )
+                // Calculate the cell that was clicked in
+                // CELL X = MOUSE X / CELL WIDTH
+                int x = (int)(e.X / graphicsPanel1.CellSize);
+                // CELL Y = MOUSE Y / CELL HEIGHT
+                int y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
+
+                if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
                 {
-                    // If the left mouse button was clicked
-                    if (e.Button == MouseButtons.Left)
+                    if (
+                        (e.Button == MouseButtons.Left && !Program.universe[x, y].Active)
+                        || (e.Button == MouseButtons.Right && Program.universe[x, y].Active)
+                        )
                     {
-                        // Enable cell.
-                        Program.universe[x, y].Active = true;
-                    }
-                    if (e.Button == MouseButtons.Right)
-                    {
-                        // Disable cell.
-                        Program.universe[x, y].Active = false;
-                    }
-
-                    int adjX;
-                    int adjY;
-
-                    for (int i = 0; i < 9; i++)
-                    {
-                        adjX = x + (i / 3) - 1;
-                        adjY = y + (i % 3) - 1;
-
-                        if (
-                            i == 4
-                            || adjX >= graphicsPanel1.GridWidth
-                            || adjY >= graphicsPanel1.GridHeight
-                            || adjX < 0
-                            || adjY < 0
-                            )
+                        // If the left mouse button was clicked
+                        if (e.Button == MouseButtons.Left)
                         {
-                            continue;
+                            // Enable cell.
+                            Program.universe[x, y].Active = true;
+                        }
+                        if (e.Button == MouseButtons.Right)
+                        {
+                            // Disable cell.
+                            Program.universe[x, y].Active = false;
                         }
 
-                        if (Program.universe[x, y].Active)
-                        {
-                            Program.universe[adjX, adjY].AdjacentCount++;
-                        }
-                        else
-                        {
-                            Program.universe[adjX, adjY].AdjacentCount--;
-                        }
-                    }
+                        int adjX;
+                        int adjY;
 
-                    // Tell Windows you need to repaint
-                    graphicsPanel1.Invalidate();
+                        for (int i = 0; i < 9; i++)
+                        {
+                            adjX = x + (i / 3) - 1;
+                            adjY = y + (i % 3) - 1;
+
+                            if (
+                                i == 4
+                                || adjX >= graphicsPanel1.GridWidth
+                                || adjY >= graphicsPanel1.GridHeight
+                                || adjX < 0
+                                || adjY < 0
+                                )
+                            {
+                                continue;
+                            }
+
+                            if (Program.universe[x, y].Active)
+                            {
+                                Program.universe[adjX, adjY].AdjacentCount++;
+                            }
+                            else
+                            {
+                                Program.universe[adjX, adjY].AdjacentCount--;
+                            }
+                        }
+
+                        // Tell Windows you need to repaint
+                        graphicsPanel1.Invalidate();
+                    }
                 }
             }
         }
 
         private void SliderButton1_MouseDown(object sender, MouseEventArgs e)
         {
-            sliderButton1.XOff = PointToClient(Cursor.Position).X - splitContainer1.SplitterDistance;
+            sliderButton1.XOff = PointToClient(Cursor.Position).X - flowLayoutPanel1.Width;
             sliderButton1.Sliding = true;
         }
 
@@ -157,10 +151,14 @@ namespace GOLSource
             {
                 if (mouseX - sliderButton1.XOff >= 1)
                 {
-                    splitContainer1.SplitterDistance = mouseX - sliderButton1.XOff;
-                    graphicsPanel1.RecalcY(ref splitContainer1);
+                    flowLayoutPanel1.Width = mouseX - sliderButton1.XOff;
 
-                    splitContainer1.Panel2.Invalidate();
+                    graphicsPanel1.Location = new Point(
+                         flowLayoutPanel1.Width,
+                         0
+                    );
+
+                    graphicsPanel1.Update(ClientRectangle.Width, ClientRectangle.Height, ref flowLayoutPanel1);
                     graphicsPanel1.Invalidate();
                 }
             }
@@ -168,8 +166,7 @@ namespace GOLSource
 
         private void Form1_ClientSizeChanged(object sender, EventArgs e)
         {
-            graphicsPanel1.RecalcY(ref splitContainer1);
-            graphicsPanel1.RecalcCellSize(ref splitContainer1);
+            graphicsPanel1.Update(Width, Height, ref flowLayoutPanel1);
         }
 
         // Discrete tick.
