@@ -18,3 +18,14 @@ obj/Debug/GOLSource.csprojAssemblyReference.cache
 *.cache
 obj/Debug/GOLSource.exe
 obj/Debug/GOLSource.pdb
+.vs/GOLSource/v16/.suo
+*.ide
+.vs/GOLSource/v16/Server/sqlite3/storage.ide
+*.ide-shm
+.vs/GOLSource/v16/Server/sqlite3/storage.ide-shm
+*.ide-wal
+.vs/GOLSource/v16/Server/sqlite3/storage.ide-wal
+.vs/GOLSource/v16/Server/sqlite3/storage.ide-shm
+.vs/GOLSource/v16/Server/sqlite3/storage.ide-wal
+.vs/GOLSource/v16/.suo
+.vs/GOLSource/v16/Server/sqlite3/storage.ide

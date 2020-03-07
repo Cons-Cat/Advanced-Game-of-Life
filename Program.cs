@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace GOLSource
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        //[STAThread]
+        [STAThread]
         static void Main()
         {
             ticks = 0;
@@ -85,9 +86,9 @@ namespace GOLSource
                 {
                     Tick();
                     form.UpdateLoop();
-
-                    Thread.Sleep(100);
                 }
+
+                Thread.Sleep(100);
             }
         }
     }

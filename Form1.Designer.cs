@@ -36,7 +36,7 @@ namespace GOLSource
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.graphicsPanel1 = new GOLSource.GraphicsPanel();
-            this.sliderButton1 = new GOLSource.SliderButton();
+            this.sliderButton1 = new GOLSource.SliderButton(this.Width);
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
