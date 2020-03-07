@@ -54,20 +54,15 @@ namespace GOLSource
             {
                 for (int j = 0; j < h; j++)
                 {
-                    if (universe[i, j].AdjacentCount < 2)
-                    {
-                        // Starve.
-                        universe[i, j].Active = false;
-                    }
-                    else if (universe[i, j].AdjacentCount > 3)
-                    {
-                        // Overpopulate.
-                        universe[i, j].Active = false;
-                    }
-                    else if (universe[i, j].AdjacentCount == 3)
+                    if (universe[i, j].AdjacentCount == 3)
                     {
                         // Reproduce.
                         universe[i, j].Active = true;
+                    }
+                    else if (universe[i, j].AdjacentCount != 2)
+                    {
+                        // Die.
+                        universe[i, j].Active = false;
                     }
                 }
             }

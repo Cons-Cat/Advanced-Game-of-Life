@@ -24,7 +24,7 @@ namespace GOLSource
             SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
-        public void Update(int argWidth, int argHeight, ref FlowLayoutPanel argPanelLeft)
+        public void UpdateGrid(int argWidth, int argHeight, ref FlowLayoutPanel argPanelLeft)
         {
             Width = argWidth - argPanelLeft.Width;
             Height = argHeight;

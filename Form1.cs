@@ -158,15 +158,20 @@ namespace GOLSource
                          0
                     );
 
-                    graphicsPanel1.Update(ClientRectangle.Width, ClientRectangle.Height, ref flowLayoutPanel1);
-                    graphicsPanel1.Invalidate();
+                    graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+
+                    graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
+                    //flowLayoutPanel1.Invalidate(new Rectangle(mouseX - sliderButton1.XOff, 0, sliderButton1.XOff, flowLayoutPanel1.Height));
+                    flowLayoutPanel1.Update();
+                    graphicsPanel1.Update();
                 }
             }
         }
 
         private void Form1_ClientSizeChanged(object sender, EventArgs e)
         {
-            graphicsPanel1.Update(Width, Height, ref flowLayoutPanel1);
+            //graphicsPanel1.UpdateGrid(Width, Height, ref flowLayoutPanel1);
+            graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
         }
 
         // Discrete tick.

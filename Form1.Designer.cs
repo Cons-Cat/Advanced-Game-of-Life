@@ -60,11 +60,14 @@ namespace GOLSource
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.flowLayoutPanel1.CausesValidation = false;
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Controls.Add(this.button4);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 3);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(191, 323);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -119,7 +122,7 @@ namespace GOLSource
             this.graphicsPanel1.GridWidth = 25;
             this.graphicsPanel1.Location = new System.Drawing.Point(192, 3);
             this.graphicsPanel1.Name = "graphicsPanel1";
-            this.graphicsPanel1.Size = new System.Drawing.Size(381, 323);
+            this.graphicsPanel1.Size = new System.Drawing.Size(381, 320);
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.YOff = 0F;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.GraphicsPanel1_Paint);
@@ -128,7 +131,7 @@ namespace GOLSource
             // sliderButton1
             // 
             this.sliderButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.sliderButton1.Location = new System.Drawing.Point(0, 131);
+            this.sliderButton1.Location = new System.Drawing.Point(0, 130);
             this.sliderButton1.Name = "sliderButton1";
             this.sliderButton1.Size = new System.Drawing.Size(22, 67);
             this.sliderButton1.Sliding = false;
@@ -145,6 +148,7 @@ namespace GOLSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(573, 345);
             this.Controls.Add(this.graphicsPanel1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -167,11 +171,11 @@ namespace GOLSource
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGenerations;
         private GraphicsPanel graphicsPanel1;
         private SliderButton sliderButton1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 
