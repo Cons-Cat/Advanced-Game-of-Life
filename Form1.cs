@@ -167,24 +167,43 @@ namespace GOLSource
             sliderButton1.XOff = PointToClient(Cursor.Position).X - flowLayoutPanel1.Width;
 
             sliderButton1.MoveState = 0;
+            sliderButton1.SubTicks = 0;
+            sliderButton1.ClickCount++;
         }
 
         private void SliderButton1_MouseUp(object sender, MouseEventArgs e)
         {
+            if (sliderButton1.Sliding)
+            {
+                if (flowLayoutPanel1.Width > 0 && flowLayoutPanel1.Width < sliderButton1.XStart)
+                {
+                    //sliderButton1.MoveState = 1;
+                    //sliderButton1.MovePercent = 0;
+                    //sliderButton1.MoveDist = flowLayoutPanel1.Width;
+                }
+            }
+
             sliderButton1.XOff = 0;
             sliderButton1.Sliding = false;
 
-            if (sliderButton1.ClickCount < 2)
+            if (sliderButton1.ClickCount == 2)
             {
-                sliderButton1.SubTicks = 0;
-                sliderButton1.ClickCount++;
-            }
-            else
-            {
-                sliderButton1.MoveState = 1;
                 sliderButton1.ClickCount = 0;
-                sliderButton1.MoveDist = flowLayoutPanel1.Width - sliderButton1.XStart;
+                sliderButton1.MoveState = 1;
                 sliderButton1.MovePercent = 0;
+
+                sliderButton1.XMoveFrom = flowLayoutPanel1.Width;
+
+                if (flowLayoutPanel1.Width == sliderButton1.XStart)
+                {
+                    // Fold.
+                    sliderButton1.MoveDist = sliderButton1.XStart;
+                }
+                else
+                {
+                    // To origin.
+                    sliderButton1.MoveDist = sliderButton1.XMoveFrom - sliderButton1.XStart;
+                }
             }
         }
 
@@ -194,6 +213,8 @@ namespace GOLSource
 
             if (sliderButton1.Sliding)
             {
+                sliderButton1.ClickCount = 0;
+
                 if (mouseX - sliderButton1.XOff >= 1)
                 {
                     flowLayoutPanel1.Width = mouseX - sliderButton1.XOff;
@@ -208,19 +229,10 @@ namespace GOLSource
             }
         }
 
-        private void UpdatePanels()
-        {
-            graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
-            graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
-
-            flowLayoutPanel1.Update();
-            graphicsPanel1.Update();
-        }
-
         // The event called by the timer every Interval milliseconds.
         private void SliderTick(object sender, EventArgs e)
         {
-            if (sliderButton1.SubTicks++ >= 19) // Every 10 ticks (1 second).
+            if (sliderButton1.SubTicks++ >= 10) // Every 10 ticks (1 second).
             {
                 sliderButton1.SubTicks = 0;
                 sliderButton1.ClickCount = 0;
@@ -238,7 +250,7 @@ namespace GOLSource
                     sliderButton1.MoveState = 0;
                 }
 
-                flowLayoutPanel1.Width = sliderButton1.XStart + sliderButton1.MoveDist - (int)(sliderButton1.MoveDist * (Math.Pow(sliderButton1.MovePercent - 1, 3) + 1));
+                flowLayoutPanel1.Width = sliderButton1.XMoveFrom - (int)(sliderButton1.MoveDist * (Math.Pow(sliderButton1.MovePercent - 1, 3) + 1));
 
                 graphicsPanel1.Location = new Point(
                     flowLayoutPanel1.Width,
@@ -247,6 +259,15 @@ namespace GOLSource
 
                 UpdatePanels();
             }
+        }
+
+        private void UpdatePanels()
+        {
+            graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+            graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
+
+            flowLayoutPanel1.Update();
+            graphicsPanel1.Update();
         }
 
         private void Form1_ClientSizeChanged(object sender, EventArgs e)

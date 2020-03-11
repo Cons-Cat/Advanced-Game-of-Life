@@ -15,13 +15,14 @@ namespace GOLSource
         public double MovePercent { get; set; }
 
         public SplitContainer SplitObj { get; set; }
+        public int XMoveFrom { get; set; }
 
         // Default constructor
         public SliderButton(int argWidth) : base()
         {
             Sliding = false;
             XOff = 0;
-            XStart = 100;//argWidth / 10;
+            XStart = 82;
             ClickCount = 0;
             MoveState = 0;
             SubTicks = 0;
