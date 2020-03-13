@@ -22,6 +22,9 @@ namespace GOLSource
         // The Timer class
         System.Windows.Forms.Timer sliderTimer = new System.Windows.Forms.Timer();
 
+        // Grid state
+        uint gridShape = 0; // 0 - Square, 1 - Hexagon
+
         public Form1()
         {
             InitializeComponent();
@@ -62,6 +65,13 @@ namespace GOLSource
 
             // A rectangle to represent each cell in pixels
             RectangleF cellRect = RectangleF.Empty;
+            //PointF p1 = new PointF();
+            //PointF p2 = new PointF();
+            //PointF p3 = new Point();
+            //PointF p4 = new PointF();
+            //PointF p5 = new PointF();
+            //PointF p6 = new PointF();
+            PointF[] cellHex = new PointF[6];
 
             // Iterate through the universe in the x, left to right
             for (int x = 0; x < graphicsPanel1.GridWidth; x++)
@@ -69,11 +79,30 @@ namespace GOLSource
                 // Iterate through the universe in the y, top to bottom
                 for (int y = 0; y < graphicsPanel1.GridHeight; y++)
                 {
-                    cellRect.X = (x * graphicsPanel1.CellSize);
-                    cellRect.Y = (y * graphicsPanel1.CellSize) + graphicsPanel1.YOff;
+                    if (gridShape == 0)
+                    {
+                        cellRect.X = (x * graphicsPanel1.CellSize);
+                        cellRect.Y = (y * graphicsPanel1.CellSize) + graphicsPanel1.YOff;
 
-                    cellRect.Width = graphicsPanel1.CellSize;
-                    cellRect.Height = graphicsPanel1.CellSize;
+                        cellRect.Width = graphicsPanel1.CellSize;
+                        cellRect.Height = graphicsPanel1.CellSize;
+                    }
+                    else
+                    {
+                        //float height = graphicsPanel1.HexRadius;
+                        //float width = HexWidth(height);
+
+                        float hexX = (x + 0.5F) * graphicsPanel1.HexRadius * 2 + ((y % 2) * (graphicsPanel1.HexRadius));
+                        float hexY = (y + 0.85F) * graphicsPanel1.HexRadius * 1.75F + graphicsPanel1.YOff;
+
+                        for (int i = 0; i < 6; i++)
+                        {
+                            cellHex[i] = new PointF(
+                                hexX + graphicsPanel1.HexRadius * 1.15F * (float)Math.Cos((i * 60 + 30) * Math.PI / 180F),
+                                hexY + graphicsPanel1.HexRadius * 1.15F * (float)Math.Sin((i * 60 + 30) * Math.PI / 180F)
+                            );
+                        }
+                    }
 
                     // Fill the cell with a brush if alive
                     if (Program.universe[x, y].Active)
@@ -82,11 +111,21 @@ namespace GOLSource
                     }
 
                     // Outline the cell with a pen
-                    e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                    if (gridShape == 0)
+                    {
+                        e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                    }
+                    else
+                    {
+                        e.Graphics.DrawPolygon(gridPen, cellHex);
+                    }
+
+                    TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
+                    TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
 
                     if (graphicsPanel1.CellSize > 12)
                     {
-                        TextRenderer.DrawText(e.Graphics, $"{Program.universe[x, y].AdjacentCount}", this.Font, new Point((int)cellRect.X, (int)cellRect.Y), SystemColors.ControlText);
+                        TextRenderer.DrawText(e.Graphics, $"{Program.universe[x, y].AdjacentCount}", this.Font, Rectangle.Round(cellRect), SystemColors.ControlText, flags);
                     }
                 }
             }
@@ -95,6 +134,12 @@ namespace GOLSource
             gridPen.Dispose();
             cellBrush.Dispose();
         }
+
+        // Return the width of a hexagon.
+        //private float HexWidth(float argHeight)
+        //{
+        //    return (float)(4 * (argHeight / 2 / Math.Sqrt(3)));
+        //}
 
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -326,6 +371,22 @@ namespace GOLSource
         private void button4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (gridShape == 0)
+            {
+                gridShape = 1;
+                button5.Text = "Square";
+            }
+            else
+            {
+                gridShape = 0;
+                button5.Text = "Hexagon";
+            }
+
+            graphicsPanel1.Invalidate();
         }
     }
 }

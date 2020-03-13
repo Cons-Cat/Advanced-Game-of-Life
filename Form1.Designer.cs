@@ -37,6 +37,7 @@ namespace GOLSource
             this.button4 = new System.Windows.Forms.Button();
             this.graphicsPanel1 = new GOLSource.GraphicsPanel();
             this.sliderButton1 = new GOLSource.SliderButton(this.Width);
+            this.button5 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
@@ -66,6 +67,7 @@ namespace GOLSource
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Controls.Add(this.button4);
+            this.flowLayoutPanel1.Controls.Add(this.button5);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -131,18 +133,35 @@ namespace GOLSource
             // sliderButton1
             // 
             this.sliderButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.sliderButton1.ClickCount = 0;
             this.sliderButton1.Location = new System.Drawing.Point(0, 130);
+            this.sliderButton1.MoveDist = 0;
+            this.sliderButton1.MovePercent = 0D;
+            this.sliderButton1.MoveState = 0;
             this.sliderButton1.Name = "sliderButton1";
             this.sliderButton1.Size = new System.Drawing.Size(22, 67);
             this.sliderButton1.Sliding = false;
             this.sliderButton1.SplitObj = null;
+            this.sliderButton1.SubTicks = 0;
             this.sliderButton1.TabIndex = 1;
             this.sliderButton1.Text = ">";
             this.sliderButton1.UseVisualStyleBackColor = true;
+            this.sliderButton1.XMoveFrom = 0;
             this.sliderButton1.XOff = 0;
+            this.sliderButton1.XStart = 82;
             this.sliderButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SliderButton1_MouseDown);
             this.sliderButton1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             this.sliderButton1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SliderButton1_MouseUp);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(3, 165);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 75);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Hexagon";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -176,6 +195,7 @@ namespace GOLSource
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button button5;
     }
 }
 

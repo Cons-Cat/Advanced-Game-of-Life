@@ -7,6 +7,7 @@ namespace GOLSource
     {
         public float YOff { get; set; }
         public float CellSize { get; set; }
+        public float HexRadius { get; set; }
         public int GridHeight { get; set; }
         public int GridWidth { get; set; }
 
@@ -30,6 +31,8 @@ namespace GOLSource
             Height = argHeight;
 
             CellSize = Math.Min((float)Width / GridWidth, (float)Height / GridHeight);
+            HexRadius = Math.Min((float)Width / GridWidth / 2, (float)Height / GridHeight / 2);
+
             YOff = (Height - (CellSize * GridHeight)) / 2;
 
             if (CellSize < 10)
