@@ -24,6 +24,7 @@ namespace GOLSource
 
         // Grid state
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
+        string cellText;
 
         public Form1()
         {
@@ -54,7 +55,7 @@ namespace GOLSource
                      0
                 );
 
-                graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
+                graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
             }
 
             // A Pen for drawing the grid lines (color, width)
@@ -93,7 +94,7 @@ namespace GOLSource
                         //float width = HexWidth(height);
 
                         float hexX = (x + 0.5F) * graphicsPanel1.HexRadius * 2 + ((y % 2) * (graphicsPanel1.HexRadius));
-                        float hexY = (y + 0.85F) * graphicsPanel1.HexRadius * 1.75F + graphicsPanel1.YOff;
+                        float hexY = (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F + graphicsPanel1.YOff;
 
                         for (int i = 0; i < 6; i++)
                         {
@@ -104,28 +105,40 @@ namespace GOLSource
                         }
                     }
 
-                    // Fill the cell with a brush if alive
-                    if (Program.universe[x, y].Active)
-                    {
-                        e.Graphics.FillRectangle(cellBrush, cellRect);
-                    }
+                    TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
+                    TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
+                    cellText = $"{Program.universe[x, y].AdjacentCount}";
 
                     // Outline the cell with a pen
                     if (gridShape == 0)
                     {
+                        if (Program.universe[x, y].Active)
+                        {
+                            e.Graphics.FillRectangle(cellBrush, cellRect);
+                        }
+
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+
+                        if (graphicsPanel1.CellSize > 12)
+                        {
+                            TextRenderer.DrawText(e.Graphics, cellText, this.Font, Rectangle.Round(cellRect), SystemColors.ControlText, flags);
+                        }
                     }
                     else
                     {
+                        if (Program.universe[x, y].Active)
+                        {
+                            e.Graphics.FillPolygon(cellBrush, cellHex);
+                        }
+
                         e.Graphics.DrawPolygon(gridPen, cellHex);
-                    }
 
-                    TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
-                    TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
+                        if (graphicsPanel1.HexRadius > 6)
+                        {
+                            SizeF textSize = e.Graphics.MeasureString(cellText, this.Font);
 
-                    if (graphicsPanel1.CellSize > 12)
-                    {
-                        TextRenderer.DrawText(e.Graphics, $"{Program.universe[x, y].AdjacentCount}", this.Font, Rectangle.Round(cellRect), SystemColors.ControlText, flags);
+                            e.Graphics.DrawString(cellText, this.Font, new SolidBrush(Color.Black), ((x + 0.5F) * 2F + (y % 2)) * graphicsPanel1.HexRadius - (textSize.Width / 2) + 1, (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F - (textSize.Height / 2) + graphicsPanel1.YOff + 1);
+                        }
                     }
                 }
             }
@@ -135,21 +148,26 @@ namespace GOLSource
             cellBrush.Dispose();
         }
 
-        // Return the width of a hexagon.
-        //private float HexWidth(float argHeight)
-        //{
-        //    return (float)(4 * (argHeight / 2 / Math.Sqrt(3)));
-        //}
-
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             if (!Program.playing)
             {
+                int x;
+                int y;
+
                 // Calculate the cell that was clicked in
-                // CELL X = MOUSE X / CELL WIDTH
-                int x = (int)(e.X / graphicsPanel1.CellSize);
-                // CELL Y = MOUSE Y / CELL HEIGHT
-                int y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
+                if (gridShape == 0)
+                {
+                    // CELL X = MOUSE X / CELL WIDTH
+                    x = (int)(e.X / graphicsPanel1.CellSize);
+                    // CELL Y = MOUSE Y / CELL HEIGHT
+                    y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
+                }
+                else
+                {
+                    x = 0;
+                    y = 0;
+                }
 
                 if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
                 {
@@ -309,7 +327,7 @@ namespace GOLSource
         private void UpdatePanels()
         {
             graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
-            graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
+            graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
 
             flowLayoutPanel1.Update();
             graphicsPanel1.Update();
@@ -324,7 +342,7 @@ namespace GOLSource
                  0
             );
 
-            graphicsPanel1.UpdateGrid(ClientRectangle.Width, ClientRectangle.Height - statusStrip1.Height, ref flowLayoutPanel1);
+            graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
         }
 
         // Discrete tick.
@@ -373,6 +391,7 @@ namespace GOLSource
 
         }
 
+        // Toggle grid shape.
         private void button5_Click(object sender, EventArgs e)
         {
             if (gridShape == 0)
@@ -386,6 +405,7 @@ namespace GOLSource
                 button5.Text = "Hexagon";
             }
 
+            graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
             graphicsPanel1.Invalidate();
         }
     }

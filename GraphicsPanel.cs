@@ -25,19 +25,21 @@ namespace GOLSource
             SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
-        public void UpdateGrid(int argWidth, int argHeight, ref FlowLayoutPanel argPanelLeft)
+        public void UpdateGrid(int argHeight, uint argGridState)
         {
             //Width = argWidth - argPanelLeft.Width;
             Height = argHeight;
 
             CellSize = Math.Min((float)Width / GridWidth, (float)Height / GridHeight);
-            HexRadius = Math.Min((float)Width / GridWidth / 2, (float)Height / GridHeight / 2);
+            HexRadius = Math.Min((float)Width / (GridWidth + 0.5F) / 2F, (float)Height / (GridHeight + 0.5F) / 1.75F);
 
-            YOff = (Height - (CellSize * GridHeight)) / 2;
-
-            if (CellSize < 10)
+            if (argGridState == 0)
             {
-                int a = 0;
+                YOff = (Height - (CellSize * GridHeight)) / 2;
+            }
+            else
+            {
+                YOff = (Height - (HexRadius * 1.75F * GridHeight)) / 2;
             }
         }
     }
