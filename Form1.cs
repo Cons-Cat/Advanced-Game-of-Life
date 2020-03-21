@@ -42,7 +42,7 @@ namespace GOLSource
             // Prevent initialized CellSize of 0.
             if (graphicsPanel1.CellSize == 0)
             {
-                graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+                graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
 
                 graphicsPanel1.Location = new Point(
                      flowLayoutPanel1.Width,
@@ -60,12 +60,6 @@ namespace GOLSource
 
             // A rectangle to represent each cell in pixels
             RectangleF cellRect = RectangleF.Empty;
-            //PointF p1 = new PointF();
-            //PointF p2 = new PointF();
-            //PointF p3 = new Point();
-            //PointF p4 = new PointF();
-            //PointF p5 = new PointF();
-            //PointF p6 = new PointF();
             PointF[] cellHex = new PointF[6];
 
             // Iterate through the universe in the x, left to right
@@ -76,7 +70,7 @@ namespace GOLSource
                 {
                     if (gridShape == 0)
                     {
-                        cellRect.X = (x * graphicsPanel1.CellSize);
+                        cellRect.X = (x * graphicsPanel1.CellSize) + graphicsPanel1.XOff;
                         cellRect.Y = (y * graphicsPanel1.CellSize) + graphicsPanel1.YOff;
 
                         cellRect.Width = graphicsPanel1.CellSize;
@@ -84,16 +78,13 @@ namespace GOLSource
                     }
                     else
                     {
-                        //float height = graphicsPanel1.HexRadius;
-                        //float width = HexWidth(height);
-
                         float hexX = (x + 0.5F) * graphicsPanel1.HexRadius * 2 + ((y % 2) * (graphicsPanel1.HexRadius));
                         float hexY = (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F + graphicsPanel1.YOff;
 
                         for (int i = 0; i < 6; i++)
                         {
                             cellHex[i] = new PointF(
-                                hexX + graphicsPanel1.HexRadius * 1.15F * (float)Math.Cos((i * 60 + 30) * Math.PI / 180F),
+                                hexX + graphicsPanel1.HexRadius * 1.15F * (float)Math.Cos((i * 60 + 30) * Math.PI / 180F) + graphicsPanel1.XOff,
                                 hexY + graphicsPanel1.HexRadius * 1.15F * (float)Math.Sin((i * 60 + 30) * Math.PI / 180F)
                             );
                         }
@@ -134,7 +125,7 @@ namespace GOLSource
                         {
                             SizeF textSize = e.Graphics.MeasureString(cellText, this.Font);
 
-                            e.Graphics.DrawString(cellText, this.Font, new SolidBrush(Color.Black), ((x + 0.5F) * 2F + (y % 2)) * graphicsPanel1.HexRadius - (textSize.Width / 2) + 1, (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F - (textSize.Height / 2) + graphicsPanel1.YOff + 1);
+                            e.Graphics.DrawString(cellText, this.Font, new SolidBrush(Color.Black), ((x + 0.5F) * 2F + (y % 2)) * graphicsPanel1.HexRadius - (textSize.Width / 2) + 1 + graphicsPanel1.XOff, (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F - (textSize.Height / 2) + graphicsPanel1.YOff + 1);
                         }
                     }
                 }
@@ -175,14 +166,14 @@ namespace GOLSource
                 if (gridShape == 0)
                 {
                     // CELL X = MOUSE X / CELL WIDTH
-                    x = (int)(e.X / graphicsPanel1.CellSize);
+                    x = (int)((e.X - graphicsPanel1.XOff) / graphicsPanel1.CellSize);
                     // CELL Y = MOUSE Y / CELL HEIGHT
                     y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
                 }
                 else if (gridShape == 1)
                 {
-                    x = (int)(e.X / (graphicsPanel1.HexRadius * 2F));
-                    y = (int)(e.Y / (graphicsPanel1.HexRadius * 1.75F));
+                    x = (int)((e.X - graphicsPanel1.XOff) / (graphicsPanel1.HexRadius * 2F));
+                    y = (int)((e.Y - graphicsPanel1.YOff) / (graphicsPanel1.HexRadius * 1.75F));
 
                     int ax = x - 1;
                     int ay = y - 1;
@@ -261,7 +252,6 @@ namespace GOLSource
 
             if (sliderButton1.ClickCount == 2)
             {
-                //sliderButton1.ClickCount = 0;
                 sliderButton1.MoveState = 1;
                 sliderButton1.MovePercent = 0;
 
@@ -291,6 +281,7 @@ namespace GOLSource
                 if (mouseX - sliderButton1.XOff >= 1)
                 {
                     flowLayoutPanel1.Width = mouseX - sliderButton1.XOff;
+                    UpdateMainBar();
 
                     graphicsPanel1.Location = new Point(
                          flowLayoutPanel1.Width,
@@ -330,6 +321,7 @@ namespace GOLSource
                 }
 
                 flowLayoutPanel1.Width = sliderButton1.XMoveFrom - (int)(sliderButton1.MoveDist * (Math.Pow(sliderButton1.MovePercent - 1, 3) + 1));
+                UpdateMainBar();
 
                 graphicsPanel1.Location = new Point(
                     flowLayoutPanel1.Width,
@@ -342,8 +334,9 @@ namespace GOLSource
 
         private void UpdatePanels()
         {
-            graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+            graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
             graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
+            //UpdateMainBar();
 
             flowLayoutPanel1.Update();
             graphicsPanel1.Update();
@@ -351,7 +344,7 @@ namespace GOLSource
 
         private void Form1_ClientSizeChanged(object sender, EventArgs e)
         {
-            graphicsPanel1.Width = ClientRectangle.Width - flowLayoutPanel1.Width;
+            graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
 
             graphicsPanel1.Location = new Point(
                  flowLayoutPanel1.Width,
@@ -438,6 +431,24 @@ namespace GOLSource
             }
 
             graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
+            graphicsPanel1.Invalidate();
+        }
+
+        // Main Bar Update
+        private void UpdateMainBar()
+        {
+            if (flowLayoutPanel1.Width >= 155)
+            {
+                panel1.Width = flowLayoutPanel1.Width;
+                panel1.Update();
+            }
+            else if (flowLayoutPanel1.Width != 155)
+            {
+                panel1.Width = 155;
+                panel1.Update();
+            }
+
+            graphicsPanel1.XOff = Math.Abs(panel1.Width - flowLayoutPanel1.Width);
             graphicsPanel1.Invalidate();
         }
     }

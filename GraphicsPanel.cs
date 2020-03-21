@@ -5,6 +5,7 @@ namespace GOLSource
 {
     public class GraphicsPanel : Panel
     {
+        public int XOff { get; set; }
         public float YOff { get; set; }
         public float CellSize { get; set; }
         public float HexRadius { get; set; }
@@ -14,6 +15,7 @@ namespace GOLSource
         // Default constructor
         public GraphicsPanel()
         {
+            XOff = 0;
             YOff = 0;
             GridHeight = Program.universe.GetLength(1);
             GridWidth = Program.universe.GetLength(0);
