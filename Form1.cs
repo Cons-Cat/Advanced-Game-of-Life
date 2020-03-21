@@ -257,10 +257,11 @@ namespace GOLSource
 
             sliderButton1.XOff = 0;
             sliderButton1.Sliding = false;
+            sliderButton1.SubTicks = 0;
 
             if (sliderButton1.ClickCount == 2)
             {
-                sliderButton1.ClickCount = 0;
+                //sliderButton1.ClickCount = 0;
                 sliderButton1.MoveState = 1;
                 sliderButton1.MovePercent = 0;
 
@@ -304,7 +305,10 @@ namespace GOLSource
         // The event called by the timer every Interval milliseconds.
         private void SliderTick(object sender, EventArgs e)
         {
-            if (sliderButton1.SubTicks++ >= 10) // Every 10 ticks (1 second).
+            sliderButton1.SubTicks++;
+            Debug.WriteLine(sliderButton1.ClickCount);
+
+            if (sliderButton1.SubTicks >= 50)
             {
                 sliderButton1.SubTicks = 0;
                 sliderButton1.ClickCount = 0;
@@ -312,6 +316,8 @@ namespace GOLSource
 
             if (sliderButton1.MoveState == 1)
             {
+                sliderButton1.ClickCount = 2;
+
                 if (sliderButton1.MovePercent < 1)
                 {
                     sliderButton1.MovePercent += 0.1;
@@ -320,6 +326,7 @@ namespace GOLSource
                 {
                     sliderButton1.MovePercent = 1;
                     sliderButton1.MoveState = 0;
+                    sliderButton1.ClickCount = 0;
                 }
 
                 flowLayoutPanel1.Width = sliderButton1.XMoveFrom - (int)(sliderButton1.MoveDist * (Math.Pow(sliderButton1.MovePercent - 1, 3) + 1));
@@ -393,11 +400,6 @@ namespace GOLSource
         public void UpdateLoop()
         {
             graphicsPanel1.Invalidate();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
         }
 
         // Toggle grid shape.

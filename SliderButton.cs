@@ -22,7 +22,7 @@ namespace GOLSource
         {
             Sliding = false;
             XOff = 0;
-            XStart = 82;
+            XStart = 98;
             ClickCount = 0;
             MoveState = 0;
             SubTicks = 0;

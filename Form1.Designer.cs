@@ -35,9 +35,9 @@ namespace GOLSource
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.graphicsPanel1 = new GOLSource.GraphicsPanel();
-            this.sliderButton1 = new GOLSource.SliderButton(this.Width);
             this.button5 = new System.Windows.Forms.Button();
+            this.sliderButton1 = new GOLSource.SliderButton(this.Width);
+            this.graphicsPanel1 = new GOLSource.GraphicsPanel();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
@@ -61,6 +61,7 @@ namespace GOLSource
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.flowLayoutPanel1.CausesValidation = false;
             this.flowLayoutPanel1.Controls.Add(this.button1);
@@ -112,7 +113,16 @@ namespace GOLSource
             this.button4.TabIndex = 3;
             this.button4.Text = "Export";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(3, 165);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 75);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Hexagon";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // graphicsPanel1
             // 
@@ -122,6 +132,7 @@ namespace GOLSource
             this.graphicsPanel1.Controls.Add(this.sliderButton1);
             this.graphicsPanel1.GridHeight = 25;
             this.graphicsPanel1.GridWidth = 25;
+            this.graphicsPanel1.HexRadius = 0F;
             this.graphicsPanel1.Location = new System.Drawing.Point(192, 3);
             this.graphicsPanel1.Name = "graphicsPanel1";
             this.graphicsPanel1.Size = new System.Drawing.Size(381, 320);
@@ -148,20 +159,10 @@ namespace GOLSource
             this.sliderButton1.UseVisualStyleBackColor = true;
             this.sliderButton1.XMoveFrom = 0;
             this.sliderButton1.XOff = 0;
-            this.sliderButton1.XStart = 82;
+            //this.sliderButton1.XStart = 82;
             this.sliderButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SliderButton1_MouseDown);
             this.sliderButton1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             this.sliderButton1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SliderButton1_MouseUp);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(3, 165);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 75);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Hexagon";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
