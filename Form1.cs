@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Threading;
 
 namespace GOLSource
 {
@@ -103,6 +97,9 @@ namespace GOLSource
                                 hexY + graphicsPanel1.HexRadius * 1.15F * (float)Math.Sin((i * 60 + 30) * Math.PI / 180F)
                             );
                         }
+
+                        Program.universe[x, y].hexPoly = cellHex;
+                        Program.universe[x, y].hexPoint = new PointF(hexX, hexY);
                     }
 
                     TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
@@ -148,12 +145,31 @@ namespace GOLSource
             cellBrush.Dispose();
         }
 
+        public static bool IsInPolygon(PointF[] poly, Point point)
+        {
+            var coef = poly.Skip(1).Select((p, i) =>
+                                            (point.Y - poly[i].Y) * (p.X - poly[i].X)
+                                          - (point.X - poly[i].X) * (p.Y - poly[i].Y))
+                                    .ToList();
+
+            if (coef.Any(p => p == 0))
+                return true;
+
+            for (int i = 1; i < coef.Count(); i++)
+            {
+                if (coef[i] * coef[i - 1] < 0)
+                    return false;
+            }
+
+            return true;
+        }
+
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             if (!Program.playing)
             {
-                int x;
-                int y;
+                int x = 0;
+                int y = 0;
 
                 // Calculate the cell that was clicked in
                 if (gridShape == 0)
@@ -163,10 +179,30 @@ namespace GOLSource
                     // CELL Y = MOUSE Y / CELL HEIGHT
                     y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
                 }
-                else
+                else if (gridShape == 1)
                 {
-                    x = 0;
-                    y = 0;
+                    x = (int)(e.X / (graphicsPanel1.HexRadius * 2F));
+                    y = (int)(e.Y / (graphicsPanel1.HexRadius * 1.75F));
+
+                    int ax = x - 1;
+                    int ay = y - 1;
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            if (ax >= 0 && ay >= 0 && ax + i < Program.universe.GetLength(0) && ay + j < Program.universe.GetLength(1))
+                            {
+                                if (IsInPolygon(Program.universe[ax + i, ay + j].hexPoly, e.Location))
+                                {
+                                    x = ax + i;
+                                    y = ay + j;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
@@ -188,39 +224,12 @@ namespace GOLSource
                             Program.universe[x, y].Active = false;
                         }
 
-                        int adjX;
-                        int adjY;
-
-                        for (int i = 0; i < 9; i++)
-                        {
-                            adjX = x + (i / 3) - 1;
-                            adjY = y + (i % 3) - 1;
-
-                            if (
-                                i == 4
-                                || adjX >= graphicsPanel1.GridWidth
-                                || adjY >= graphicsPanel1.GridHeight
-                                || adjX < 0
-                                || adjY < 0
-                                )
-                            {
-                                continue;
-                            }
-
-                            if (Program.universe[x, y].Active)
-                            {
-                                Program.universe[adjX, adjY].AdjacentCount++;
-                            }
-                            else
-                            {
-                                Program.universe[adjX, adjY].AdjacentCount--;
-                            }
-                        }
-
-                        // Tell Windows you need to repaint
-                        graphicsPanel1.Invalidate();
+                        Program.universe[x, y].CountAdjacent(x, y, gridShape, graphicsPanel1.GridWidth, graphicsPanel1.GridHeight);
                     }
                 }
+
+                // Tell Windows you need to repaint
+                graphicsPanel1.Invalidate();
             }
         }
 
@@ -403,6 +412,27 @@ namespace GOLSource
             {
                 gridShape = 0;
                 button5.Text = "Hexagon";
+            }
+
+            for (int k = 0; k <= 1; k++)
+            {
+                for (int i = 0; i < Program.universe.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Program.universe.GetLength(1); j++)
+                    {
+                        if (k == 0)
+                        {
+                            Program.universe[i, j].AdjacentCount = 0;
+                        }
+                        else
+                        {
+                            if (Program.universe[i, j].Active)
+                            {
+                                Program.universe[i, j].CountAdjacent(i, j, gridShape, graphicsPanel1.GridWidth, graphicsPanel1.GridHeight);
+                            }
+                        }
+                    }
+                }
             }
 
             graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
