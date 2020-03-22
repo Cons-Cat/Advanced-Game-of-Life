@@ -2,7 +2,6 @@
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace GOLSource
@@ -106,7 +105,28 @@ namespace GOLSource
             }
         }
 
-        // Main Bar Update
+        // Update side panel dimensions.
+        private void UpdateSliderPanel()
+        {
+            for (int i = 0; i < slidingPanel.Length; i++)
+            {
+                if (i == panelInd)
+                {
+                    slidingPanel[i].Location = new Point(0, panel1.Height + 3);
+                    slidingPanel[i].Width = sliderButton1.Location.X + graphicsPanel1.Location.X;
+                }
+                else
+                {
+                    slidingPanel[i].Location = new Point(0 - slidingPanel[i].Width, panel1.Height + 3);
+                }
+
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height - 3;
+
+                slidingPanel[i].Update();
+            }
+        }
+
+        // Update main bar dimensions.
         private void UpdateMainBar()
         {
             if (slidingPanel[panelInd].Width >= 155)

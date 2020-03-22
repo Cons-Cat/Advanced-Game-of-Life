@@ -105,7 +105,7 @@ namespace GOLSource
             this.flowLayoutPanelCore.Controls.Add(this.buttonRandom);
             this.flowLayoutPanelCore.Location = new System.Drawing.Point(0, 104);
             this.flowLayoutPanelCore.Name = "flowLayoutPanelCore";
-            this.flowLayoutPanelCore.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.flowLayoutPanelCore.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.flowLayoutPanelCore.Size = new System.Drawing.Size(191, 122);
             this.flowLayoutPanelCore.TabIndex = 0;
             // 
@@ -166,6 +166,7 @@ namespace GOLSource
             this.buttonRandom.TabIndex = 5;
             this.buttonRandom.Text = "Random";
             this.buttonRandom.UseVisualStyleBackColor = true;
+            this.buttonRandom.Click += new System.EventHandler(this.buttonRandom_Click);
             // 
             // buttonSave
             // 
@@ -266,10 +267,10 @@ namespace GOLSource
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(573, 345);
+            this.Controls.Add(this.flowLayoutPanelCore);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.graphicsPanel1);
             this.Controls.Add(this.flowLayoutPanelSettings);
-            this.Controls.Add(this.flowLayoutPanelCore);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
