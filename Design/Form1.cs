@@ -20,6 +20,10 @@ namespace GOLSource
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
         string cellText;
 
+        // Sliding panels
+        uint panelInd = 0;
+        FlowLayoutPanel[] slidingPanel = new FlowLayoutPanel[2];
+
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +32,18 @@ namespace GOLSource
             sliderTimer.Interval = 100; // milliseconds
             sliderTimer.Tick += SliderTick;
             sliderTimer.Enabled = true; // start timer running
+
+            // Initialize array
+            slidingPanel[0] = flowLayoutPanelCore;
+            slidingPanel[1] = flowLayoutPanelSettings;
+
+            for (int i = 0; i < slidingPanel.Length; i++)
+            {
+                if (i != panelInd)
+                {
+                    slidingPanel[i].Location = new Point(0 - slidingPanel[i].Width, 0);
+                }
+            }
         }
 
         // Calculate the next generation of cells
@@ -42,7 +58,7 @@ namespace GOLSource
             graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
             graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
 
-            flowLayoutPanel1.Update();
+            flowLayoutPanelCore.Update();
             graphicsPanel1.Update();
         }
 
@@ -51,15 +67,21 @@ namespace GOLSource
             graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
 
             graphicsPanel1.Location = new Point(
-                 flowLayoutPanel1.Width,
+                 flowLayoutPanelCore.Width,
                  0
             );
+
+            for (int i = 0; i < slidingPanel.Length; i++)
+            {
+                slidingPanel[i].Location = new Point(slidingPanel[i].Location.X, panel1.Height);
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height;
+            }
 
             graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
         }
 
         // Discrete tick.
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonTick_Click(object sender, EventArgs e)
         {
             if (!Program.playing)
             {
@@ -69,10 +91,11 @@ namespace GOLSource
         }
 
         // Loop ticks.
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonPlay_Click(object sender, EventArgs e)
         {
             Program.playing = !Program.playing;
         }
+
         public void UpdateLoop()
         {
             graphicsPanel1.Invalidate();

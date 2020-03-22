@@ -12,7 +12,7 @@ namespace GOLSource
         private void SliderButton1_MouseDown(object sender, MouseEventArgs e)
         {
             sliderButton1.Sliding = true;
-            sliderButton1.XOff = PointToClient(Cursor.Position).X - flowLayoutPanel1.Width;
+            sliderButton1.XOff = PointToClient(Cursor.Position).X - slidingPanel[panelInd].Width;
 
             sliderButton1.MoveState = 0;
             sliderButton1.SubTicks = 0;
@@ -30,12 +30,20 @@ namespace GOLSource
                 sliderButton1.MoveState = 1;
                 sliderButton1.MovePercent = 0;
 
-                sliderButton1.XMoveFrom = flowLayoutPanel1.Width;
+                sliderButton1.XMoveFrom = slidingPanel[panelInd].Width;
 
-                if (flowLayoutPanel1.Width == sliderButton1.XStart)
+                if (slidingPanel[panelInd].Width == sliderButton1.XStart)
                 {
                     // Fold.
                     sliderButton1.MoveDist = sliderButton1.XStart;
+
+                    /*for (int i = 0; i < slidingPanel.Length; i++)
+                    {
+                        if (i != panelInd)
+                        {
+                            slidingPanel[i].Location.X = -slidingPanel[i].Width;
+                        }
+                    }*/
                 }
                 else
                 {
@@ -55,11 +63,11 @@ namespace GOLSource
 
                 if (mouseX - sliderButton1.XOff >= 1)
                 {
-                    flowLayoutPanel1.Width = mouseX - sliderButton1.XOff;
+                    slidingPanel[panelInd].Width = mouseX - sliderButton1.XOff;
                     UpdateMainBar();
 
                     graphicsPanel1.Location = new Point(
-                         flowLayoutPanel1.Width,
+                         slidingPanel[panelInd].Width,
                          0
                     );
 
@@ -95,11 +103,11 @@ namespace GOLSource
                     sliderButton1.ClickCount = 0;
                 }
 
-                flowLayoutPanel1.Width = sliderButton1.XMoveFrom - (int)(sliderButton1.MoveDist * (Math.Pow(sliderButton1.MovePercent - 1, 3) + 1));
+                slidingPanel[panelInd].Width = sliderButton1.XMoveFrom - (int)(sliderButton1.MoveDist * (Math.Pow(sliderButton1.MovePercent - 1, 3) + 1));
                 UpdateMainBar();
 
                 graphicsPanel1.Location = new Point(
-                    flowLayoutPanel1.Width,
+                    slidingPanel[panelInd].Width,
                     0
                 );
 
@@ -110,18 +118,18 @@ namespace GOLSource
         // Main Bar Update
         private void UpdateMainBar()
         {
-            if (flowLayoutPanel1.Width >= 155)
+            if (slidingPanel[panelInd].Width >= 155)
             {
-                panel1.Width = flowLayoutPanel1.Width;
+                panel1.Width = slidingPanel[panelInd].Width;
                 panel1.Update();
             }
-            else if (flowLayoutPanel1.Width != 155)
+            else if (slidingPanel[panelInd].Width != 155)
             {
                 panel1.Width = 155;
                 panel1.Update();
             }
 
-            graphicsPanel1.XOff = Math.Abs(panel1.Width - flowLayoutPanel1.Width);
+            graphicsPanel1.XOff = Math.Abs(panel1.Width - slidingPanel[panelInd].Width);
             graphicsPanel1.Invalidate();
         }
     }

@@ -17,7 +17,7 @@ namespace GOLSource
                 graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
 
                 graphicsPanel1.Location = new Point(
-                     flowLayoutPanel1.Width,
+                     flowLayoutPanelCore.Width,
                      0
                 );
 

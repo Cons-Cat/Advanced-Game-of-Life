@@ -61,7 +61,7 @@
     <Compile Include="Design\PanelButtons.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Design\SliderButton1.cs">
+    <Compile Include="Design\SliderBehavior.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Design\Form1.cs">

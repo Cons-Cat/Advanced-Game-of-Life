@@ -10,7 +10,7 @@ namespace GOLSource
     public partial class Form1 : Form
     {
         // Clear grid.
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonClear_Click(object sender, EventArgs e)
         {
             if (!Program.playing)
             {
@@ -31,17 +31,17 @@ namespace GOLSource
         }
 
         // Toggle grid shape.
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonShape_Click(object sender, EventArgs e)
         {
             if (gridShape == 0)
             {
                 gridShape = 1;
-                button5.Text = "Square";
+                buttonShape.Text = "Square";
             }
             else
             {
                 gridShape = 0;
-                button5.Text = "Hexagon";
+                buttonShape.Text = "Hexagon";
             }
 
             for (int k = 0; k <= 1; k++)
