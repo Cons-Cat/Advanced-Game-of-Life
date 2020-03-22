@@ -72,7 +72,6 @@ namespace GOLSource
         private void SliderTick(object sender, EventArgs e)
         {
             sliderButton1.SubTicks++;
-            Debug.WriteLine(sliderButton1.ClickCount);
 
             if (sliderButton1.SubTicks >= 50)
             {
@@ -113,15 +112,22 @@ namespace GOLSource
             if (slidingPanel[panelInd].Width >= 155)
             {
                 panel1.Width = slidingPanel[panelInd].Width;
-                panel1.Update();
             }
             else if (slidingPanel[panelInd].Width != 155)
             {
                 panel1.Width = 155;
-                panel1.Update();
             }
 
             graphicsPanel1.XOff = Math.Abs(panel1.Width - slidingPanel[panelInd].Width);
+
+            buttonNew.Location = new Point(3, 3);
+            buttonSave.Location = new Point((panel1.Width - buttonSave.Width) / 2, 3);
+            buttonOpen.Location = new Point(panel1.Width - buttonOpen.Width - 3, 3);
+
+            buttonCore.Location = new Point((buttonSave.Location.X - buttonNew.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
+            buttonSettings.Location = new Point(buttonSave.Location.X + (buttonOpen.Location.X - buttonSave.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
+
+            panel1.Update();
             graphicsPanel1.Invalidate();
         }
     }
