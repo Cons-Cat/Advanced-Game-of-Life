@@ -78,11 +78,13 @@ namespace GOLSource
         private void buttonRandSeed_Click(object sender, EventArgs e)
         {
             InputForm dlg = new InputForm();
-            dlg.seed = 0;
+            dlg.value = 0;
+            dlg.label1.Text = "Input Seed";
+            dlg.label1.Location = new Point(dlg.Width / 2 - dlg.label1.Width / 2, 9);
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                seed = dlg.seed;
+                seed = dlg.value;
                 RandomizeGrid(seed);
             }
         }

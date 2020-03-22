@@ -41,8 +41,8 @@ namespace GOLSource
             slidingPanel[0] = flowLayoutPanelCore;
             slidingPanel[1] = flowLayoutPanelSettings;
 
-            UpdateMainBar();
             UpdateSliderPanel();
+            UpdateMainBar();
         }
 
         // Calculate the next generation of cells

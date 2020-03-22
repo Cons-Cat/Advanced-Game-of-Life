@@ -55,13 +55,16 @@
     <Compile Include="Classes\SliderButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Design\SettingsButtons.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Design\MainPanelButtons.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Design\GridBehavior.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Design\PanelButtons.cs">
+    <Compile Include="Design\CoreButtons.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Design\SliderBehavior.cs">

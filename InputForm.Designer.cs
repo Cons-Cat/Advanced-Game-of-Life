@@ -46,11 +46,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 9);
+            this.label1.Location = new System.Drawing.Point(83, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Input Seed";
+            this.label1.Text = "Label";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // textBox1
             // 
@@ -78,7 +79,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonInput;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox textBox1;
     }
 }

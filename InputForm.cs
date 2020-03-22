@@ -12,11 +12,11 @@ namespace GOLSource
 {
     public partial class InputForm : Form
     {
-        public int seed;
+        public int value;
 
         public InputForm()
         {
-            seed = 0;
+            value = 0;
 
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace GOLSource
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            int.TryParse(textBox1.Text, out seed);
+            int.TryParse(textBox1.Text, out value);
         }
     }
 }

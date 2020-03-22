@@ -254,6 +254,7 @@ namespace GOLSource
             this.buttonSpeed.TabIndex = 0;
             this.buttonSpeed.Text = "Tick Speed";
             this.buttonSpeed.UseVisualStyleBackColor = true;
+            this.buttonSpeed.Click += new System.EventHandler(this.buttonSpeed_Click);
             // 
             // buttonWorldSize
             // 
