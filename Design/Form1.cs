@@ -17,6 +17,7 @@ namespace GOLSource
 
         // Grid state
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
+        public int seed { get; set; }
         string cellText;
 
         // Sliding panels
@@ -26,6 +27,7 @@ namespace GOLSource
         public Form1()
         {
             InitializeComponent();
+            seed = 0;
 
             // Setup the timer
             sliderTimer.Interval = 100; // milliseconds

@@ -63,20 +63,38 @@ namespace GOLSource
         {
             if (!Program.playing)
             {
-                Random rnd = new Random();
-
-                // Activate approximately one third of cells.
-                for (int i = 0; i < Program.universe.GetLength(0); i++)
-                {
-                    for (int j = 0; j < Program.universe.GetLength(1); j++)
-                    {
-                        Program.universe[i, j].Active = (rnd.Next(0, 3) == 2) ? true : false;
-                    }
-                }
-
-                UpdateGrid();
-                graphicsPanel1.Invalidate();
+                RandomizeGrid(Guid.NewGuid().GetHashCode());
             }
+        }
+
+        private void buttonRandSeed_Click(object sender, EventArgs e)
+        {
+            InputForm dlg = new InputForm();
+            dlg.seed = 0;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                seed = dlg.seed;
+                RandomizeGrid(seed);
+            }
+        }
+
+        // Randomize grid life.
+        private void RandomizeGrid(int argSeed)
+        {
+            Random rnd = new Random(argSeed);
+
+            // Activate approximately one third of cells.
+            for (int i = 0; i < Program.universe.GetLength(0); i++)
+            {
+                for (int j = 0; j < Program.universe.GetLength(1); j++)
+                {
+                    Program.universe[i, j].Active = (rnd.Next(0, 3) == 2) ? true : false;
+                }
+            }
+
+            UpdateGrid();
+            graphicsPanel1.Invalidate();
         }
     }
 }

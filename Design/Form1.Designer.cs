@@ -38,6 +38,7 @@ namespace GOLSource
             this.buttonSize = new System.Windows.Forms.Button();
             this.buttonShape = new System.Windows.Forms.Button();
             this.buttonRandom = new System.Windows.Forms.Button();
+            this.buttonRandSeed = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.graphicsPanel1 = new GOLSource.GraphicsPanel();
@@ -103,15 +104,15 @@ namespace GOLSource
             this.flowLayoutPanelCore.Controls.Add(this.buttonSize);
             this.flowLayoutPanelCore.Controls.Add(this.buttonShape);
             this.flowLayoutPanelCore.Controls.Add(this.buttonRandom);
+            this.flowLayoutPanelCore.Controls.Add(this.buttonRandSeed);
             this.flowLayoutPanelCore.Location = new System.Drawing.Point(0, 104);
             this.flowLayoutPanelCore.Name = "flowLayoutPanelCore";
-            this.flowLayoutPanelCore.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.flowLayoutPanelCore.Size = new System.Drawing.Size(191, 122);
             this.flowLayoutPanelCore.TabIndex = 0;
             // 
             // buttonTick
             // 
-            this.buttonTick.Location = new System.Drawing.Point(3, 6);
+            this.buttonTick.Location = new System.Drawing.Point(3, 3);
             this.buttonTick.Name = "buttonTick";
             this.buttonTick.Size = new System.Drawing.Size(60, 60);
             this.buttonTick.TabIndex = 0;
@@ -121,7 +122,7 @@ namespace GOLSource
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(69, 6);
+            this.buttonClear.Location = new System.Drawing.Point(69, 3);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(60, 60);
             this.buttonClear.TabIndex = 1;
@@ -131,7 +132,7 @@ namespace GOLSource
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Location = new System.Drawing.Point(3, 72);
+            this.buttonPlay.Location = new System.Drawing.Point(3, 69);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(60, 60);
             this.buttonPlay.TabIndex = 2;
@@ -141,7 +142,7 @@ namespace GOLSource
             // 
             // buttonSize
             // 
-            this.buttonSize.Location = new System.Drawing.Point(69, 72);
+            this.buttonSize.Location = new System.Drawing.Point(69, 69);
             this.buttonSize.Name = "buttonSize";
             this.buttonSize.Size = new System.Drawing.Size(60, 60);
             this.buttonSize.TabIndex = 3;
@@ -150,7 +151,7 @@ namespace GOLSource
             // 
             // buttonShape
             // 
-            this.buttonShape.Location = new System.Drawing.Point(3, 138);
+            this.buttonShape.Location = new System.Drawing.Point(3, 135);
             this.buttonShape.Name = "buttonShape";
             this.buttonShape.Size = new System.Drawing.Size(60, 60);
             this.buttonShape.TabIndex = 4;
@@ -160,13 +161,23 @@ namespace GOLSource
             // 
             // buttonRandom
             // 
-            this.buttonRandom.Location = new System.Drawing.Point(69, 138);
+            this.buttonRandom.Location = new System.Drawing.Point(69, 135);
             this.buttonRandom.Name = "buttonRandom";
             this.buttonRandom.Size = new System.Drawing.Size(60, 60);
             this.buttonRandom.TabIndex = 5;
             this.buttonRandom.Text = "Random";
             this.buttonRandom.UseVisualStyleBackColor = true;
             this.buttonRandom.Click += new System.EventHandler(this.buttonRandom_Click);
+            // 
+            // buttonRandSeed
+            // 
+            this.buttonRandSeed.Location = new System.Drawing.Point(3, 201);
+            this.buttonRandSeed.Name = "buttonRandSeed";
+            this.buttonRandSeed.Size = new System.Drawing.Size(60, 60);
+            this.buttonRandSeed.TabIndex = 6;
+            this.buttonRandSeed.Text = "Random Seed";
+            this.buttonRandSeed.UseVisualStyleBackColor = true;
+            this.buttonRandSeed.Click += new System.EventHandler(this.buttonRandSeed_Click);
             // 
             // buttonSave
             // 
@@ -268,6 +279,7 @@ namespace GOLSource
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(573, 345);
             this.Controls.Add(this.flowLayoutPanelCore);
+            this.graphicsPanel1.ResumeLayout(false);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.graphicsPanel1);
             this.Controls.Add(this.flowLayoutPanelSettings);
@@ -279,7 +291,6 @@ namespace GOLSource
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.flowLayoutPanelCore.ResumeLayout(false);
-            this.graphicsPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -305,6 +316,7 @@ namespace GOLSource
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelSettings;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonCore;
+        private System.Windows.Forms.Button buttonRandSeed;
     }
 }
 
