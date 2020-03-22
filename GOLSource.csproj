@@ -52,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Cell.cs" />
+    <Compile Include="InputForm_Double.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputForm_Double.Designer.cs">
+      <DependentUpon>InputForm_Double.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\SliderButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InputForm.resx">
       <DependentUpon>InputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputForm_Double.resx">
+      <DependentUpon>InputForm_Double.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

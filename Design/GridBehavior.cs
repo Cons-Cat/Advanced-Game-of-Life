@@ -21,7 +21,7 @@ namespace GOLSource
                      0
                 );
 
-                graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
+                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
             }
 
             // A Pen for drawing the grid lines (color, width)
@@ -35,10 +35,10 @@ namespace GOLSource
             PointF[] cellHex = new PointF[6];
 
             // Iterate through the universe in the x, left to right
-            for (int x = 0; x < graphicsPanel1.GridWidth; x++)
+            for (int x = 0; x < Program.universe.GetLength(0); x++)
             {
                 // Iterate through the universe in the y, top to bottom
-                for (int y = 0; y < graphicsPanel1.GridHeight; y++)
+                for (int y = 0; y < Program.universe.GetLength(1); y++)
                 {
                     if (gridShape == 0)
                     {
@@ -168,7 +168,7 @@ namespace GOLSource
                     }
                 }
 
-                if (x >= 0 && y >= 0 && x < graphicsPanel1.GridWidth && y < graphicsPanel1.GridHeight)
+                if (x >= 0 && y >= 0 && x < Program.universe.GetLength(0) && y < Program.universe.GetLength(1))
                 {
                     if (
                         (e.Button == MouseButtons.Left && !Program.universe[x, y].Active)
@@ -187,7 +187,7 @@ namespace GOLSource
                             Program.universe[x, y].Active = false;
                         }
 
-                        Program.universe[x, y].CountAdjacent(x, y, gridShape, graphicsPanel1.GridWidth, graphicsPanel1.GridHeight);
+                        Program.universe[x, y].CountAdjacent(x, y, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
                     }
                 }
 
@@ -212,7 +212,7 @@ namespace GOLSource
                         {
                             if (Program.universe[i, j].Active)
                             {
-                                Program.universe[i, j].CountAdjacent(i, j, gridShape, graphicsPanel1.GridWidth, graphicsPanel1.GridHeight);
+                                Program.universe[i, j].CountAdjacent(i, j, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
                             }
                         }
                     }

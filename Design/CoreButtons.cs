@@ -24,9 +24,9 @@ namespace GOLSource
         {
             if (!Program.playing)
             {
-                for (int i = 0; i < graphicsPanel1.GridWidth; i++)
+                for (int i = 0; i < Program.universe.GetLength(0); i++)
                 {
-                    for (int j = 0; j < graphicsPanel1.GridHeight; j++)
+                    for (int j = 0; j < Program.universe.GetLength(1); j++)
                     {
                         Program.universe[i, j].Active = false;
                         Program.universe[i, j].AdjacentCount = 0;
@@ -55,7 +55,7 @@ namespace GOLSource
                 }
 
                 UpdateGrid();
-                graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
+                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
                 graphicsPanel1.Invalidate();
             }
         }

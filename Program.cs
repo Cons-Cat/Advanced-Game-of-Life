@@ -21,17 +21,7 @@ namespace GOLSource
             Thread t = new Thread(PlayThread);
             t.Start();
 
-            for (int i = 0; i < universe.GetLength(0); i++)
-            {
-                for (int j = 0; j < universe.GetLength(1); j++)
-                {
-                    universe[i, j] = new Cell
-                    {
-                        X = i,
-                        Y = j
-                    };
-                }
-            }
+            ReSizeUniverse(25, 25);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -87,6 +77,29 @@ namespace GOLSource
                 }
 
                 Thread.Sleep(Form1.GameSpeed);
+            }
+        }
+
+        public static void ReSizeUniverse(int argWidth, int argHeight)
+        {
+            if (argWidth > 0 && argHeight > 0)
+            {
+                universe = null;
+                universe = new Cell[argWidth, argHeight];
+
+                for (int i = 0; i < universe.GetLength(0); i++)
+                {
+                    for (int j = 0; j < universe.GetLength(1); j++)
+                    {
+                        universe[i, j] = new Cell
+                        {
+                            X = i,
+                            Y = j
+                        };
+
+                        universe[i, j].AdjacentCount = 0;
+                    }
+                }
             }
         }
     }

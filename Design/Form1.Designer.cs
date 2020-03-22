@@ -55,7 +55,7 @@ namespace GOLSource
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonCore = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
-            this.TickLabel = new System.Windows.Forms.Label();
+            this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
@@ -67,7 +67,7 @@ namespace GOLSource
             // 
             this.sliderButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.sliderButton1.ClickCount = 0;
-            this.sliderButton1.Location = new System.Drawing.Point(0, 130);
+            this.sliderButton1.Location = new System.Drawing.Point(0, 135);
             this.sliderButton1.MoveDist = 0;
             this.sliderButton1.MovePercent = 0D;
             this.sliderButton1.MoveState = 0;
@@ -89,7 +89,8 @@ namespace GOLSource
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelGenerations});
+            this.toolStripStatusLabelGenerations,
+            this.toolStripStatusLabelTickRate});
             this.statusStrip1.Location = new System.Drawing.Point(0, 323);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(573, 22);
@@ -215,8 +216,6 @@ namespace GOLSource
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
             this.graphicsPanel1.CellSize = 0F;
             this.graphicsPanel1.Controls.Add(this.sliderButton1);
-            this.graphicsPanel1.GridHeight = 25;
-            this.graphicsPanel1.GridWidth = 25;
             this.graphicsPanel1.HexRadius = 0F;
             this.graphicsPanel1.Location = new System.Drawing.Point(192, 3);
             this.graphicsPanel1.Name = "graphicsPanel1";
@@ -264,6 +263,7 @@ namespace GOLSource
             this.buttonWorldSize.TabIndex = 1;
             this.buttonWorldSize.Text = "Universe Size";
             this.buttonWorldSize.UseVisualStyleBackColor = true;
+            this.buttonWorldSize.Click += new System.EventHandler(this.buttonWorldSize_Click);
             // 
             // buttonLineToggle
             // 
@@ -273,6 +273,7 @@ namespace GOLSource
             this.buttonLineToggle.TabIndex = 2;
             this.buttonLineToggle.Text = "Toggle Lines";
             this.buttonLineToggle.UseVisualStyleBackColor = true;
+            this.buttonLineToggle.Click += new System.EventHandler(this.buttonLineToggle_Click);
             // 
             // buttonAdjacentToggle
             // 
@@ -282,6 +283,7 @@ namespace GOLSource
             this.buttonAdjacentToggle.TabIndex = 3;
             this.buttonAdjacentToggle.Text = "Toggle Neighbor";
             this.buttonAdjacentToggle.UseVisualStyleBackColor = true;
+            this.buttonAdjacentToggle.Click += new System.EventHandler(this.buttonAdjacentToggle_Click);
             // 
             // buttonHud
             // 
@@ -291,6 +293,7 @@ namespace GOLSource
             this.buttonHud.TabIndex = 4;
             this.buttonHud.Text = "Toggle HUD";
             this.buttonHud.UseVisualStyleBackColor = true;
+            this.buttonHud.Click += new System.EventHandler(this.buttonHud_Click);
             // 
             // buttonCellCol
             // 
@@ -300,6 +303,7 @@ namespace GOLSource
             this.buttonCellCol.TabIndex = 5;
             this.buttonCellCol.Text = "Cell Color";
             this.buttonCellCol.UseVisualStyleBackColor = true;
+            this.buttonCellCol.Click += new System.EventHandler(this.buttonCellCol_Click);
             // 
             // buttonLineCol
             // 
@@ -309,6 +313,7 @@ namespace GOLSource
             this.buttonLineCol.TabIndex = 6;
             this.buttonLineCol.Text = "Line Color";
             this.buttonLineCol.UseVisualStyleBackColor = true;
+            this.buttonLineCol.Click += new System.EventHandler(this.buttonLineCol_Click);
             // 
             // buttonReset
             // 
@@ -318,6 +323,7 @@ namespace GOLSource
             this.buttonReset.TabIndex = 7;
             this.buttonReset.Text = "Reset to Default";
             this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // panel1
             // 
@@ -363,14 +369,11 @@ namespace GOLSource
             this.buttonNew.UseVisualStyleBackColor = true;
             this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
-            // TickLabel
+            // toolStripStatusLabelTickRate
             // 
-            this.TickLabel.AutoSize = true;
-            this.TickLabel.Location = new System.Drawing.Point(115, 329);
-            this.TickLabel.Name = "TickLabel";
-            this.TickLabel.Size = new System.Drawing.Size(102, 13);
-            this.TickLabel.TabIndex = 6;
-            this.TickLabel.Text = "Tick Speed (ms) = 0";
+            this.toolStripStatusLabelTickRate.Name = "toolStripStatusLabelTickRate";
+            this.toolStripStatusLabelTickRate.Size = new System.Drawing.Size(111, 17);
+            this.toolStripStatusLabelTickRate.Text = "Tick Speed (ms) = 0";
             // 
             // Form1
             // 
@@ -380,7 +383,6 @@ namespace GOLSource
             this.ClientSize = new System.Drawing.Size(573, 345);
             this.Controls.Add(this.flowLayoutPanelCore);
             this.Controls.Add(this.flowLayoutPanelSettings);
-            this.Controls.Add(this.TickLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.graphicsPanel1);
             this.Controls.Add(this.statusStrip1);
@@ -419,7 +421,6 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonCore;
         private System.Windows.Forms.Button buttonRandSeed;
-        private System.Windows.Forms.Label TickLabel;
         private System.Windows.Forms.Button buttonSpeed;
         private System.Windows.Forms.Button buttonWorldSize;
         private System.Windows.Forms.Button buttonLineToggle;
@@ -428,6 +429,7 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonCellCol;
         private System.Windows.Forms.Button buttonLineCol;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTickRate;
     }
 }
 

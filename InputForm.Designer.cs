@@ -35,9 +35,9 @@
             // 
             // buttonInput
             // 
-            this.buttonInput.Location = new System.Drawing.Point(69, 66);
+            this.buttonInput.Location = new System.Drawing.Point(71, 66);
             this.buttonInput.Name = "buttonInput";
-            this.buttonInput.Size = new System.Drawing.Size(56, 23);
+            this.buttonInput.Size = new System.Drawing.Size(60, 23);
             this.buttonInput.TabIndex = 0;
             this.buttonInput.Text = "Done";
             this.buttonInput.UseVisualStyleBackColor = true;
@@ -55,7 +55,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(49, 40);
+            this.textBox1.Location = new System.Drawing.Point(50, 40);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(192, 101);
+            this.ClientSize = new System.Drawing.Size(194, 101);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonInput);

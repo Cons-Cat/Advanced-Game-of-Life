@@ -30,7 +30,7 @@ namespace GOLSource
             InitializeComponent();
             seed = 0;
             GameSpeed = 100;
-            TickLabel.Text = $"Tick Speed (ms) = {GameSpeed}";
+            toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
 
             // Setup the timer
             sliderTimer.Interval = 100; // milliseconds
@@ -66,10 +66,9 @@ namespace GOLSource
 
         private void UpdatePanels()
         {
-            graphicsPanel1.Width = ClientRectangle.Width - panel1.Width + graphicsPanel1.XOff;
-            graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
+            graphicsPanel1.Width = ClientRectangle.Width;
+            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
 
-            flowLayoutPanelCore.Update();
             graphicsPanel1.Update();
         }
 
@@ -88,12 +87,7 @@ namespace GOLSource
                 slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height;
             }
 
-            graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
-        }
-
-        public void UpdateLoop()
-        {
-            graphicsPanel1.Invalidate();
+            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
         }
     }
 }
