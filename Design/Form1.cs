@@ -37,12 +37,12 @@ namespace GOLSource
             slidingPanel[0] = flowLayoutPanelCore;
             slidingPanel[1] = flowLayoutPanelSettings;
 
+            UpdateSliderPanel();
+
             for (int i = 0; i < slidingPanel.Length; i++)
             {
-                if (i != panelInd)
-                {
-                    slidingPanel[i].Location = new Point(0 - slidingPanel[i].Width, 0);
-                }
+                slidingPanel[i].Location = new Point(slidingPanel[i].Location.X, panel1.Height);
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height;
             }
         }
 
@@ -99,6 +99,38 @@ namespace GOLSource
         public void UpdateLoop()
         {
             graphicsPanel1.Invalidate();
+        }
+
+        private void buttonCore_Click(object sender, EventArgs e)
+        {
+            panelInd = 0;
+            UpdateSliderPanel();
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            panelInd = 1;
+            UpdateSliderPanel();
+        }
+
+        private void UpdateSliderPanel()
+        {
+            for (int i = 0; i < slidingPanel.Length; i++)
+            {
+                if (i == panelInd)
+                {
+                    slidingPanel[i].Location = new Point(0, panel1.Height);
+                    slidingPanel[i].Width = sliderButton1.Location.X + graphicsPanel1.Location.X;
+                }
+                else
+                {
+                    slidingPanel[i].Location = new Point(0 - slidingPanel[i].Width, panel1.Height);
+                }
+
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height;
+
+                slidingPanel[i].Update();
+            }
         }
     }
 }

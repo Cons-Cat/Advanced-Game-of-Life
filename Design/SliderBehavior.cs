@@ -36,14 +36,6 @@ namespace GOLSource
                 {
                     // Fold.
                     sliderButton1.MoveDist = sliderButton1.XStart;
-
-                    /*for (int i = 0; i < slidingPanel.Length; i++)
-                    {
-                        if (i != panelInd)
-                        {
-                            slidingPanel[i].Location.X = -slidingPanel[i].Width;
-                        }
-                    }*/
                 }
                 else
                 {
