@@ -9,6 +9,16 @@ namespace GOLSource
 {
     public partial class Form1 : Form
     {
+        // A single tick.
+        private void ButtonTick_Click(object sender, EventArgs e)
+        {
+            if (!Program.playing)
+            {
+                Program.Tick();
+                graphicsPanel1.Invalidate();
+            }
+        }
+
         // Clear grid.
         private void buttonClear_Click(object sender, EventArgs e)
         {
@@ -25,8 +35,6 @@ namespace GOLSource
 
                 Program.ticks = 0;
                 UpdateTicks(0);
-
-                graphicsPanel1.Invalidate();
             }
         }
 

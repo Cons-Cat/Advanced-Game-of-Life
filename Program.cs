@@ -73,6 +73,8 @@ namespace GOLSource
                     universe[i, j].UpdateAdjacentCount();
                 }
             }
+
+            form.UpdateLoop();
         }
 
         public static void PlayThread()
@@ -82,7 +84,6 @@ namespace GOLSource
                 if (playing)
                 {
                     Tick();
-                    form.UpdateLoop();
                 }
 
                 Thread.Sleep(100);

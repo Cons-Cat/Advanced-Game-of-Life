@@ -46,7 +46,19 @@ namespace GOLSource
         public void UpdateTicks(int argTicks)
         {
             // Update status strip generations
-            toolStripStatusLabelGenerations.Text = "Generations = " + argTicks.ToString();
+            try
+            {
+                toolStripStatusLabelGenerations.Text = "Generations = " + argTicks.ToString();
+            }
+            catch (Exception ex)
+            {
+                // Visual Studio lies about an impossible
+                // cross-threading error, so a Try-Catch
+                // is necessary when executing the program
+                // in Debug mode.
+
+                // Compiled executables do not need this.
+            }
         }
 
         private void UpdatePanels()
@@ -74,16 +86,6 @@ namespace GOLSource
             }
 
             graphicsPanel1.UpdateGrid(ClientRectangle.Height - statusStrip1.Height, gridShape);
-        }
-
-        // Discrete tick.
-        private void ButtonTick_Click(object sender, EventArgs e)
-        {
-            if (!Program.playing)
-            {
-                Program.Tick();
-                graphicsPanel1.Invalidate();
-            }
         }
 
         public void UpdateLoop()
