@@ -175,6 +175,7 @@ namespace GOLSource
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonOpen
             // 
@@ -184,6 +185,7 @@ namespace GOLSource
             this.buttonOpen.TabIndex = 7;
             this.buttonOpen.Text = "Open";
             this.buttonOpen.UseVisualStyleBackColor = true;
+            this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
             // 
             // graphicsPanel1
             // 
@@ -256,6 +258,7 @@ namespace GOLSource
             this.buttonNew.TabIndex = 5;
             this.buttonNew.Text = "New";
             this.buttonNew.UseVisualStyleBackColor = true;
+            this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
             // Form1
             // 

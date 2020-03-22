@@ -62,7 +62,7 @@ namespace GOLSource
                 adjY = argY + (i % 3) - 1;
 
                 if (
-                    i == 4
+                    i == 4 // Exclude this cell.
                     || adjX >= argWidth
                     || adjY >= argHeight
                     || adjX < 0
@@ -72,6 +72,7 @@ namespace GOLSource
                     continue;
                 }
 
+                // Exclude additional cells from the hex grid.
                 if (gridShape == 1
                     && (
                         (
@@ -91,13 +92,6 @@ namespace GOLSource
                 if (Program.universe[argX, argY].Active)
                 {
                     Program.universe[adjX, adjY].AdjacentCount++;
-                }
-                else
-                {
-                    if (Program.universe[adjX, adjY].AdjacentCount > 0)
-                    {
-                        Program.universe[adjX, adjY].AdjacentCount--;
-                    }
                 }
             }
         }

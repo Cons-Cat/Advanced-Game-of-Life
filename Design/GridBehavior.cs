@@ -195,5 +195,29 @@ namespace GOLSource
                 graphicsPanel1.Invalidate();
             }
         }
+
+        private void UpdateGrid()
+        {
+            for (int k = 0; k <= 1; k++)
+            {
+                for (int i = 0; i < Program.universe.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Program.universe.GetLength(1); j++)
+                    {
+                        if (k == 0)
+                        {
+                            Program.universe[i, j].AdjacentCount = 0;
+                        }
+                        else
+                        {
+                            if (Program.universe[i, j].Active)
+                            {
+                                Program.universe[i, j].CountAdjacent(i, j, gridShape, graphicsPanel1.GridWidth, graphicsPanel1.GridHeight);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
