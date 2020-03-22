@@ -86,7 +86,7 @@ namespace GOLSource
                     Tick();
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(Form1.GameSpeed);
             }
         }
     }

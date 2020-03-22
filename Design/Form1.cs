@@ -18,6 +18,7 @@ namespace GOLSource
         // Grid state
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
         public int seed { get; set; }
+        static public int GameSpeed { get; set; }
         string cellText;
 
         // Sliding panels
@@ -28,6 +29,8 @@ namespace GOLSource
         {
             InitializeComponent();
             seed = 0;
+            GameSpeed = 100;
+            TickLabel.Text = $"Tick Speed (ms) = {GameSpeed}";
 
             // Setup the timer
             sliderTimer.Interval = 100; // milliseconds
