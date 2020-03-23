@@ -46,13 +46,14 @@ namespace GOLSource
             slidingPanel[0] = flowLayoutPanelCore;
             slidingPanel[1] = flowLayoutPanelSettings;
 
-            DefaultSettings();
+            ReloadSettings();
 
             UpdateSliderPanel();
             UpdateMainBar();
         }
 
-        private void DefaultSettings()
+        // Set settings to default values.
+        private void ResetSettings()
         {
             gridColor = Color.Black;
             cellColor = Color.Gray;
@@ -65,6 +66,23 @@ namespace GOLSource
             drawHud = true;
 
             statusStrip1.Visible = true;
+            toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
+        }
+
+        private void ReloadSettings()
+        {
+            gridColor = Properties.Settings.Default.gridColor;
+            cellColor = Properties.Settings.Default.cellColor;
+
+            GameSpeed = Properties.Settings.Default.GameSpeed;
+
+            drawLines = Properties.Settings.Default.drawLines;
+            drawAdjacent = Properties.Settings.Default.drawAdjacent;
+
+            drawHud = Properties.Settings.Default.drawHud;
+            statusStrip1.Visible = drawHud;
+            hudScale = drawHud ? 1 : 0;
+
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
         }
 
@@ -125,6 +143,18 @@ namespace GOLSource
         {
             UpdateGrid();
             graphicsPanel1.Invalidate();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.gridColor = gridColor;
+            Properties.Settings.Default.cellColor = cellColor;
+            Properties.Settings.Default.GameSpeed = GameSpeed;
+            Properties.Settings.Default.drawAdjacent = drawAdjacent;
+            Properties.Settings.Default.drawHud = drawHud;
+            Properties.Settings.Default.drawLines = drawLines;
+
+            Properties.Settings.Default.Save();
         }
     }
 }
