@@ -17,6 +17,7 @@ namespace GOLSource
 
         // Grid state
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
+        uint cellCount;
         public int Seed { get; set; }
         public static int GameSpeed { get; set; }
 
@@ -34,6 +35,7 @@ namespace GOLSource
         {
             InitializeComponent();
             Seed = 0;
+            cellCount = 0;
 
             // Setup the timer
             sliderTimer.Interval = 100; // milliseconds
@@ -67,7 +69,7 @@ namespace GOLSource
         }
 
         // Calculate the next generation of cells
-        public void UpdateTicks(int argTicks)
+        public void UpdateTicksLabel(int argTicks)
         {
             // Update status strip generations
             try
@@ -83,6 +85,12 @@ namespace GOLSource
 
                 // Compiled executables do not need this.
             }
+        }
+
+        // Update cell count
+        private void UpdateCellCountLabel()
+        {
+            toolStripStatusLabelCells.Text = $"Cell Count = {cellCount}";
         }
 
         private void UpdatePanels()

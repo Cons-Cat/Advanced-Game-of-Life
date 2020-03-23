@@ -34,7 +34,7 @@ namespace GOLSource
         public static void Tick()
         {
             ticks++;
-            form.UpdateTicks(ticks);
+            form.UpdateTicksLabel(ticks);
 
             int w = universe.GetLength(0);
             int h = universe.GetLength(1);

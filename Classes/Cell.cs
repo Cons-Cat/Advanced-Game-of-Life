@@ -93,6 +93,10 @@ namespace GOLSource
                 {
                     Program.universe[adjX, adjY].AdjacentCount++;
                 }
+                else
+                {
+                    Program.universe[adjX, adjY].AdjacentCount--;
+                }
             }
         }
     }

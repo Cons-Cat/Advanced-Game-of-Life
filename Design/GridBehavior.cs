@@ -123,10 +123,10 @@ namespace GOLSource
 
         public static bool IsInPolygon(PointF[] poly, Point point)
         {
-            var coef = poly.Skip(1).Select((p, i) =>
-                                            (point.Y - poly[i].Y) * (p.X - poly[i].X)
-                                          - (point.X - poly[i].X) * (p.Y - poly[i].Y))
-                                    .ToList();
+            var coef = poly.Skip(1).Select((p, i)
+            => (point.Y - poly[i].Y) * (p.X - poly[i].X)
+            - (point.X - poly[i].X) * (p.Y - poly[i].Y)
+            ).ToList();
 
             if (coef.Any(p => p == 0))
                 return true;
@@ -193,14 +193,17 @@ namespace GOLSource
                         {
                             // Enable cell.
                             Program.universe[x, y].Active = true;
+                            cellCount++;
                         }
                         if (e.Button == MouseButtons.Right)
                         {
                             // Disable cell.
+                            cellCount--;
                             Program.universe[x, y].Active = false;
                         }
 
                         Program.universe[x, y].CountAdjacent(x, y, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
+                        UpdateCellCountLabel();
                     }
                 }
 
@@ -211,6 +214,8 @@ namespace GOLSource
 
         private void UpdateGrid()
         {
+            cellCount = 0;
+
             for (int k = 0; k <= 1; k++)
             {
                 for (int i = 0; i < Program.universe.GetLength(0); i++)
@@ -226,11 +231,14 @@ namespace GOLSource
                             if (Program.universe[i, j].Active)
                             {
                                 Program.universe[i, j].CountAdjacent(i, j, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
+                                cellCount++;
                             }
                         }
                     }
                 }
             }
+
+            UpdateCellCountLabel();
         }
     }
 }

@@ -33,9 +33,11 @@ namespace GOLSource
                     }
                 }
 
+                cellCount = 0;
+                UpdateCellCountLabel();
                 Seed = 0;
                 Program.ticks = 0;
-                UpdateTicks(0);
+                UpdateTicksLabel(0);
             }
 
             graphicsPanel1.Invalidate();

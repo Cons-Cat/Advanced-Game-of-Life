@@ -11,7 +11,7 @@ namespace GOLSource
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|Life Lexicon files (*.cells)|*.cells";
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|Plaintext files (*.cells)|*.cells";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -46,7 +46,7 @@ namespace GOLSource
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|Life Lexicon files (*.cells)|*.cells";
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|Plaintext files (*.cells)|*.cells";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -109,7 +109,7 @@ namespace GOLSource
                     {
                         for (int i = 0; i < Program.universe.GetLength(0); i++)
                         {
-                            sw.Write(Program.universe[i, j].Active ? '0' : '.');
+                            sw.Write(Program.universe[i, j].Active ? 'O' : '.');
                         }
 
                         sw.WriteLine();
@@ -168,7 +168,7 @@ namespace GOLSource
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "txt files (*.txt)|*.txt|Life Lexicon files (*.cells)|*.cells";
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|Plaintext files (*.cells)|*.cells";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
 
@@ -190,6 +190,7 @@ namespace GOLSource
                         }
                         else if (ext == ".cells")
                         {
+                            // Loop through lines until a ! metadata line is not found.
                             char tempChr = '!';
 
                             while (tempChr == '!')
@@ -212,7 +213,7 @@ namespace GOLSource
                                         }
                                         else if (ext == ".cells")
                                         {
-                                            Program.universe[i, j].Active = (sr.Read() == '0' ? true : false);
+                                            Program.universe[i, j].Active = (sr.Read() == 'O' ? true : false);
                                         }
                                     }
                                     else
