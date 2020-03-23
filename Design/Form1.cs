@@ -23,6 +23,8 @@ namespace GOLSource
         string cellText;
         bool drawLines;
         bool drawAdjacent;
+        bool drawHud;
+        int hudScale;
 
         // Sliding panels
         uint panelInd = 0;
@@ -34,6 +36,7 @@ namespace GOLSource
             Seed = 0;
             GameSpeed = 100;
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
+            hudScale = 1;
 
             // Setup the timer
             sliderTimer.Interval = 100; // milliseconds
@@ -46,6 +49,7 @@ namespace GOLSource
 
             drawLines = true;
             drawAdjacent = true;
+            drawHud = true;
 
             UpdateSliderPanel();
             UpdateMainBar();
@@ -73,7 +77,7 @@ namespace GOLSource
         private void UpdatePanels()
         {
             graphicsPanel1.Width = ClientRectangle.Width;
-            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
+            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
 
             sliderButton1.Location = new Point(sliderButton1.Location.X, graphicsPanel1.Height / 2 - sliderButton1.Height / 2);
 
@@ -92,10 +96,10 @@ namespace GOLSource
             for (int i = 0; i < slidingPanel.Length; i++)
             {
                 slidingPanel[i].Location = new Point(slidingPanel[i].Location.X, panel1.Height);
-                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height;
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * hudScale);
             }
 
-            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
+            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
         }
 
         public void UpdateLoop()

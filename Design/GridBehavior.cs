@@ -21,7 +21,7 @@ namespace GOLSource
                      0
                 );
 
-                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
+                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
             }
 
             // A Pen for drawing the grid lines (color, width)

@@ -120,7 +120,7 @@ namespace GOLSource
                     slidingPanel[i].Location = new Point(0 - slidingPanel[i].Width, panel1.Height + 3);
                 }
 
-                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - statusStrip1.Height - 3;
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * hudScale) - 3;
 
                 slidingPanel[i].Update();
             }
