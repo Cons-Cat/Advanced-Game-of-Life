@@ -16,16 +16,18 @@ namespace GOLSource
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             ticks = 0;
             playing = false;
+
             Thread t = new Thread(PlayThread);
             t.Start();
 
             ReSizeUniverse(25, 25);
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             form = new Form1();
+
             Application.Run(form);
         }
 
@@ -55,15 +57,6 @@ namespace GOLSource
                 }
             }
 
-            // Evaluate new adjacent counts.
-            for (int i = 0; i < w; i++)
-            {
-                for (int j = 0; j < h; j++)
-                {
-                    universe[i, j].UpdateAdjacentCount();
-                }
-            }
-
             form.UpdateLoop();
         }
 
@@ -87,9 +80,9 @@ namespace GOLSource
                 universe = null;
                 universe = new Cell[argWidth, argHeight];
 
-                for (int i = 0; i < universe.GetLength(0); i++)
+                for (int i = 0; i < argWidth; i++)
                 {
-                    for (int j = 0; j < universe.GetLength(1); j++)
+                    for (int j = 0; j < argHeight; j++)
                     {
                         universe[i, j] = new Cell
                         {

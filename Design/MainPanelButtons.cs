@@ -14,7 +14,7 @@ namespace GOLSource
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "txt files (*.txt)";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -61,6 +61,9 @@ namespace GOLSource
                 // Write each directory name to a file.
                 using (StreamWriter sw = new StreamWriter(argStream))
                 {
+                    sw.WriteLine(Program.universe.GetLength(0));
+                    sw.WriteLine(Program.universe.GetLength(1));
+
                     for (int j = 0; j < Program.universe.GetLength(1); j++)
                     {
                         for (int i = 0; i < Program.universe.GetLength(0); i++)
@@ -90,12 +93,19 @@ namespace GOLSource
                 {
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
+                    int w;
+                    int h;
 
                     using (StreamReader sr = new StreamReader(fileStream))
                     {
-                        for (int j = 0; j < Program.universe.GetLength(1); j++)
+                        w = int.Parse(sr.ReadLine());
+                        h = int.Parse(sr.ReadLine());
+
+                        Program.ReSizeUniverse(w, h);
+
+                        for (int j = 0; j < h; j++)
                         {
-                            for (int i = 0; i < Program.universe.GetLength(0); i++)
+                            for (int i = 0; i < w; i++)
                             {
                                 Program.universe[i, j].Active = (sr.Read() == '1' ? true : false);
                             }
@@ -106,8 +116,8 @@ namespace GOLSource
                         sr.ReadToEnd();
                     }
 
-                    UpdateGrid();
-                    graphicsPanel1.Invalidate();
+                    graphicsPanel1.UpdateGridOffset(w, h, gridShape);
+                    UpdatePanels();
                 }
             }
         }

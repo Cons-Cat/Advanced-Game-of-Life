@@ -89,5 +89,11 @@ namespace GOLSource
 
             graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
         }
+
+        public void UpdateLoop()
+        {
+            UpdateGrid();
+            graphicsPanel1.Invalidate();
+        }
     }
 }

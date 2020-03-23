@@ -32,11 +32,12 @@ namespace GOLSource
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCells = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.flowLayoutPanelCore = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonTick = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonPlay = new System.Windows.Forms.Button();
-            this.buttonSize = new System.Windows.Forms.Button();
             this.buttonShape = new System.Windows.Forms.Button();
             this.buttonRandom = new System.Windows.Forms.Button();
             this.buttonRandSeed = new System.Windows.Forms.Button();
@@ -60,7 +61,6 @@ namespace GOLSource
             this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
-            this.graphicsPanel1.SuspendLayout();
             this.flowLayoutPanelSettings.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +113,18 @@ namespace GOLSource
             this.toolStripStatusLabelTickRate.Size = new System.Drawing.Size(111, 17);
             this.toolStripStatusLabelTickRate.Text = "Tick Speed (ms) = 0";
             // 
+            // toolStripStatusLabelCells
+            // 
+            this.toolStripStatusLabelCells.Name = "toolStripStatusLabelCells";
+            this.toolStripStatusLabelCells.Size = new System.Drawing.Size(83, 17);
+            this.toolStripStatusLabelCells.Text = "Cell Count = 0";
+            // 
+            // toolStripStatusLabelSeed
+            // 
+            this.toolStripStatusLabelSeed.Name = "toolStripStatusLabelSeed";
+            this.toolStripStatusLabelSeed.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabelSeed.Text = "Seed = 0";
+            // 
             // flowLayoutPanelCore
             // 
             this.flowLayoutPanelCore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -122,7 +134,6 @@ namespace GOLSource
             this.flowLayoutPanelCore.Controls.Add(this.buttonTick);
             this.flowLayoutPanelCore.Controls.Add(this.buttonClear);
             this.flowLayoutPanelCore.Controls.Add(this.buttonPlay);
-            this.flowLayoutPanelCore.Controls.Add(this.buttonSize);
             this.flowLayoutPanelCore.Controls.Add(this.buttonShape);
             this.flowLayoutPanelCore.Controls.Add(this.buttonRandom);
             this.flowLayoutPanelCore.Controls.Add(this.buttonRandSeed);
@@ -161,18 +172,9 @@ namespace GOLSource
             this.buttonPlay.UseVisualStyleBackColor = true;
             this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
-            // buttonSize
-            // 
-            this.buttonSize.Location = new System.Drawing.Point(3, 201);
-            this.buttonSize.Name = "buttonSize";
-            this.buttonSize.Size = new System.Drawing.Size(60, 60);
-            this.buttonSize.TabIndex = 3;
-            this.buttonSize.Text = "Size";
-            this.buttonSize.UseVisualStyleBackColor = true;
-            // 
             // buttonShape
             // 
-            this.buttonShape.Location = new System.Drawing.Point(3, 267);
+            this.buttonShape.Location = new System.Drawing.Point(3, 201);
             this.buttonShape.Name = "buttonShape";
             this.buttonShape.Size = new System.Drawing.Size(60, 60);
             this.buttonShape.TabIndex = 4;
@@ -182,7 +184,7 @@ namespace GOLSource
             // 
             // buttonRandom
             // 
-            this.buttonRandom.Location = new System.Drawing.Point(3, 333);
+            this.buttonRandom.Location = new System.Drawing.Point(3, 267);
             this.buttonRandom.Name = "buttonRandom";
             this.buttonRandom.Size = new System.Drawing.Size(60, 60);
             this.buttonRandom.TabIndex = 5;
@@ -192,7 +194,7 @@ namespace GOLSource
             // 
             // buttonRandSeed
             // 
-            this.buttonRandSeed.Location = new System.Drawing.Point(3, 399);
+            this.buttonRandSeed.Location = new System.Drawing.Point(3, 333);
             this.buttonRandSeed.Name = "buttonRandSeed";
             this.buttonRandSeed.Size = new System.Drawing.Size(60, 60);
             this.buttonRandSeed.TabIndex = 6;
@@ -409,7 +411,6 @@ namespace GOLSource
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.flowLayoutPanelCore.ResumeLayout(false);
-            this.graphicsPanel1.ResumeLayout(false);
             this.flowLayoutPanelSettings.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -429,7 +430,6 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonShape;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonOpen;
-        private System.Windows.Forms.Button buttonSize;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonNew;
         private System.Windows.Forms.Button buttonRandom;

@@ -33,9 +33,12 @@ namespace GOLSource
                     }
                 }
 
+                seed = 0;
                 Program.ticks = 0;
                 UpdateTicks(0);
             }
+
+            graphicsPanel1.Invalidate();
         }
 
         // Toggle grid shape.

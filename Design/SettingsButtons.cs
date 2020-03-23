@@ -42,17 +42,14 @@ namespace GOLSource
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                Debug.WriteLine($"{dlg.value1}, {dlg.value2}");
-                Program.ReSizeUniverse(dlg.value1, dlg.value2);
+                if (dlg.value1 != Program.universe.GetLength(0) || dlg.value1 != Program.universe.GetLength(1)) // If the value has changed.
+                {
+                    Program.ReSizeUniverse(dlg.value1, dlg.value2);
 
-                UpdatePanels();
-                graphicsPanel1.Invalidate();
+                    UpdatePanels();
+                    graphicsPanel1.Invalidate();
+                }
             }
-        }
-
-        public void UpdateLoop()
-        {
-            graphicsPanel1.Invalidate();
         }
 
         private void buttonLineToggle_Click(object sender, EventArgs e)
