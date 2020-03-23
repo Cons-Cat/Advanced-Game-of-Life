@@ -75,12 +75,24 @@ namespace GOLSource
 
         private void buttonCellCol_Click(object sender, EventArgs e)
         {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = cellColor;
 
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                cellColor = dlg.Color;
+            }
         }
 
         private void buttonLineCol_Click(object sender, EventArgs e)
         {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = cellColor;
 
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                gridColor = dlg.Color;
+            }
         }
 
         private void buttonReset_Click(object sender, EventArgs e)

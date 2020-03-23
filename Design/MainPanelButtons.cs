@@ -118,6 +118,7 @@ namespace GOLSource
 
                     graphicsPanel1.UpdateGridOffset(w, h, gridShape);
                     UpdatePanels();
+                    UpdateGrid();
                 }
             }
         }
