@@ -40,6 +40,7 @@ namespace GOLSource
                 // Iterate through the universe in the y, top to bottom
                 for (int y = 0; y < Program.universe.GetLength(1); y++)
                 {
+                    // Calculate the co-ordinates of each cell.
                     if (gridShape == 0)
                     {
                         cellRect.X = (x * graphicsPanel1.CellSize) + graphicsPanel1.XOff;
@@ -69,7 +70,7 @@ namespace GOLSource
                     TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
                     cellText = $"{Program.universe[x, y].AdjacentCount}";
 
-                    // Outline the cell with a pen
+                    // Draw each cell.
                     if (gridShape == 0)
                     {
                         if (Program.universe[x, y].Active)
@@ -77,11 +78,17 @@ namespace GOLSource
                             e.Graphics.FillRectangle(cellBrush, cellRect);
                         }
 
-                        e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
-
-                        if (graphicsPanel1.CellSize > 12)
+                        if (drawLines)
                         {
-                            TextRenderer.DrawText(e.Graphics, cellText, this.Font, Rectangle.Round(cellRect), SystemColors.ControlText, flags);
+                            e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                        }
+
+                        if (drawAdjacent)
+                        {
+                            if (graphicsPanel1.CellSize > 12)
+                            {
+                                TextRenderer.DrawText(e.Graphics, cellText, this.Font, Rectangle.Round(cellRect), SystemColors.ControlText, flags);
+                            }
                         }
                     }
                     else
@@ -91,13 +98,19 @@ namespace GOLSource
                             e.Graphics.FillPolygon(cellBrush, cellHex);
                         }
 
-                        e.Graphics.DrawPolygon(gridPen, cellHex);
-
-                        if (graphicsPanel1.HexRadius > 6)
+                        if (drawLines)
                         {
-                            SizeF textSize = e.Graphics.MeasureString(cellText, this.Font);
+                            e.Graphics.DrawPolygon(gridPen, cellHex);
+                        }
 
-                            e.Graphics.DrawString(cellText, this.Font, new SolidBrush(Color.Black), ((x + 0.5F) * 2F + (y % 2)) * graphicsPanel1.HexRadius - (textSize.Width / 2) + 1 + graphicsPanel1.XOff, (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F - (textSize.Height / 2) + graphicsPanel1.YOff + 1);
+                        if (drawAdjacent)
+                        {
+                            if (graphicsPanel1.HexRadius > 6)
+                            {
+                                SizeF textSize = e.Graphics.MeasureString(cellText, this.Font);
+
+                                e.Graphics.DrawString(cellText, this.Font, new SolidBrush(Color.Black), ((x + 0.5F) * 2F + (y % 2)) * graphicsPanel1.HexRadius - (textSize.Width / 2) + 1 + graphicsPanel1.XOff, (y + 0.5F) * graphicsPanel1.HexRadius * 1.75F - (textSize.Height / 2) + graphicsPanel1.YOff + 1);
+                            }
                         }
                     }
                 }

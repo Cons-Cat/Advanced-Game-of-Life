@@ -21,7 +21,6 @@ namespace GOLSource
             {
                 GameSpeed = dlg.value;
                 toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
-                //TickLabel.Invalidate();
             }
         }
 
@@ -54,12 +53,14 @@ namespace GOLSource
 
         private void buttonLineToggle_Click(object sender, EventArgs e)
         {
-
+            drawLines = !drawLines;
+            graphicsPanel1.Invalidate();
         }
 
         private void buttonAdjacentToggle_Click(object sender, EventArgs e)
         {
-
+            drawAdjacent = !drawAdjacent;
+            graphicsPanel1.Invalidate();
         }
 
         private void buttonHud_Click(object sender, EventArgs e)

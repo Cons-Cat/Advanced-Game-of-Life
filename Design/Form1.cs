@@ -17,9 +17,12 @@ namespace GOLSource
 
         // Grid state
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
-        public int seed { get; set; }
-        static public int GameSpeed { get; set; }
+        public int Seed { get; set; }
+        public static int GameSpeed { get; set; }
+
         string cellText;
+        bool drawLines;
+        bool drawAdjacent;
 
         // Sliding panels
         uint panelInd = 0;
@@ -28,7 +31,7 @@ namespace GOLSource
         public Form1()
         {
             InitializeComponent();
-            seed = 0;
+            Seed = 0;
             GameSpeed = 100;
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
 
@@ -40,6 +43,9 @@ namespace GOLSource
             // Initialize array
             slidingPanel[0] = flowLayoutPanelCore;
             slidingPanel[1] = flowLayoutPanelSettings;
+
+            drawLines = true;
+            drawAdjacent = true;
 
             UpdateSliderPanel();
             UpdateMainBar();
@@ -68,6 +74,8 @@ namespace GOLSource
         {
             graphicsPanel1.Width = ClientRectangle.Width;
             graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - statusStrip1.Height, gridShape);
+
+            sliderButton1.Location = new Point(sliderButton1.Location.X, graphicsPanel1.Height / 2 - sliderButton1.Height / 2);
 
             graphicsPanel1.Update();
         }

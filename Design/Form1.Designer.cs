@@ -61,6 +61,7 @@ namespace GOLSource
             this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
+            this.graphicsPanel1.SuspendLayout();
             this.flowLayoutPanelSettings.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +70,7 @@ namespace GOLSource
             // 
             this.sliderButton1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.sliderButton1.ClickCount = 0;
-            this.sliderButton1.Location = new System.Drawing.Point(0, 135);
+            this.sliderButton1.Location = new System.Drawing.Point(0, 149);
             this.sliderButton1.MoveDist = 0;
             this.sliderButton1.MovePercent = 0D;
             this.sliderButton1.MoveState = 0;
@@ -411,6 +412,7 @@ namespace GOLSource
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.flowLayoutPanelCore.ResumeLayout(false);
+            this.graphicsPanel1.ResumeLayout(false);
             this.flowLayoutPanelSettings.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

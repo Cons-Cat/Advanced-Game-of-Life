@@ -33,7 +33,7 @@ namespace GOLSource
                     }
                 }
 
-                seed = 0;
+                Seed = 0;
                 Program.ticks = 0;
                 UpdateTicks(0);
             }
@@ -74,10 +74,10 @@ namespace GOLSource
         {
             if (!Program.playing)
             {
-                seed = (int)Math.Pow(DateTime.Now.Millisecond, 2) % 50515093;
+                Seed = (int)Math.Pow(DateTime.Now.Millisecond, 2) % 50515093;
 
-                RandomizeGrid(seed);
-                toolStripStatusLabelSeed.Text = $"Seed = {seed}";
+                RandomizeGrid(Seed);
+                toolStripStatusLabelSeed.Text = $"Seed = {Seed}";
             }
         }
 
@@ -90,10 +90,10 @@ namespace GOLSource
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                seed = dlg.value;
+                Seed = dlg.value;
 
-                RandomizeGrid(seed);
-                toolStripStatusLabelSeed.Text = $"Seed = {seed}";
+                RandomizeGrid(Seed);
+                toolStripStatusLabelSeed.Text = $"Seed = {Seed}";
             }
         }
 
