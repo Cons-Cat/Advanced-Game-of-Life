@@ -84,9 +84,12 @@ namespace GOLSource
         private void buttonRandSeed_Click(object sender, EventArgs e)
         {
             InputForm dlg = new InputForm();
-            dlg.value = 0;
+
             dlg.label1.Text = "Input Seed";
             dlg.label1.Location = new Point(dlg.Width / 2 - dlg.label1.Width / 2, 9);
+
+            dlg.value = Seed;
+            dlg.textBox1.Text = Seed.ToString();
 
             if (DialogResult.OK == dlg.ShowDialog())
             {

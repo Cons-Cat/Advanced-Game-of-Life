@@ -144,8 +144,12 @@ namespace GOLSource
             buttonSave.Location = new Point((panel1.Width - buttonSave.Width) / 2, 3);
             buttonOpen.Location = new Point(panel1.Width - buttonOpen.Width - 3, 3);
 
-            buttonCore.Location = new Point((buttonSave.Location.X - buttonNew.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
-            buttonSettings.Location = new Point(buttonSave.Location.X + (buttonOpen.Location.X - buttonSave.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
+            buttonImport.Location = new Point(3, panel1.Height - buttonCore.Height - 3);
+            buttonCore.Location = new Point((panel1.Width - buttonSave.Width) / 2, panel1.Height - buttonCore.Height - 3);
+            buttonSettings.Location = new Point(panel1.Width - buttonOpen.Width - 3, panel1.Height - buttonCore.Height - 3);
+
+            //buttonCore.Location = new Point((buttonSave.Location.X - buttonNew.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
+            //buttonSettings.Location = new Point(buttonSave.Location.X + (buttonOpen.Location.X - buttonSave.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
 
             panel1.Update();
             graphicsPanel1.Invalidate();

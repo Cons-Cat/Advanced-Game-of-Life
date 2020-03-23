@@ -57,6 +57,7 @@ namespace GOLSource
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonCore = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
+            this.buttonImport = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
@@ -339,6 +340,7 @@ namespace GOLSource
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.panel1.Controls.Add(this.buttonImport);
             this.panel1.Controls.Add(this.buttonSettings);
             this.panel1.Controls.Add(this.buttonCore);
             this.panel1.Controls.Add(this.buttonOpen);
@@ -352,7 +354,7 @@ namespace GOLSource
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(82, 50);
+            this.buttonSettings.Location = new System.Drawing.Point(54, 50);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(45, 45);
             this.buttonSettings.TabIndex = 9;
@@ -362,7 +364,7 @@ namespace GOLSource
             // 
             // buttonCore
             // 
-            this.buttonCore.Location = new System.Drawing.Point(31, 50);
+            this.buttonCore.Location = new System.Drawing.Point(3, 50);
             this.buttonCore.Name = "buttonCore";
             this.buttonCore.Size = new System.Drawing.Size(45, 45);
             this.buttonCore.TabIndex = 8;
@@ -385,12 +387,22 @@ namespace GOLSource
             this.toolStripStatusLabelCells.Name = "toolStripStatusLabelCells";
             this.toolStripStatusLabelCells.Size = new System.Drawing.Size(83, 17);
             this.toolStripStatusLabelCells.Text = "Cell Count = 0";
-            // 
+            //
             // toolStripStatusLabelSeed
-            // 
+            //
             this.toolStripStatusLabelSeed.Name = "toolStripStatusLabelSeed";
             this.toolStripStatusLabelSeed.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabelSeed.Text = "Seed = 0";
+            // 
+            // buttonImport
+            // 
+            this.buttonImport.Location = new System.Drawing.Point(105, 50);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(45, 45);
+            this.buttonImport.TabIndex = 10;
+            this.buttonImport.Text = "Import";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // Form1
             // 
@@ -448,6 +460,7 @@ namespace GOLSource
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTickRate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCells;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSeed;
+        private System.Windows.Forms.Button buttonImport;
     }
 }
 

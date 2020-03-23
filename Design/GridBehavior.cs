@@ -83,7 +83,7 @@ namespace GOLSource
                             e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                         }
 
-                        if (drawAdjacent)
+                        if (drawAdjacent && Program.universe[x, y].AdjacentCount > 0)
                         {
                             if (graphicsPanel1.CellSize > 12)
                             {
@@ -103,7 +103,7 @@ namespace GOLSource
                             e.Graphics.DrawPolygon(gridPen, cellHex);
                         }
 
-                        if (drawAdjacent)
+                        if (drawAdjacent && Program.universe[x, y].AdjacentCount > 0)
                         {
                             if (graphicsPanel1.HexRadius > 6)
                             {
