@@ -97,7 +97,8 @@ namespace GOLSource
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-
+            DefaultSettings();
+            graphicsPanel1.Invalidate();
         }
     }
 }
