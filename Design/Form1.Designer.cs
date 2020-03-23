@@ -31,6 +31,7 @@ namespace GOLSource
             this.sliderButton1 = new GOLSource.SliderButton(this.Width);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
             this.flowLayoutPanelCore = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonTick = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
@@ -55,7 +56,8 @@ namespace GOLSource
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonCore = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
-            this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCells = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
@@ -90,7 +92,9 @@ namespace GOLSource
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelGenerations,
-            this.toolStripStatusLabelTickRate});
+            this.toolStripStatusLabelTickRate,
+            this.toolStripStatusLabelCells,
+            this.toolStripStatusLabelSeed});
             this.statusStrip1.Location = new System.Drawing.Point(0, 323);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(573, 22);
@@ -102,6 +106,12 @@ namespace GOLSource
             this.toolStripStatusLabelGenerations.Name = "toolStripStatusLabelGenerations";
             this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
             this.toolStripStatusLabelGenerations.Text = "Generations = 0";
+            // 
+            // toolStripStatusLabelTickRate
+            // 
+            this.toolStripStatusLabelTickRate.Name = "toolStripStatusLabelTickRate";
+            this.toolStripStatusLabelTickRate.Size = new System.Drawing.Size(111, 17);
+            this.toolStripStatusLabelTickRate.Text = "Tick Speed (ms) = 0";
             // 
             // flowLayoutPanelCore
             // 
@@ -369,11 +379,17 @@ namespace GOLSource
             this.buttonNew.UseVisualStyleBackColor = true;
             this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
-            // toolStripStatusLabelTickRate
+            // toolStripStatusLabelCells
             // 
-            this.toolStripStatusLabelTickRate.Name = "toolStripStatusLabelTickRate";
-            this.toolStripStatusLabelTickRate.Size = new System.Drawing.Size(111, 17);
-            this.toolStripStatusLabelTickRate.Text = "Tick Speed (ms) = 0";
+            this.toolStripStatusLabelCells.Name = "toolStripStatusLabelCells";
+            this.toolStripStatusLabelCells.Size = new System.Drawing.Size(83, 17);
+            this.toolStripStatusLabelCells.Text = "Cell Count = 0";
+            // 
+            // toolStripStatusLabelSeed
+            // 
+            this.toolStripStatusLabelSeed.Name = "toolStripStatusLabelSeed";
+            this.toolStripStatusLabelSeed.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabelSeed.Text = "Seed = 0";
             // 
             // Form1
             // 
@@ -430,6 +446,8 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonLineCol;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTickRate;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCells;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSeed;
     }
 }
 

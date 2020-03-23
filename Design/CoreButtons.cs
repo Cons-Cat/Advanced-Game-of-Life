@@ -71,7 +71,10 @@ namespace GOLSource
         {
             if (!Program.playing)
             {
-                RandomizeGrid(Guid.NewGuid().GetHashCode());
+                seed = (int)Math.Pow(DateTime.Now.Millisecond, 2) % 50515093;
+
+                RandomizeGrid(seed);
+                toolStripStatusLabelSeed.Text = $"Seed = {seed}";
             }
         }
 
@@ -85,7 +88,9 @@ namespace GOLSource
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 seed = dlg.value;
+
                 RandomizeGrid(seed);
+                toolStripStatusLabelSeed.Text = $"Seed = {seed}";
             }
         }
 
