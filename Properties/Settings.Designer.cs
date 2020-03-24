@@ -142,5 +142,17 @@ namespace GOLSource.Properties {
                 this["backColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool isFinite {
+            get {
+                return ((bool)(this["isFinite"]));
+            }
+            set {
+                this["isFinite"] = value;
+            }
+        }
     }
 }

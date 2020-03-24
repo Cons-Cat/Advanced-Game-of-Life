@@ -51,6 +51,16 @@ namespace GOLSource
             }
         }
 
+        private void buttonFiniteToggle_Click(object sender, EventArgs e)
+        {
+            if (!Program.playing)
+            {
+                isFinite = !isFinite;
+                UpdateGrid();
+                graphicsPanel1.Invalidate();
+            }
+        }
+
         private void buttonLineToggle_Click(object sender, EventArgs e)
         {
             drawLines = !drawLines;

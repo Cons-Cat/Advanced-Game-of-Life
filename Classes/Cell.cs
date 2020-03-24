@@ -22,35 +22,6 @@ namespace GOLSource
             Active = false;
         }
 
-        public void UpdateAdjacentCount()
-        {
-            AdjacentCount = 0;
-            int adjX;
-            int adjY;
-
-            for (int i = 0; i < 9; i++)
-            {
-                adjX = X + (i / 3) - 1;
-                adjY = Y + (i % 3) - 1;
-
-                if (
-                    i == 4
-                    || adjX >= Program.universe.GetLength(0)
-                    || adjY >= Program.universe.GetLength(1)
-                    || adjX < 0
-                    || adjY < 0
-                    )
-                {
-                    continue;
-                }
-
-                if (Program.universe[X + (i / 3) - 1, Y + (i % 3) - 1].Active)
-                {
-                    AdjacentCount++;
-                }
-            }
-        }
-
         internal void CountAdjacent(int argX, int argY, uint gridShape, int argWidth, int argHeight)
         {
             int adjX;
@@ -61,12 +32,35 @@ namespace GOLSource
                 adjX = argX + (i / 3) - 1;
                 adjY = argY + (i % 3) - 1;
 
+                // Wrap around the universe when toroidal.
+                if (!Program.form.isFinite)
+                {
+                    if (adjX >= argWidth)
+                    {
+                        adjX = 0;
+                    }
+                    else if (adjX < 0)
+                    {
+                        adjX = argWidth - 1;
+                    }
+                    if (adjY >= argHeight)
+                    {
+                        adjY = 0;
+                    }
+                    else if (adjY < 0)
+                    {
+                        adjY = argHeight - 1;
+                    }
+                }
+
                 if (
                     i == 4 // Exclude this cell.
-                    || adjX >= argWidth
-                    || adjY >= argHeight
-                    || adjX < 0
-                    || adjY < 0
+                    || (Program.form.isFinite // Skip these exclusions when toroidal.
+                    && (adjX >= argWidth
+                        || adjY >= argHeight
+                        || adjX < 0
+                        || adjY < 0)
+                    )
                     )
                 {
                     continue;

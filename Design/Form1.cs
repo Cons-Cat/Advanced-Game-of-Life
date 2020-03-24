@@ -22,6 +22,7 @@ namespace GOLSource
         uint generationsCount;
         public int Seed { get; set; }
         public static int GameSpeed { get; set; }
+        public bool isFinite;
 
         string cellText;
         bool drawLines;
@@ -64,12 +65,13 @@ namespace GOLSource
             cellColor = Color.Gray;
 
             GameSpeed = 100;
-            hudScale = 1;
+            isFinite = true;
 
             drawLines = true;
             drawAdjacent = true;
             drawToolStrip = true;
             drawHud = true;
+            hudScale = 1;
 
             statusStrip1.Visible = true;
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
@@ -85,14 +87,16 @@ namespace GOLSource
             cellColor = Properties.Settings.Default.cellColor;
 
             GameSpeed = Properties.Settings.Default.GameSpeed;
+            isFinite = Properties.Settings.Default.isFinite;
 
             drawLines = Properties.Settings.Default.drawLines;
             drawAdjacent = Properties.Settings.Default.drawAdjacent;
 
-            drawToolStrip = Properties.Settings.Default.drawToolStrip;
-            statusStrip1.Visible = drawToolStrip;
             drawHud = Properties.Settings.Default.drawHud;
             hudScale = drawToolStrip ? 1 : 0;
+
+            drawToolStrip = Properties.Settings.Default.drawToolStrip;
+            statusStrip1.Visible = drawToolStrip;
 
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
 
@@ -111,7 +115,7 @@ namespace GOLSource
             }
             catch (Exception ex)
             {
-                // Visual Studio lies about an impossible
+                // Visual Studio asserts a bizarrea sort of
                 // cross-threading error, so a Try-Catch
                 // is necessary when executing the program
                 // in Debug mode.
@@ -167,6 +171,7 @@ namespace GOLSource
             Properties.Settings.Default.gridColor = gridColor;
             Properties.Settings.Default.cellColor = cellColor;
             Properties.Settings.Default.GameSpeed = GameSpeed;
+            Properties.Settings.Default.isFinite = isFinite;
             Properties.Settings.Default.drawAdjacent = drawAdjacent;
             Properties.Settings.Default.drawToolStrip = drawToolStrip;
             Properties.Settings.Default.drawHud = drawHud;

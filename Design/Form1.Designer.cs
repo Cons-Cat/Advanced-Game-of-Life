@@ -53,6 +53,7 @@ namespace GOLSource
             this.buttonAdjacentToggle = new System.Windows.Forms.Button();
             this.buttonHud = new System.Windows.Forms.Button();
             this.buttonStrip = new System.Windows.Forms.Button();
+            this.buttonBackCol = new System.Windows.Forms.Button();
             this.buttonCellCol = new System.Windows.Forms.Button();
             this.buttonLineCol = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
@@ -72,12 +73,14 @@ namespace GOLSource
             this.toolStripMenuItemTogAdjacent = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTogHud = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTogStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonBackCol = new System.Windows.Forms.Button();
+            this.buttonFiniteToggle = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
+            this.graphicsPanel1.SuspendLayout();
             this.flowLayoutPanelSettings.SuspendLayout();
             this.panel1.SuspendLayout();
             this.rightClickMenuStrip.SuspendLayout();
+            this.graphicsPanel1.Controls.Add(this.sliderButton1);
             this.SuspendLayout();
             // 
             // sliderButton1
@@ -259,6 +262,7 @@ namespace GOLSource
             this.graphicsPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
             this.graphicsPanel1.CellSize = 0F;
+            this.graphicsPanel1.Controls.Add(this.sliderButton1);
             this.graphicsPanel1.HexRadius = 0F;
             this.graphicsPanel1.Location = new System.Drawing.Point(192, 3);
             this.graphicsPanel1.Name = "graphicsPanel1";
@@ -270,7 +274,6 @@ namespace GOLSource
             this.graphicsPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseDown);
             this.graphicsPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GraphicsPanel1_MouseClick);
             this.graphicsPanel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseUp);
-            this.graphicsPanel1.Controls.Add(this.sliderButton1);
             // 
             // flowLayoutPanelSettings
             // 
@@ -279,6 +282,7 @@ namespace GOLSource
             this.flowLayoutPanelSettings.BackColor = System.Drawing.SystemColors.ControlLight;
             this.flowLayoutPanelSettings.CausesValidation = false;
             this.flowLayoutPanelSettings.Controls.Add(this.buttonWorldSize);
+            this.flowLayoutPanelSettings.Controls.Add(this.buttonFiniteToggle);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonSpeed);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonLineToggle);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonAdjacentToggle);
@@ -291,12 +295,12 @@ namespace GOLSource
             this.flowLayoutPanelSettings.Controls.Add(this.buttonReload);
             this.flowLayoutPanelSettings.Location = new System.Drawing.Point(96, 104);
             this.flowLayoutPanelSettings.Name = "flowLayoutPanelSettings";
-            this.flowLayoutPanelSettings.Size = new System.Drawing.Size(419, 216);
+            this.flowLayoutPanelSettings.Size = new System.Drawing.Size(95, 216);
             this.flowLayoutPanelSettings.TabIndex = 5;
             // 
             // buttonSpeed
             // 
-            this.buttonSpeed.Location = new System.Drawing.Point(69, 3);
+            this.buttonSpeed.Location = new System.Drawing.Point(3, 135);
             this.buttonSpeed.Name = "buttonSpeed";
             this.buttonSpeed.Size = new System.Drawing.Size(60, 60);
             this.buttonSpeed.TabIndex = 0;
@@ -306,7 +310,7 @@ namespace GOLSource
             // 
             // buttonLineToggle
             // 
-            this.buttonLineToggle.Location = new System.Drawing.Point(135, 3);
+            this.buttonLineToggle.Location = new System.Drawing.Point(3, 201);
             this.buttonLineToggle.Name = "buttonLineToggle";
             this.buttonLineToggle.Size = new System.Drawing.Size(60, 60);
             this.buttonLineToggle.TabIndex = 2;
@@ -316,7 +320,7 @@ namespace GOLSource
             // 
             // buttonAdjacentToggle
             // 
-            this.buttonAdjacentToggle.Location = new System.Drawing.Point(201, 3);
+            this.buttonAdjacentToggle.Location = new System.Drawing.Point(3, 267);
             this.buttonAdjacentToggle.Name = "buttonAdjacentToggle";
             this.buttonAdjacentToggle.Size = new System.Drawing.Size(60, 60);
             this.buttonAdjacentToggle.TabIndex = 3;
@@ -326,7 +330,7 @@ namespace GOLSource
             // 
             // buttonHud
             // 
-            this.buttonHud.Location = new System.Drawing.Point(267, 3);
+            this.buttonHud.Location = new System.Drawing.Point(3, 333);
             this.buttonHud.Name = "buttonHud";
             this.buttonHud.Size = new System.Drawing.Size(60, 60);
             this.buttonHud.TabIndex = 4;
@@ -336,7 +340,7 @@ namespace GOLSource
             // 
             // buttonStrip
             // 
-            this.buttonStrip.Location = new System.Drawing.Point(333, 3);
+            this.buttonStrip.Location = new System.Drawing.Point(3, 399);
             this.buttonStrip.Name = "buttonStrip";
             this.buttonStrip.Size = new System.Drawing.Size(60, 60);
             this.buttonStrip.TabIndex = 9;
@@ -344,9 +348,19 @@ namespace GOLSource
             this.buttonStrip.UseVisualStyleBackColor = true;
             this.buttonStrip.Click += new System.EventHandler(this.buttonStrip_Click);
             // 
+            // buttonBackCol
+            // 
+            this.buttonBackCol.Location = new System.Drawing.Point(3, 465);
+            this.buttonBackCol.Name = "buttonBackCol";
+            this.buttonBackCol.Size = new System.Drawing.Size(60, 60);
+            this.buttonBackCol.TabIndex = 10;
+            this.buttonBackCol.Text = "Back Color";
+            this.buttonBackCol.UseVisualStyleBackColor = true;
+            this.buttonBackCol.Click += new System.EventHandler(this.buttonBackCol_Click);
+            // 
             // buttonCellCol
             // 
-            this.buttonCellCol.Location = new System.Drawing.Point(69, 69);
+            this.buttonCellCol.Location = new System.Drawing.Point(3, 531);
             this.buttonCellCol.Name = "buttonCellCol";
             this.buttonCellCol.Size = new System.Drawing.Size(60, 60);
             this.buttonCellCol.TabIndex = 5;
@@ -356,7 +370,7 @@ namespace GOLSource
             // 
             // buttonLineCol
             // 
-            this.buttonLineCol.Location = new System.Drawing.Point(135, 69);
+            this.buttonLineCol.Location = new System.Drawing.Point(3, 597);
             this.buttonLineCol.Name = "buttonLineCol";
             this.buttonLineCol.Size = new System.Drawing.Size(60, 60);
             this.buttonLineCol.TabIndex = 6;
@@ -366,7 +380,7 @@ namespace GOLSource
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(201, 69);
+            this.buttonReset.Location = new System.Drawing.Point(3, 663);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(60, 60);
             this.buttonReset.TabIndex = 7;
@@ -376,7 +390,7 @@ namespace GOLSource
             // 
             // buttonReload
             // 
-            this.buttonReload.Location = new System.Drawing.Point(267, 69);
+            this.buttonReload.Location = new System.Drawing.Point(3, 729);
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Size = new System.Drawing.Size(60, 60);
             this.buttonReload.TabIndex = 8;
@@ -519,15 +533,15 @@ namespace GOLSource
             this.toolStripMenuItemTogStrip.Text = "Toggle Strip";
             this.toolStripMenuItemTogStrip.Click += new System.EventHandler(this.toolStripMenuItemTogStrip_Click);
             // 
-            // buttonBackCol
+            // buttonFiniteToggle
             // 
-            this.buttonBackCol.Location = new System.Drawing.Point(3, 69);
-            this.buttonBackCol.Name = "buttonBackCol";
-            this.buttonBackCol.Size = new System.Drawing.Size(60, 60);
-            this.buttonBackCol.TabIndex = 10;
-            this.buttonBackCol.Text = "Back Color";
-            this.buttonBackCol.UseVisualStyleBackColor = true;
-            this.buttonBackCol.Click += new System.EventHandler(this.buttonBackCol_Click);
+            this.buttonFiniteToggle.Location = new System.Drawing.Point(3, 69);
+            this.buttonFiniteToggle.Name = "buttonFiniteToggle";
+            this.buttonFiniteToggle.Size = new System.Drawing.Size(60, 60);
+            this.buttonFiniteToggle.TabIndex = 11;
+            this.buttonFiniteToggle.Text = "Toggle Finite Boundary";
+            this.buttonFiniteToggle.UseVisualStyleBackColor = true;
+            this.buttonFiniteToggle.Click += new System.EventHandler(this.buttonFiniteToggle_Click);
             // 
             // Form1
             // 
@@ -548,6 +562,7 @@ namespace GOLSource
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.flowLayoutPanelCore.ResumeLayout(false);
+            this.graphicsPanel1.ResumeLayout(false);
             this.flowLayoutPanelSettings.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.rightClickMenuStrip.ResumeLayout(false);
@@ -601,5 +616,6 @@ namespace GOLSource
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogHud;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogStrip;
         private System.Windows.Forms.Button buttonBackCol;
+        private System.Windows.Forms.Button buttonFiniteToggle;
     }
 }
