@@ -94,6 +94,11 @@ namespace GOLSource
             }
         }
 
+        public void UpdateSizeLabel(int argWidth, int argHeight)
+        {
+            toolStripStatusLabelGrid.Text = "Universe Size = {" + $"{argWidth}, {argHeight}" + '}';
+        }
+
         private void WriteFileCELLS(Stream argStream, string argName)
         {
             if (argStream != null)

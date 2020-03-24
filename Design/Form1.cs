@@ -67,6 +67,9 @@ namespace GOLSource
 
             statusStrip1.Visible = true;
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
+
+            Program.ReSizeUniverse(25, 25);
+            UpdatePanels();
         }
 
         private void ReloadSettings()
@@ -84,6 +87,9 @@ namespace GOLSource
             hudScale = drawHud ? 1 : 0;
 
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
+
+            Program.ReSizeUniverse(Properties.Settings.Default.gridWidth, Properties.Settings.Default.gridHeight);
+            UpdatePanels();
         }
 
         // Calculate the next generation of cells
@@ -115,6 +121,7 @@ namespace GOLSource
         {
             graphicsPanel1.Width = ClientRectangle.Width;
             graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
+            UpdateSizeLabel(Program.universe.GetLength(0), Program.universe.GetLength(1));
 
             sliderButton1.Location = new Point(sliderButton1.Location.X, graphicsPanel1.Height / 2 - sliderButton1.Height / 2);
 
@@ -153,6 +160,8 @@ namespace GOLSource
             Properties.Settings.Default.drawAdjacent = drawAdjacent;
             Properties.Settings.Default.drawHud = drawHud;
             Properties.Settings.Default.drawLines = drawLines;
+            Properties.Settings.Default.gridWidth = Program.universe.GetLength(0);
+            Properties.Settings.Default.gridHeight = Program.universe.GetLength(1);
 
             Properties.Settings.Default.Save();
         }

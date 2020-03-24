@@ -94,5 +94,29 @@ namespace GOLSource.Properties {
                 this["cellColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int gridWidth {
+            get {
+                return ((int)(this["gridWidth"]));
+            }
+            set {
+                this["gridWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int gridHeight {
+            get {
+                return ((int)(this["gridHeight"]));
+            }
+            set {
+                this["gridHeight"] = value;
+            }
+        }
     }
 }

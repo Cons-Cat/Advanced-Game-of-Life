@@ -20,5 +20,11 @@
     <Setting Name="cellColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Gray</Value>
     </Setting>
+    <Setting Name="gridWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="gridHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
