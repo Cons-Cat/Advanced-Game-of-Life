@@ -127,7 +127,19 @@ namespace GOLSource
         // Update cell count
         private void UpdateCellCountLabel()
         {
-            toolStripStatusLabelCells.Text = $"Cell Count = {cellCount}";
+            try
+            {
+                toolStripStatusLabelCells.Text = $"Cell Count = {cellCount}";
+            }
+            catch (Exception ex)
+            {
+                // Visual Studio asserts a bizarrea sort of
+                // cross-threading error, so a Try-Catch
+                // is necessary when executing the program
+                // in Debug mode.
+
+                // Compiled executables do not need this.
+            }
         }
 
         private void UpdatePanels()
@@ -136,6 +148,7 @@ namespace GOLSource
             graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
             UpdateSizeLabel(Program.universe.GetLength(0), Program.universe.GetLength(1));
 
+            slidingPanel[panelInd].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * hudScale);
             sliderButton1.Location = new Point(sliderButton1.Location.X, graphicsPanel1.Height / 2 - sliderButton1.Height / 2);
 
             graphicsPanel1.Update();

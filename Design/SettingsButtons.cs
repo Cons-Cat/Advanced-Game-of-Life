@@ -125,6 +125,7 @@ namespace GOLSource
         private void buttonReset_Click(object sender, EventArgs e)
         {
             ResetSettings();
+            UpdatePanels();
             graphicsPanel1.Invalidate();
         }
     }

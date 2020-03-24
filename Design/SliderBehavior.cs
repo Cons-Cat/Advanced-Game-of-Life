@@ -10,12 +10,15 @@ namespace GOLSource
     {
         private void SliderButton1_MouseDown(object sender, MouseEventArgs e)
         {
-            sliderButton1.Sliding = true;
-            sliderButton1.XOff = PointToClient(Cursor.Position).X - slidingPanel[panelInd].Width;
+            if (sliderButton1.MoveState == 0)
+            {
+                sliderButton1.Sliding = true;
+                sliderButton1.XOff = PointToClient(Cursor.Position).X - slidingPanel[panelInd].Width;
 
-            sliderButton1.MoveState = 0;
-            sliderButton1.SubTicks = 0;
-            sliderButton1.ClickCount++;
+                sliderButton1.MoveState = 0;
+                sliderButton1.SubTicks = 0;
+                sliderButton1.ClickCount++;
+            }
         }
 
         private void SliderButton1_MouseUp(object sender, MouseEventArgs e)
@@ -147,9 +150,6 @@ namespace GOLSource
             buttonImport.Location = new Point(3, panel1.Height - buttonCore.Height - 3);
             buttonCore.Location = new Point((panel1.Width - buttonSave.Width) / 2, panel1.Height - buttonCore.Height - 3);
             buttonSettings.Location = new Point(panel1.Width - buttonOpen.Width - 3, panel1.Height - buttonCore.Height - 3);
-
-            //buttonCore.Location = new Point((buttonSave.Location.X - buttonNew.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
-            //buttonSettings.Location = new Point(buttonSave.Location.X + (buttonOpen.Location.X - buttonSave.Location.X) / 2, panel1.Height - buttonCore.Height - 3);
 
             panel1.Update();
             graphicsPanel1.Invalidate();
