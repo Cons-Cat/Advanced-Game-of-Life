@@ -24,6 +24,9 @@ namespace GOLSource
                 graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
             }
 
+            // A pen for drawing the HUD.
+            Pen hudPen = new Pen(Color.FromArgb(122, 153, 0, 153), 2);
+
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
 
@@ -33,6 +36,9 @@ namespace GOLSource
             // A rectangle to represent each cell in pixels
             RectangleF cellRect = RectangleF.Empty;
             PointF[] cellHex = new PointF[6];
+
+            TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
+            TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
 
             // Iterate through the universe in the x, left to right
             for (int x = 0; x < Program.universe.GetLength(0); x++)
@@ -66,8 +72,6 @@ namespace GOLSource
                         Program.universe[x, y].hexPoint = new PointF(hexX, hexY);
                     }
 
-                    TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
-                    TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
                     cellText = $"{Program.universe[x, y].AdjacentCount}";
 
                     // Draw each cell.
@@ -116,7 +120,20 @@ namespace GOLSource
                 }
             }
 
+            // Draw HUD
+            if (drawHud)
+            {
+                flags = TextFormatFlags.Left |
+                TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
+                TextRenderer.DrawText(e.Graphics, "Universe Size: {" + $"{Program.universe.GetLength(0)}, {Program.universe.GetLength(1)}" + '}', this.Font, new Point(graphicsPanel1.XOff, graphicsPanel1.Location.Y + graphicsPanel1.Height - 20), hudPen.Color, flags);
+                string wrapStr = "Finite";
+                TextRenderer.DrawText(e.Graphics, $"Boundary Type: {wrapStr}", this.Font, new Point(graphicsPanel1.XOff, graphicsPanel1.Location.Y + graphicsPanel1.Height - 30), hudPen.Color, flags);
+                TextRenderer.DrawText(e.Graphics, $"Cell Count: {cellCount}", this.Font, new Point(graphicsPanel1.XOff, graphicsPanel1.Location.Y + graphicsPanel1.Height - 40), hudPen.Color, flags);
+                TextRenderer.DrawText(e.Graphics, $"Generations: {generationsCount}", this.Font, new Point(graphicsPanel1.XOff, graphicsPanel1.Location.Y + graphicsPanel1.Height - 50), hudPen.Color, flags);
+            }
+
             // Cleaning up pens and brushes
+            hudPen.Dispose();
             gridPen.Dispose();
             cellBrush.Dispose();
         }

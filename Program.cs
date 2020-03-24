@@ -10,7 +10,7 @@ namespace GOLSource
         // The universe array
         public static Cell[,] universe = new Cell[25, 25];
         public static bool playing;
-        public static int ticks;
+        public static uint ticks;
         public static Form1 form;
 
         [STAThread]

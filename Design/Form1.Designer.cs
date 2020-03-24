@@ -34,6 +34,7 @@ namespace GOLSource
             this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelCells = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelGrid = new System.Windows.Forms.ToolStripStatusLabel();
             this.flowLayoutPanelCore = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.buttonShape = new System.Windows.Forms.Button();
@@ -59,7 +60,7 @@ namespace GOLSource
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonCore = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
-            this.toolStripStatusLabelGrid = new System.Windows.Forms.ToolStripStatusLabel();
+            this.buttonStrip = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
@@ -127,6 +128,12 @@ namespace GOLSource
             this.toolStripStatusLabelSeed.Name = "toolStripStatusLabelSeed";
             this.toolStripStatusLabelSeed.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabelSeed.Text = "Seed = 0";
+            // 
+            // toolStripStatusLabelGrid
+            // 
+            this.toolStripStatusLabelGrid.Name = "toolStripStatusLabelGrid";
+            this.toolStripStatusLabelGrid.Size = new System.Drawing.Size(133, 17);
+            this.toolStripStatusLabelGrid.Text = "Universe Size = { 25, 25 }";
             // 
             // flowLayoutPanelCore
             // 
@@ -262,18 +269,19 @@ namespace GOLSource
             this.flowLayoutPanelSettings.Controls.Add(this.buttonLineToggle);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonAdjacentToggle);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonHud);
+            this.flowLayoutPanelSettings.Controls.Add(this.buttonStrip);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonCellCol);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonLineCol);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonReset);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonReload);
             this.flowLayoutPanelSettings.Location = new System.Drawing.Point(96, 104);
             this.flowLayoutPanelSettings.Name = "flowLayoutPanelSettings";
-            this.flowLayoutPanelSettings.Size = new System.Drawing.Size(90, 216);
+            this.flowLayoutPanelSettings.Size = new System.Drawing.Size(297, 216);
             this.flowLayoutPanelSettings.TabIndex = 5;
             // 
             // buttonSpeed
             // 
-            this.buttonSpeed.Location = new System.Drawing.Point(3, 69);
+            this.buttonSpeed.Location = new System.Drawing.Point(69, 3);
             this.buttonSpeed.Name = "buttonSpeed";
             this.buttonSpeed.Size = new System.Drawing.Size(60, 60);
             this.buttonSpeed.TabIndex = 0;
@@ -283,7 +291,7 @@ namespace GOLSource
             // 
             // buttonLineToggle
             // 
-            this.buttonLineToggle.Location = new System.Drawing.Point(3, 135);
+            this.buttonLineToggle.Location = new System.Drawing.Point(135, 3);
             this.buttonLineToggle.Name = "buttonLineToggle";
             this.buttonLineToggle.Size = new System.Drawing.Size(60, 60);
             this.buttonLineToggle.TabIndex = 2;
@@ -293,7 +301,7 @@ namespace GOLSource
             // 
             // buttonAdjacentToggle
             // 
-            this.buttonAdjacentToggle.Location = new System.Drawing.Point(3, 201);
+            this.buttonAdjacentToggle.Location = new System.Drawing.Point(201, 3);
             this.buttonAdjacentToggle.Name = "buttonAdjacentToggle";
             this.buttonAdjacentToggle.Size = new System.Drawing.Size(60, 60);
             this.buttonAdjacentToggle.TabIndex = 3;
@@ -303,7 +311,7 @@ namespace GOLSource
             // 
             // buttonHud
             // 
-            this.buttonHud.Location = new System.Drawing.Point(3, 267);
+            this.buttonHud.Location = new System.Drawing.Point(3, 69);
             this.buttonHud.Name = "buttonHud";
             this.buttonHud.Size = new System.Drawing.Size(60, 60);
             this.buttonHud.TabIndex = 4;
@@ -313,7 +321,7 @@ namespace GOLSource
             // 
             // buttonCellCol
             // 
-            this.buttonCellCol.Location = new System.Drawing.Point(3, 333);
+            this.buttonCellCol.Location = new System.Drawing.Point(135, 69);
             this.buttonCellCol.Name = "buttonCellCol";
             this.buttonCellCol.Size = new System.Drawing.Size(60, 60);
             this.buttonCellCol.TabIndex = 5;
@@ -323,7 +331,7 @@ namespace GOLSource
             // 
             // buttonLineCol
             // 
-            this.buttonLineCol.Location = new System.Drawing.Point(3, 399);
+            this.buttonLineCol.Location = new System.Drawing.Point(201, 69);
             this.buttonLineCol.Name = "buttonLineCol";
             this.buttonLineCol.Size = new System.Drawing.Size(60, 60);
             this.buttonLineCol.TabIndex = 6;
@@ -333,7 +341,7 @@ namespace GOLSource
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(3, 465);
+            this.buttonReset.Location = new System.Drawing.Point(3, 135);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(60, 60);
             this.buttonReset.TabIndex = 7;
@@ -343,7 +351,7 @@ namespace GOLSource
             // 
             // buttonReload
             // 
-            this.buttonReload.Location = new System.Drawing.Point(3, 531);
+            this.buttonReload.Location = new System.Drawing.Point(69, 135);
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Size = new System.Drawing.Size(60, 60);
             this.buttonReload.TabIndex = 8;
@@ -405,11 +413,15 @@ namespace GOLSource
             this.buttonNew.UseVisualStyleBackColor = true;
             this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
-            // toolStripStatusLabelGrid
+            // buttonStrip
             // 
-            this.toolStripStatusLabelGrid.Name = "toolStripStatusLabelGrid";
-            this.toolStripStatusLabelGrid.Size = new System.Drawing.Size(133, 17);
-            this.toolStripStatusLabelGrid.Text = "Universe Size = { 25, 25 }";
+            this.buttonStrip.Location = new System.Drawing.Point(69, 69);
+            this.buttonStrip.Name = "buttonStrip";
+            this.buttonStrip.Size = new System.Drawing.Size(60, 60);
+            this.buttonStrip.TabIndex = 9;
+            this.buttonStrip.Text = "Toggle Strip";
+            this.buttonStrip.UseVisualStyleBackColor = true;
+            this.buttonStrip.Click += new System.EventHandler(this.buttonStrip_Click);
             // 
             // Form1
             // 
@@ -471,6 +483,7 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.Button buttonReload;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGrid;
+        private System.Windows.Forms.Button buttonStrip;
     }
 }
 

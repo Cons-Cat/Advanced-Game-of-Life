@@ -18,12 +18,14 @@ namespace GOLSource
         // Grid state
         uint gridShape = 0; // 0 - Square, 1 - Hexagon
         uint cellCount;
+        uint generationsCount;
         public int Seed { get; set; }
         public static int GameSpeed { get; set; }
 
         string cellText;
         bool drawLines;
         bool drawAdjacent;
+        bool drawToolStrip;
         bool drawHud;
         int hudScale;
 
@@ -36,6 +38,7 @@ namespace GOLSource
             InitializeComponent();
             Seed = 0;
             cellCount = 0;
+            generationsCount = 0;
 
             // Setup the timer
             sliderTimer.Interval = 100; // milliseconds
@@ -63,6 +66,7 @@ namespace GOLSource
 
             drawLines = true;
             drawAdjacent = true;
+            drawToolStrip = true;
             drawHud = true;
 
             statusStrip1.Visible = true;
@@ -82,9 +86,10 @@ namespace GOLSource
             drawLines = Properties.Settings.Default.drawLines;
             drawAdjacent = Properties.Settings.Default.drawAdjacent;
 
+            drawToolStrip = Properties.Settings.Default.drawToolStrip;
+            statusStrip1.Visible = drawToolStrip;
             drawHud = Properties.Settings.Default.drawHud;
-            statusStrip1.Visible = drawHud;
-            hudScale = drawHud ? 1 : 0;
+            hudScale = drawToolStrip ? 1 : 0;
 
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
 
@@ -93,11 +98,12 @@ namespace GOLSource
         }
 
         // Calculate the next generation of cells
-        public void UpdateTicksLabel(int argTicks)
+        public void UpdateTicksLabel(uint argTicks)
         {
             // Update status strip generations
             try
             {
+                generationsCount = argTicks;
                 toolStripStatusLabelGenerations.Text = "Generations = " + argTicks.ToString();
             }
             catch (Exception ex)
@@ -158,6 +164,7 @@ namespace GOLSource
             Properties.Settings.Default.cellColor = cellColor;
             Properties.Settings.Default.GameSpeed = GameSpeed;
             Properties.Settings.Default.drawAdjacent = drawAdjacent;
+            Properties.Settings.Default.drawToolStrip = drawToolStrip;
             Properties.Settings.Default.drawHud = drawHud;
             Properties.Settings.Default.drawLines = drawLines;
             Properties.Settings.Default.gridWidth = Program.universe.GetLength(0);

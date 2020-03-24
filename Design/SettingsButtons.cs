@@ -66,8 +66,14 @@ namespace GOLSource
         private void buttonHud_Click(object sender, EventArgs e)
         {
             drawHud = !drawHud;
-            hudScale = drawHud ? 1 : 0;
-            statusStrip1.Visible = drawHud;
+            graphicsPanel1.Invalidate();
+        }
+
+        private void buttonStrip_Click(object sender, EventArgs e)
+        {
+            drawToolStrip = !drawToolStrip;
+            hudScale = drawToolStrip ? 1 : 0;
+            statusStrip1.Visible = drawToolStrip;
 
             slidingPanel[panelInd].Height = ClientSize.Height - panel1.Height - (statusStrip1.Height * hudScale) - 3;
             UpdatePanels();

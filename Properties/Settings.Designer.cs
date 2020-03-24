@@ -26,12 +26,12 @@ namespace GOLSource.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool drawHud {
+        public bool drawToolStrip {
             get {
-                return ((bool)(this["drawHud"]));
+                return ((bool)(this["drawToolStrip"]));
             }
             set {
-                this["drawHud"] = value;
+                this["drawToolStrip"] = value;
             }
         }
         
@@ -116,6 +116,18 @@ namespace GOLSource.Properties {
             }
             set {
                 this["gridHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool drawHud {
+            get {
+                return ((bool)(this["drawHud"]));
+            }
+            set {
+                this["drawHud"] = value;
             }
         }
     }
