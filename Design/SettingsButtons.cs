@@ -79,6 +79,17 @@ namespace GOLSource
             UpdatePanels();
         }
 
+        private void buttonBackCol_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = cellColor;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                backColor = dlg.Color;
+            }
+        }
+
         private void buttonCellCol_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();

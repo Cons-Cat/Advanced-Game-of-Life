@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Cell.cs" />
+    <Compile Include="Design\ContextMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InputForm_Double.cs">
       <SubType>Form</SubType>
     </Compile>

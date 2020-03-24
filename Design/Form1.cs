@@ -9,8 +9,9 @@ namespace GOLSource
     public partial class Form1 : Form
     {
         // Drawing colors
-        Color gridColor;
+        Color backColor;
         Color cellColor;
+        Color gridColor;
 
         // The Timer class
         System.Windows.Forms.Timer sliderTimer = new System.Windows.Forms.Timer();
@@ -58,6 +59,7 @@ namespace GOLSource
         // Set settings to default values.
         private void ResetSettings()
         {
+            backColor = Color.White;
             gridColor = Color.Black;
             cellColor = Color.Gray;
 
@@ -78,6 +80,7 @@ namespace GOLSource
 
         private void ReloadSettings()
         {
+            backColor = Properties.Settings.Default.backColor;
             gridColor = Properties.Settings.Default.gridColor;
             cellColor = Properties.Settings.Default.cellColor;
 
@@ -160,6 +163,7 @@ namespace GOLSource
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Properties.Settings.Default.backColor = backColor;
             Properties.Settings.Default.gridColor = gridColor;
             Properties.Settings.Default.cellColor = cellColor;
             Properties.Settings.Default.GameSpeed = GameSpeed;

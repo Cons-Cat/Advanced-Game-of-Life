@@ -9,6 +9,10 @@ namespace GOLSource
 {
     public partial class Form1 : Form
     {
+        // Mouse co-ordinate holders used for the context form.
+        int tempEX;
+        int tempEY;
+
         private void GraphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             // Prevent initialized CellSize of 0.
@@ -30,8 +34,9 @@ namespace GOLSource
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
 
-            // A Brush for filling living cells interiors (color)
+            // A Brush for filling cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
+            Brush emptyBrush = new SolidBrush(backColor);
 
             // A rectangle to represent each cell in pixels
             RectangleF cellRect = RectangleF.Empty;
@@ -81,6 +86,10 @@ namespace GOLSource
                         {
                             e.Graphics.FillRectangle(cellBrush, cellRect);
                         }
+                        else
+                        {
+                            e.Graphics.FillRectangle(emptyBrush, cellRect);
+                        }
 
                         if (drawLines)
                         {
@@ -100,6 +109,10 @@ namespace GOLSource
                         if (Program.universe[x, y].Active)
                         {
                             e.Graphics.FillPolygon(cellBrush, cellHex);
+                        }
+                        else
+                        {
+                            e.Graphics.FillPolygon(emptyBrush, cellHex);
                         }
 
                         if (drawLines)
@@ -136,6 +149,7 @@ namespace GOLSource
             hudPen.Dispose();
             gridPen.Dispose();
             cellBrush.Dispose();
+            emptyBrush.Dispose();
         }
 
         public static bool IsInPolygon(PointF[] poly, Point point)
@@ -157,12 +171,34 @@ namespace GOLSource
             return true;
         }
 
-        // Clicking on a cell.
+        // Clicking on a single cell.
         private void graphicsPanel1_MouseDown(object sender, MouseEventArgs e)
         {
-            CellInput(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                CellInput(e);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                tempEX = e.X;
+                tempEY = e.Y;
+            }
         }
 
+        // Open context menu.
+        private void graphicsPanel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.X == tempEX && e.Y == tempEY)
+                {
+                    // If the right mouse button is released without dragging.
+                    rightClickMenuStrip.Show(this, new Point(e.X + slidingPanel[panelInd].Width, e.Y));
+                }
+            }
+        }
+
+        // Painting across multiple cells.
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             CellInput(e);

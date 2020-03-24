@@ -130,5 +130,17 @@ namespace GOLSource.Properties {
                 this["drawHud"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color backColor {
+            get {
+                return ((global::System.Drawing.Color)(this["backColor"]));
+            }
+            set {
+                this["backColor"] = value;
+            }
+        }
     }
 }

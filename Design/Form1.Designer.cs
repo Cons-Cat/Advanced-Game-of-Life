@@ -29,6 +29,7 @@ namespace GOLSource
         private void InitializeComponent()
         {
             this.sliderButton1 = new GOLSource.SliderButton(this.Width);
+            this.components = new System.ComponentModel.Container();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
@@ -61,10 +62,22 @@ namespace GOLSource
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonCore = new System.Windows.Forms.Button();
             this.buttonNew = new System.Windows.Forms.Button();
+            this.rightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemCols = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemBackCol = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemCellCol = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLineCol = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTogLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTogAdjacent = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTogHud = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemTogStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonBackCol = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanelCore.SuspendLayout();
             this.flowLayoutPanelSettings.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.rightClickMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // sliderButton1
@@ -246,7 +259,6 @@ namespace GOLSource
             this.graphicsPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
             this.graphicsPanel1.CellSize = 0F;
-            this.graphicsPanel1.Controls.Add(this.sliderButton1);
             this.graphicsPanel1.HexRadius = 0F;
             this.graphicsPanel1.Location = new System.Drawing.Point(192, 3);
             this.graphicsPanel1.Name = "graphicsPanel1";
@@ -257,6 +269,8 @@ namespace GOLSource
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.GraphicsPanel1_Paint);
             this.graphicsPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseDown);
             this.graphicsPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GraphicsPanel1_MouseClick);
+            this.graphicsPanel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseUp);
+            this.graphicsPanel1.Controls.Add(this.sliderButton1);
             // 
             // flowLayoutPanelSettings
             // 
@@ -270,18 +284,19 @@ namespace GOLSource
             this.flowLayoutPanelSettings.Controls.Add(this.buttonAdjacentToggle);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonHud);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonStrip);
+            this.flowLayoutPanelSettings.Controls.Add(this.buttonBackCol);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonCellCol);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonLineCol);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonReset);
             this.flowLayoutPanelSettings.Controls.Add(this.buttonReload);
             this.flowLayoutPanelSettings.Location = new System.Drawing.Point(96, 104);
             this.flowLayoutPanelSettings.Name = "flowLayoutPanelSettings";
-            this.flowLayoutPanelSettings.Size = new System.Drawing.Size(95, 216);
+            this.flowLayoutPanelSettings.Size = new System.Drawing.Size(419, 216);
             this.flowLayoutPanelSettings.TabIndex = 5;
             // 
             // buttonSpeed
             // 
-            this.buttonSpeed.Location = new System.Drawing.Point(3, 69);
+            this.buttonSpeed.Location = new System.Drawing.Point(69, 3);
             this.buttonSpeed.Name = "buttonSpeed";
             this.buttonSpeed.Size = new System.Drawing.Size(60, 60);
             this.buttonSpeed.TabIndex = 0;
@@ -291,7 +306,7 @@ namespace GOLSource
             // 
             // buttonLineToggle
             // 
-            this.buttonLineToggle.Location = new System.Drawing.Point(3, 135);
+            this.buttonLineToggle.Location = new System.Drawing.Point(135, 3);
             this.buttonLineToggle.Name = "buttonLineToggle";
             this.buttonLineToggle.Size = new System.Drawing.Size(60, 60);
             this.buttonLineToggle.TabIndex = 2;
@@ -301,7 +316,7 @@ namespace GOLSource
             // 
             // buttonAdjacentToggle
             // 
-            this.buttonAdjacentToggle.Location = new System.Drawing.Point(3, 201);
+            this.buttonAdjacentToggle.Location = new System.Drawing.Point(201, 3);
             this.buttonAdjacentToggle.Name = "buttonAdjacentToggle";
             this.buttonAdjacentToggle.Size = new System.Drawing.Size(60, 60);
             this.buttonAdjacentToggle.TabIndex = 3;
@@ -311,7 +326,7 @@ namespace GOLSource
             // 
             // buttonHud
             // 
-            this.buttonHud.Location = new System.Drawing.Point(3, 267);
+            this.buttonHud.Location = new System.Drawing.Point(267, 3);
             this.buttonHud.Name = "buttonHud";
             this.buttonHud.Size = new System.Drawing.Size(60, 60);
             this.buttonHud.TabIndex = 4;
@@ -321,7 +336,7 @@ namespace GOLSource
             // 
             // buttonStrip
             // 
-            this.buttonStrip.Location = new System.Drawing.Point(3, 333);
+            this.buttonStrip.Location = new System.Drawing.Point(333, 3);
             this.buttonStrip.Name = "buttonStrip";
             this.buttonStrip.Size = new System.Drawing.Size(60, 60);
             this.buttonStrip.TabIndex = 9;
@@ -331,7 +346,7 @@ namespace GOLSource
             // 
             // buttonCellCol
             // 
-            this.buttonCellCol.Location = new System.Drawing.Point(3, 399);
+            this.buttonCellCol.Location = new System.Drawing.Point(69, 69);
             this.buttonCellCol.Name = "buttonCellCol";
             this.buttonCellCol.Size = new System.Drawing.Size(60, 60);
             this.buttonCellCol.TabIndex = 5;
@@ -341,7 +356,7 @@ namespace GOLSource
             // 
             // buttonLineCol
             // 
-            this.buttonLineCol.Location = new System.Drawing.Point(3, 465);
+            this.buttonLineCol.Location = new System.Drawing.Point(135, 69);
             this.buttonLineCol.Name = "buttonLineCol";
             this.buttonLineCol.Size = new System.Drawing.Size(60, 60);
             this.buttonLineCol.TabIndex = 6;
@@ -351,7 +366,7 @@ namespace GOLSource
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(3, 531);
+            this.buttonReset.Location = new System.Drawing.Point(201, 69);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(60, 60);
             this.buttonReset.TabIndex = 7;
@@ -361,7 +376,7 @@ namespace GOLSource
             // 
             // buttonReload
             // 
-            this.buttonReload.Location = new System.Drawing.Point(3, 597);
+            this.buttonReload.Location = new System.Drawing.Point(267, 69);
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Size = new System.Drawing.Size(60, 60);
             this.buttonReload.TabIndex = 8;
@@ -423,6 +438,97 @@ namespace GOLSource
             this.buttonNew.UseVisualStyleBackColor = true;
             this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
+            // rightClickMenuStrip
+            // 
+            this.rightClickMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemCols,
+            this.toolStripMenuItemView});
+            this.rightClickMenuStrip.Name = "rightClickMenuStrip";
+            this.rightClickMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.rightClickMenuStrip.ShowCheckMargin = true;
+            this.rightClickMenuStrip.ShowImageMargin = false;
+            this.rightClickMenuStrip.Size = new System.Drawing.Size(109, 48);
+            // 
+            // toolStripMenuItemCols
+            // 
+            this.toolStripMenuItemCols.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemBackCol,
+            this.toolStripMenuItemCellCol,
+            this.toolStripMenuItemLineCol});
+            this.toolStripMenuItemCols.Name = "toolStripMenuItemCols";
+            this.toolStripMenuItemCols.Size = new System.Drawing.Size(108, 22);
+            this.toolStripMenuItemCols.Text = "Colors";
+            // 
+            // toolStripMenuItemBackCol
+            // 
+            this.toolStripMenuItemBackCol.Name = "toolStripMenuItemBackCol";
+            this.toolStripMenuItemBackCol.Size = new System.Drawing.Size(131, 22);
+            this.toolStripMenuItemBackCol.Text = "Back Color";
+            this.toolStripMenuItemBackCol.Click += new System.EventHandler(this.toolStripMenuItemBackCol_Click);
+            // 
+            // toolStripMenuItemCellCol
+            // 
+            this.toolStripMenuItemCellCol.Name = "toolStripMenuItemCellCol";
+            this.toolStripMenuItemCellCol.Size = new System.Drawing.Size(131, 22);
+            this.toolStripMenuItemCellCol.Text = "Cell Color";
+            this.toolStripMenuItemCellCol.Click += new System.EventHandler(this.toolStripMenuItemCellCol_Click);
+            // 
+            // toolStripMenuItemLineCol
+            // 
+            this.toolStripMenuItemLineCol.Name = "toolStripMenuItemLineCol";
+            this.toolStripMenuItemLineCol.Size = new System.Drawing.Size(131, 22);
+            this.toolStripMenuItemLineCol.Text = "Line Color";
+            this.toolStripMenuItemLineCol.Click += new System.EventHandler(this.toolStripMenuItemLineCol_Click);
+            // 
+            // toolStripMenuItemView
+            // 
+            this.toolStripMenuItemView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemTogLine,
+            this.toolStripMenuItemTogAdjacent,
+            this.toolStripMenuItemTogHud,
+            this.toolStripMenuItemTogStrip});
+            this.toolStripMenuItemView.Name = "toolStripMenuItemView";
+            this.toolStripMenuItemView.Size = new System.Drawing.Size(108, 22);
+            this.toolStripMenuItemView.Text = "View";
+            // 
+            // toolStripMenuItemTogLine
+            // 
+            this.toolStripMenuItemTogLine.Name = "toolStripMenuItemTogLine";
+            this.toolStripMenuItemTogLine.Size = new System.Drawing.Size(163, 22);
+            this.toolStripMenuItemTogLine.Text = "Toggle Lines";
+            this.toolStripMenuItemTogLine.Click += new System.EventHandler(this.toolStripMenuItemTogLine_Click);
+            // 
+            // toolStripMenuItemTogAdjacent
+            // 
+            this.toolStripMenuItemTogAdjacent.Name = "toolStripMenuItemTogAdjacent";
+            this.toolStripMenuItemTogAdjacent.Size = new System.Drawing.Size(163, 22);
+            this.toolStripMenuItemTogAdjacent.Text = "Toggle Neighbor";
+            this.toolStripMenuItemTogAdjacent.Click += new System.EventHandler(this.toolStripMenuItemTogAdjacent_Click);
+            // 
+            // toolStripMenuItemTogHud
+            // 
+            this.toolStripMenuItemTogHud.Name = "toolStripMenuItemTogHud";
+            this.toolStripMenuItemTogHud.Size = new System.Drawing.Size(163, 22);
+            this.toolStripMenuItemTogHud.Text = "Toggle HUD";
+            this.toolStripMenuItemTogHud.Click += new System.EventHandler(this.toolStripMenuItemTogHud_Click);
+            // 
+            // toolStripMenuItemTogStrip
+            // 
+            this.toolStripMenuItemTogStrip.Name = "toolStripMenuItemTogStrip";
+            this.toolStripMenuItemTogStrip.Size = new System.Drawing.Size(163, 22);
+            this.toolStripMenuItemTogStrip.Text = "Toggle Strip";
+            this.toolStripMenuItemTogStrip.Click += new System.EventHandler(this.toolStripMenuItemTogStrip_Click);
+            // 
+            // buttonBackCol
+            // 
+            this.buttonBackCol.Location = new System.Drawing.Point(3, 69);
+            this.buttonBackCol.Name = "buttonBackCol";
+            this.buttonBackCol.Size = new System.Drawing.Size(60, 60);
+            this.buttonBackCol.TabIndex = 10;
+            this.buttonBackCol.Text = "Back Color";
+            this.buttonBackCol.UseVisualStyleBackColor = true;
+            this.buttonBackCol.Click += new System.EventHandler(this.buttonBackCol_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +550,7 @@ namespace GOLSource
             this.flowLayoutPanelCore.ResumeLayout(false);
             this.flowLayoutPanelSettings.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.rightClickMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -462,6 +569,7 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonOpen;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonNew;
+        private SliderButton sliderButton1;
         private System.Windows.Forms.Button buttonRandom;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelSettings;
         private System.Windows.Forms.Button buttonSettings;
@@ -475,7 +583,6 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonCellCol;
         private System.Windows.Forms.Button buttonLineCol;
         private System.Windows.Forms.Button buttonReset;
-        private SliderButton sliderButton1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTickRate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCells;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSeed;
@@ -483,6 +590,16 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonReload;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGrid;
         private System.Windows.Forms.Button buttonStrip;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCols;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemView;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemBackCol;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCellCol;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLineCol;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogLine;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogAdjacent;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogHud;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogStrip;
+        private System.Windows.Forms.Button buttonBackCol;
     }
 }
-
