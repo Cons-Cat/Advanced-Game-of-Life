@@ -131,7 +131,7 @@ namespace GOLSource
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "txt files (*.txt)|*.txt";
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|Plaintext files (*.cells)|*.cells";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
 
@@ -139,13 +139,28 @@ namespace GOLSource
                 {
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
-                    int w;
-                    int h;
+                    string ext = Path.GetExtension(openFileDialog.FileName).ToLower();
+
+                    int w = Program.universe.GetLength(0);
+                    int h = Program.universe.GetLength(1);
 
                     using (StreamReader sr = new StreamReader(fileStream))
                     {
-                        w = int.Parse(sr.ReadLine());
-                        h = int.Parse(sr.ReadLine());
+                        if (ext == ".txt")
+                        {
+                            w = int.Parse(sr.ReadLine());
+                            h = int.Parse(sr.ReadLine());
+                        }
+                        else if (ext == ".cells")
+                        {
+                            // Loop through lines until a ! metadata line is not found.
+                            char tempChr = '!';
+
+                            while (tempChr == '!')
+                            {
+                                tempChr = sr.ReadLine()[0];
+                            }
+                        }
 
                         Program.ReSizeUniverse(w, h);
 
@@ -153,7 +168,14 @@ namespace GOLSource
                         {
                             for (int i = 0; i < w; i++)
                             {
-                                Program.universe[i, j].Active = (sr.Read() == '1' ? true : false);
+                                if (ext == ".txt")
+                                {
+                                    Program.universe[i, j].Active = (sr.Read() == '1' ? true : false);
+                                }
+                                else if (ext == ".cells")
+                                {
+                                    Program.universe[i, j].Active = (sr.Read() == 'O' ? true : false);
+                                }
                             }
 
                             sr.ReadLine();
@@ -214,11 +236,17 @@ namespace GOLSource
                                     {
                                         if (ext == ".txt")
                                         {
-                                            Program.universe[i, j].Active = (sr.Read() == '1' ? true : false);
+                                            if (sr.Read() == '1')
+                                            {
+                                                Program.universe[i, j].Active = true;
+                                            }
                                         }
                                         else if (ext == ".cells")
                                         {
-                                            Program.universe[i, j].Active = (sr.Read() == 'O' ? true : false);
+                                            if (sr.Read() == 'O')
+                                            {
+                                                Program.universe[i, j].Active = true;
+                                            }
                                         }
                                     }
                                     else
