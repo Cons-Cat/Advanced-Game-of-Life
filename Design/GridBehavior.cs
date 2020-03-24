@@ -157,14 +157,25 @@ namespace GOLSource
             return true;
         }
 
+        // Clicking on a cell.
+        private void graphicsPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            CellInput(e);
+        }
+
         private void GraphicsPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            CellInput(e);
+        }
+
+        public void CellInput(MouseEventArgs e)
         {
             if (!Program.playing)
             {
                 int x = 0;
                 int y = 0;
 
-                // Calculate the cell that was clicked in
+                // Calculate the cell that was clicked in.
                 if (gridShape == 0)
                 {
                     // CELL X = MOUSE X / CELL WIDTH
@@ -174,8 +185,8 @@ namespace GOLSource
                 }
                 else if (gridShape == 1)
                 {
-                    x = (int)((e.X - graphicsPanel1.XOff) / (graphicsPanel1.HexRadius * 2F));
                     y = (int)((e.Y - graphicsPanel1.YOff) / (graphicsPanel1.HexRadius * 1.75F));
+                    x = (int)((e.X - graphicsPanel1.XOff - ((y % 2) * graphicsPanel1.HexRadius)) / (graphicsPanel1.HexRadius * 2F));
 
                     int ax = x - 1;
                     int ay = y - 1;
