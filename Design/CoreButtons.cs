@@ -60,7 +60,7 @@ namespace GOLSource
                 }
 
                 UpdateGrid();
-                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
+                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * stripScale), gridShape);
                 graphicsPanel1.Invalidate();
             }
         }

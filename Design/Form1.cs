@@ -29,7 +29,7 @@ namespace GOLSource
         bool drawAdjacent;
         bool drawToolStrip;
         bool drawHud;
-        int hudScale;
+        int stripScale;
 
         // Sliding panels
         uint panelInd = 0;
@@ -69,11 +69,12 @@ namespace GOLSource
 
             drawLines = true;
             drawAdjacent = true;
-            drawToolStrip = true;
             drawHud = true;
-            hudScale = 1;
 
+            drawToolStrip = true;
             statusStrip1.Visible = true;
+            stripScale = 1;
+
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
 
             Program.ReSizeUniverse(25, 25);
@@ -91,12 +92,11 @@ namespace GOLSource
 
             drawLines = Properties.Settings.Default.drawLines;
             drawAdjacent = Properties.Settings.Default.drawAdjacent;
-
             drawHud = Properties.Settings.Default.drawHud;
-            hudScale = drawToolStrip ? 1 : 0;
 
             drawToolStrip = Properties.Settings.Default.drawToolStrip;
             statusStrip1.Visible = drawToolStrip;
+            stripScale = drawToolStrip ? 1 : 0;
 
             toolStripStatusLabelTickRate.Text = $"Tick Speed (ms) = {GameSpeed}";
 
@@ -146,10 +146,10 @@ namespace GOLSource
         private void UpdatePanels()
         {
             graphicsPanel1.Width = ClientRectangle.Width;
-            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
+            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * stripScale), gridShape);
             UpdateSizeLabel(Program.universe.GetLength(0), Program.universe.GetLength(1));
 
-            slidingPanel[panelInd].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * hudScale);
+            slidingPanel[panelInd].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * stripScale);
             sliderButton1.Location = new Point(sliderButton1.Location.X, graphicsPanel1.Height / 2 - sliderButton1.Height / 2);
 
             graphicsPanel1.Update();
@@ -167,10 +167,10 @@ namespace GOLSource
             for (int i = 0; i < slidingPanel.Length; i++)
             {
                 slidingPanel[i].Location = new Point(slidingPanel[i].Location.X, panel1.Height);
-                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * hudScale);
+                slidingPanel[i].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * stripScale);
             }
 
-            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
+            graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * stripScale), gridShape);
         }
 
         // This is called each tick.

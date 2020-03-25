@@ -35,7 +35,7 @@ namespace GOLSource
                      0
                 );
 
-                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
+                graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * stripScale), gridShape);
             }
 
             // A pen for drawing the HUD.
@@ -334,7 +334,7 @@ namespace GOLSource
                         fixOffGridLine = offGrid;
 
                         // Assign cell state.
-                        if (curX == tempX && curY == tempY)
+                        if ((curX == tempX && curY == tempY) || gridShape == 1) // Do not interpolate hexagons.
                         {
                             Program.universe[curX, curY].Active = active;
                         }
