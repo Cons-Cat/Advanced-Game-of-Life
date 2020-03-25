@@ -196,6 +196,7 @@ namespace GOLSource
             Properties.Settings.Default.gridHeight = Program.universe.GetLength(1);
 
             Properties.Settings.Default.Save();
+            Environment.Exit(0);
         }
     }
 }
