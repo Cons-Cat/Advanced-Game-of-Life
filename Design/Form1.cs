@@ -142,6 +142,7 @@ namespace GOLSource
             }
         }
 
+        // This is called whenever a panel's dimensions or co-ordinates have changed.
         private void UpdatePanels()
         {
             graphicsPanel1.Width = ClientRectangle.Width;
@@ -172,12 +173,14 @@ namespace GOLSource
             graphicsPanel1.UpdateGridOffset(ClientSize.Width - panel1.Width, ClientRectangle.Height - (statusStrip1.Height * hudScale), gridShape);
         }
 
+        // This is called each tick.
         public void UpdateLoop()
         {
             UpdateGrid();
             graphicsPanel1.Invalidate();
         }
 
+        // Save settings.
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Properties.Settings.Default.backColor = backColor;

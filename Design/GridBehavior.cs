@@ -13,6 +13,16 @@ namespace GOLSource
         int tempEX;
         int tempEY;
 
+        // Variables related to grid input.
+        int curX;
+        int curY;
+        int tempX;
+        int tempY;
+        int incLineX = -1;
+        int incLineY = -1;
+        bool offGrid = false;
+        bool fixOffGridLine = false;
+
         private void GraphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             // Prevent initialized CellSize of 0.
@@ -160,12 +170,16 @@ namespace GOLSource
             ).ToList();
 
             if (coef.Any(p => p == 0))
+            {
                 return true;
+            }
 
             for (int i = 1; i < coef.Count(); i++)
             {
                 if (coef[i] * coef[i - 1] < 0)
+                {
                     return false;
+                }
             }
 
             return true;
@@ -174,20 +188,38 @@ namespace GOLSource
         // Clicking on a single cell.
         private void graphicsPanel1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            UpdateMouseGridCoords(e);
+
+            if (curX < 0) { incLineX = 0; }
+            if (curY < 0) { incLineY = 0; }
+            if (curX > Program.universe.GetLength(0) - 1) { incLineX = Program.universe.GetLength(0) - 1; }
+            if (curY > Program.universe.GetLength(1) - 1) { incLineY = Program.universe.GetLength(1) - 1; }
+
+            if (curX >= 0 && curY >= 0 && curX < Program.universe.GetLength(0) && curY < Program.universe.GetLength(1))
             {
-                CellInput(e);
+                if (e.Button == MouseButtons.Left)
+                {
+                    CellInput(e);
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    tempEX = e.X;
+                    tempEY = e.Y;
+                }
             }
-            else if (e.Button == MouseButtons.Right)
+            else
             {
-                tempEX = e.X;
-                tempEY = e.Y;
+                offGrid = true;
             }
         }
 
         // Open context menu.
         private void graphicsPanel1_MouseUp(object sender, MouseEventArgs e)
         {
+            fixOffGridLine = false;
+            incLineX = -1;
+            incLineY = -1;
+
             if (e.Button == MouseButtons.Right)
             {
                 if (e.X == tempEX && e.Y == tempEY)
@@ -204,75 +236,161 @@ namespace GOLSource
             CellInput(e);
         }
 
-        public void CellInput(MouseEventArgs e)
+        private void UpdateMouseGridCoords(MouseEventArgs e)
         {
-            if (!Program.playing)
+            // Calculate the cell that was clicked in.
+            if (gridShape == 0)
             {
-                int x = 0;
-                int y = 0;
+                // CELL X = MOUSE X / CELL WIDTH
+                curX = (int)((e.X - graphicsPanel1.XOff) / graphicsPanel1.CellSize);
+                // CELL Y = MOUSE Y / CELL HEIGHT
+                curY = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
+            }
+            else if (gridShape == 1)
+            {
+                curY = (int)((e.Y - graphicsPanel1.YOff) / (graphicsPanel1.HexRadius * 1.75F));
+                curX = (int)((e.X - graphicsPanel1.XOff - ((curY % 2) * graphicsPanel1.HexRadius)) / (graphicsPanel1.HexRadius * 2F));
 
-                // Calculate the cell that was clicked in.
-                if (gridShape == 0)
+                int ax = curX - 1;
+                int ay = curY - 1;
+
+                for (int i = 0; i < 2; i++)
                 {
-                    // CELL X = MOUSE X / CELL WIDTH
-                    x = (int)((e.X - graphicsPanel1.XOff) / graphicsPanel1.CellSize);
-                    // CELL Y = MOUSE Y / CELL HEIGHT
-                    y = (int)((e.Y - graphicsPanel1.YOff) / graphicsPanel1.CellSize);
-                }
-                else if (gridShape == 1)
-                {
-                    y = (int)((e.Y - graphicsPanel1.YOff) / (graphicsPanel1.HexRadius * 1.75F));
-                    x = (int)((e.X - graphicsPanel1.XOff - ((y % 2) * graphicsPanel1.HexRadius)) / (graphicsPanel1.HexRadius * 2F));
-
-                    int ax = x - 1;
-                    int ay = y - 1;
-
-                    for (int i = 0; i < 2; i++)
+                    for (int j = 0; j < 2; j++)
                     {
-                        for (int j = 0; j < 2; j++)
+                        if (ax >= 0 && ay >= 0 && ax + i < Program.universe.GetLength(0) && ay + j < Program.universe.GetLength(1))
                         {
-                            if (ax >= 0 && ay >= 0 && ax + i < Program.universe.GetLength(0) && ay + j < Program.universe.GetLength(1))
+                            if (IsInPolygon(Program.universe[ax + i, ay + j].hexPoly, e.Location))
                             {
-                                if (IsInPolygon(Program.universe[ax + i, ay + j].hexPoly, e.Location))
-                                {
-                                    x = ax + i;
-                                    y = ay + j;
+                                curX = ax + i;
+                                curY = ay + j;
 
-                                    break;
-                                }
+                                break;
                             }
                         }
                     }
                 }
+            }
+        }
 
-                if (x >= 0 && y >= 0 && x < Program.universe.GetLength(0) && y < Program.universe.GetLength(1))
+        public void CellInput(MouseEventArgs e)
+        {
+            if (!Program.playing)
+            {
+                UpdateMouseGridCoords(e);
+
+                if (curX >= 0 && curY >= 0 && curX < Program.universe.GetLength(0) && curY < Program.universe.GetLength(1))
+                {
+                    offGrid = false;
+                }
+
+                if (!offGrid)
                 {
                     if (
-                        (e.Button == MouseButtons.Left && !Program.universe[x, y].Active)
-                        || (e.Button == MouseButtons.Right && Program.universe[x, y].Active)
+                        (e.Button == MouseButtons.Left)
+                        || (e.Button == MouseButtons.Right)
                         )
                     {
-                        // If the left mouse button was clicked
+                        bool active = true;
+
                         if (e.Button == MouseButtons.Left)
                         {
-                            // Enable cell.
-                            Program.universe[x, y].Active = true;
-                            cellCount++;
+                            active = true;
                         }
-                        if (e.Button == MouseButtons.Right)
+                        else if (e.Button == MouseButtons.Right)
                         {
-                            // Disable cell.
-                            cellCount--;
-                            Program.universe[x, y].Active = false;
+                            active = false;
                         }
 
-                        Program.universe[x, y].CountAdjacent(x, y, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
+                        // Prevent erratic line from being drawn when
+                        // the mouse leaves the grid, then comes back
+                        // inside.
+                        if (fixOffGridLine)
+                        {
+                            tempX = curX;
+                            tempY = curY;
+
+                            if (incLineX != -1)
+                            {
+                                tempX = incLineX;
+                            }
+                            if (incLineY != -1)
+                            {
+                                tempY = incLineY;
+                            }
+
+                            fixOffGridLine = false;
+                        }
+
+                        incLineX = -1;
+                        incLineY = -1;
+
+                        // Clamp co-ordinates.
+                        if (curX < 0) { curX = 0; offGrid = true; incLineX = 0; }
+                        if (curY < 0) { curY = 0; offGrid = true; incLineY = 0; }
+                        if (curX > Program.universe.GetLength(0) - 1) { curX = Program.universe.GetLength(0) - 1; offGrid = true; incLineX = Program.universe.GetLength(0) - 1; }
+                        if (curY > Program.universe.GetLength(1) - 1) { curY = Program.universe.GetLength(1) - 1; offGrid = true; incLineY = Program.universe.GetLength(1) - 1; }
+
+                        fixOffGridLine = offGrid;
+
+                        // Assign cell state.
+                        if (curX == tempX)
+                        {
+                            Program.universe[curX, curY].Active = active;
+                        }
+                        else
+                        {
+                            InterpolateCells(curX, curY, tempX, tempY, active);
+                        }
+
+                        //Program.universe[curX, curY].CountAdjacent(curX, curY, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
+                        UpdateGrid();
                         UpdateCellCountLabel();
                     }
+
+                    tempX = curX;
+                    tempY = curY;
                 }
 
                 // Tell Windows you need to repaint
                 graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void InterpolateCells(int x0, int y0, int x1, int y1, bool argActive)
+        {
+            int dx = Math.Abs(x1 - x0);
+            int sx = x0 < x1 ? 1 : -1;
+            int dy = -Math.Abs(y1 - y0);
+            int sy = y0 < y1 ? 1 : -1;
+            int err = dx + dy;
+            int e2;
+
+            while (true)
+            {
+                if (x0 < Program.universe.GetLength(0)
+                    && y0 < Program.universe.GetLength(1)
+                    && x0 >= 0
+                    && y0 >= 0
+                    )
+                {
+                    Program.universe[x0, y0].Active = argActive;
+                }
+
+                if (x0 == x1 && y0 == y1) { break; }
+
+                e2 = 2 * err;
+
+                if (e2 >= dy)
+                {
+                    err += dy;
+                    x0 += sx;
+                }
+                if (e2 <= dx)
+                {
+                    err += dx;
+                    y0 += sy;
+                }
             }
         }
 
