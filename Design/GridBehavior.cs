@@ -334,7 +334,7 @@ namespace GOLSource
                         fixOffGridLine = offGrid;
 
                         // Assign cell state.
-                        if (curX == tempX)
+                        if (curX == tempX && curY == tempY)
                         {
                             Program.universe[curX, curY].Active = active;
                         }
@@ -343,7 +343,6 @@ namespace GOLSource
                             InterpolateCells(curX, curY, tempX, tempY, active);
                         }
 
-                        //Program.universe[curX, curY].CountAdjacent(curX, curY, gridShape, Program.universe.GetLength(0), Program.universe.GetLength(1));
                         UpdateGrid();
                         UpdateCellCountLabel();
                     }
