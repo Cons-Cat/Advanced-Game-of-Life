@@ -30,13 +30,14 @@ namespace GOLSource
         {
             this.sliderButton1 = new GOLSource.SliderButton(this.Width);
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelTickRate = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelCells = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelGrid = new System.Windows.Forms.ToolStripStatusLabel();
-            this.flowLayoutPanelCore = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelCore = new GOLSource.TransparentFlowPanel();
             this.buttonPlay = new System.Windows.Forms.Button();
             this.buttonShape = new System.Windows.Forms.Button();
             this.buttonTick = new System.Windows.Forms.Button();
@@ -47,7 +48,8 @@ namespace GOLSource
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.graphicsPanel1 = new GOLSource.GraphicsPanel();
-            this.flowLayoutPanelSettings = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelSettings = new GOLSource.TransparentFlowPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonFiniteToggle = new System.Windows.Forms.Button();
             this.buttonSpeed = new System.Windows.Forms.Button();
             this.buttonLineToggle = new System.Windows.Forms.Button();
@@ -78,9 +80,12 @@ namespace GOLSource
             this.flowLayoutPanelCore.SuspendLayout();
             this.graphicsPanel1.SuspendLayout();
             this.flowLayoutPanelSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.rightClickMenuStrip.SuspendLayout();
+
             this.graphicsPanel1.Controls.Add(this.sliderButton1);
+            this.Controls.Add(this.pictureBox1);
             this.SuspendLayout();
             // 
             // sliderButton1
@@ -297,6 +302,15 @@ namespace GOLSource
             this.flowLayoutPanelSettings.Name = "flowLayoutPanelSettings";
             this.flowLayoutPanelSettings.Size = new System.Drawing.Size(78, 216);
             this.flowLayoutPanelSettings.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(128, 120);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(176, 176);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // buttonFiniteToggle
             // 
@@ -564,6 +578,7 @@ namespace GOLSource
             this.flowLayoutPanelCore.ResumeLayout(false);
             this.graphicsPanel1.ResumeLayout(false);
             this.flowLayoutPanelSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.rightClickMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -578,7 +593,7 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonTick;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonPlay;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCore;
+        private GOLSource.TransparentFlowPanel flowLayoutPanelCore;
         private System.Windows.Forms.Button buttonShape;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonOpen;
@@ -586,7 +601,7 @@ namespace GOLSource
         private System.Windows.Forms.Button buttonNew;
         private SliderButton sliderButton1;
         private System.Windows.Forms.Button buttonRandom;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelSettings;
+        private GOLSource.TransparentFlowPanel flowLayoutPanelSettings;
         private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.Button buttonCore;
         private System.Windows.Forms.Button buttonRandSeed;
@@ -617,5 +632,6 @@ namespace GOLSource
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTogStrip;
         private System.Windows.Forms.Button buttonBackCol;
         private System.Windows.Forms.Button buttonFiniteToggle;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

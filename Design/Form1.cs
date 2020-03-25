@@ -152,6 +152,32 @@ namespace GOLSource
             slidingPanel[panelInd].Height = ClientRectangle.Height - panel1.Height - (statusStrip1.Height * stripScale);
             sliderButton1.Location = new Point(sliderButton1.Location.X, graphicsPanel1.Height / 2 - sliderButton1.Height / 2);
 
+            pictureBox1.Location = slidingPanel[panelInd].Location;
+            pictureBox1.Width = slidingPanel[panelInd].Width;
+            pictureBox1.Height = slidingPanel[panelInd].Height;
+
+            // Repeat pictureBox.
+            if (pictureBox1.Width > 0)
+            {
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+                Image image = (Image)(resources.GetObject("pictureBox1.Image"));
+                Bitmap bm = new Bitmap(image.Width * (int)(Math.Ceiling((double)pictureBox1.Width / image.Width)), image.Height * (int)(Math.Ceiling((double)pictureBox1.Height / image.Height)));
+                Graphics gp = Graphics.FromImage(bm);
+
+                for (int i = 0; i <= bm.Width - image.Width; i += image.Width)
+                {
+                    for (int j = 0; j <= bm.Height - image.Height; j += image.Height)
+                    {
+                        gp.DrawImage(image, new Point(i, j));
+                    }
+                }
+
+                pictureBox1.Image = bm;
+
+                pictureBox1.Update();
+                slidingPanel[panelInd].BringToFront();
+            }
+
             graphicsPanel1.Update();
         }
 
