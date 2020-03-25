@@ -153,13 +153,12 @@ namespace GOLSource
                         }
                         else if (ext == ".cells")
                         {
-                            // Loop through lines until a ! metadata line is not found.
-                            char tempChr = '!';
+                            w = Program.universe.GetLength(0);
+                            h = Program.universe.GetLength(1);
 
-                            while (tempChr == '!')
-                            {
-                                tempChr = sr.ReadLine()[0];
-                            }
+                            // Skip first two lines.
+                            sr.ReadLine();
+                            sr.ReadLine();
                         }
 
                         Program.ReSizeUniverse(w, h);
@@ -174,11 +173,23 @@ namespace GOLSource
                                 }
                                 else if (ext == ".cells")
                                 {
-                                    Program.universe[i, j].Active = (sr.Read() == 'O' ? true : false);
+                                    char chr = (char)sr.Read();
+
+                                    if (chr != '\n')
+                                    {
+                                        Program.universe[i, j].Active = (chr == 'O' ? true : false);
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
                                 }
                             }
 
-                            sr.ReadLine();
+                            if (ext == ".txt")
+                            {
+                                sr.ReadLine();
+                            }
                         }
 
                         sr.ReadToEnd();
@@ -217,13 +228,12 @@ namespace GOLSource
                         }
                         else if (ext == ".cells")
                         {
-                            // Loop through lines until a ! metadata line is not found.
-                            char tempChr = '!';
+                            w = Program.universe.GetLength(0);
+                            h = Program.universe.GetLength(1);
 
-                            while (tempChr == '!')
-                            {
-                                tempChr = sr.ReadLine()[0];
-                            }
+                            // Skip first two lines.
+                            sr.ReadLine();
+                            sr.ReadLine();
                         }
 
                         for (int j = 0; j < Program.universe.GetLength(1); j++)
@@ -243,9 +253,15 @@ namespace GOLSource
                                         }
                                         else if (ext == ".cells")
                                         {
-                                            if (sr.Read() == 'O')
+                                            char chr = (char)sr.Read();
+
+                                            if (chr == 'O')
                                             {
                                                 Program.universe[i, j].Active = true;
+                                            }
+                                            else if (chr == '\n')
+                                            {
+                                                break;
                                             }
                                         }
                                     }
@@ -255,7 +271,10 @@ namespace GOLSource
                                     }
                                 }
 
-                                sr.ReadLine();
+                                if (ext == ".txt")
+                                {
+                                    sr.ReadLine();
+                                }
                             }
                             else
                             {
